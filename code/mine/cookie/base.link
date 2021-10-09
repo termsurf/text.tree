@@ -1,0 +1,242 @@
+match OWS
+  match chain
+    match sieve
+      match class, class obs-fold
+    match class, class WSP
+
+match obs-fold
+  match class, class CRLF
+
+match set-cookie-string
+  match class, class cookie-pair
+  match chain
+    match write, write <;>
+    match class, class SP
+    match class, class cookie-av
+
+match cookie-pair
+  match class, class cookie-name
+  match write, write <=>
+  match class, class cookie-value
+
+match cookie-name
+  match class, class token
+
+match cookie-value
+  match crown
+    match chain
+      match class, class cookie-octet
+    match chunk
+      match class, class DQUOTE
+      match chain, class cookie-octet
+      match class, class DQUOTE
+
+match cookie-octet
+  match crown
+    match chunk, share #u0021
+    match bound
+      mount start, share #u0023
+      mount front, share #u002B
+    mount bound
+      mount start, share #u002D
+      mount front, share #u003A
+    mount bound
+      mount start, share #u003C
+      mount front, share #u005B
+    mount bound
+      mount start, share #u005D
+      mount front, share #u007E
+
+match controls
+  match crown
+    match bound
+      mount start, share #u0000
+      mount front, share #u001F
+    match chunk, share #u007F
+
+match token
+  match shift
+    match crown
+      match class, class controls
+      match class, class non-token-separators
+
+match non-token-separators
+  match chunk, share <(>
+  match chunk, share <)>
+  match chunk, share <\<>
+  match chunk, share <\>>
+  match chunk, share <@>
+  match chunk, share <,>
+  match chunk, share <;>
+  match chunk, share <:>
+  match chunk, share <\\>
+  match chunk, share <">
+  match chunk, share </>
+  match chunk, share <[>
+  match chunk, share <]>
+  match chunk, share <?>
+  match chunk, share <=>
+  match chunk, share <\{>
+  match chunk, share <\}>
+  match class, class SP
+  match class, class HT
+
+match cookie-av
+  match class, class expires-av
+  match class, class max-age-av
+  match class, class domain-av
+  match class, class path-av
+  match class, class secure-av
+  match class, class httponly-av
+  match class, class extension-av
+
+match expires-av
+  match chunk, share <Expires=>
+    mount sense, write false
+  match class, class sane-cookie-date
+
+match sane-cookie-date
+  match class, <rfc1123-date, defined in [RFC2616], Section 3.3.1>
+
+match max-age-av
+  match chunk, share <Max-Age=>
+    mount sense, write false
+  match class, class non-zero-digit
+  match chain
+    match class, class DIGIT
+
+match non-zero-digit
+  match bound
+    mount start, share 1
+    mount front, share 9
+
+match domain-av
+  match chunk, share <Domain=>
+    mount sense, write false
+  match class, class domain-value
+
+match domain-value
+  match class, class subdomain
+
+match subdomain
+  match crown
+    match class, class label
+    match block
+      match class, class subdomain
+      match chunk, share <.>
+      match class, class label
+
+match label
+  match class, class letter
+  match sieve
+    match sieve
+      match class, class ldh-str
+    match class, class let-dig
+
+match ldh-str
+  match crown
+    match class, class let-dig-hyp
+    match block
+      match class, class let-dig-hyp
+      match class, class ldh-str
+
+match let-dig-hyp
+  match crown
+    match class, class let-dig
+    match chunk, share <->
+
+match let-dig
+  match crown
+    match class, class letter
+    match class, class digit
+
+match letter
+  match crown
+    match bound
+      match start, share a
+      match start, share z
+    match bound
+      match start, share A
+      match start, share Z
+
+match digit
+  match bound
+    match start, share 0
+    match start, share 9
+
+match path-av
+  match chunk, share <Path=>
+    mount sense, write false
+  match class, class path-value
+
+match path-value
+  match class, class char
+    match shift
+      match crown
+        match class, class controls
+        match chunk, share <;>
+
+match char
+  match bound
+    mount start, share #u0001
+    mount front, share #u007F
+
+match secure-av
+  match chunk, share <Secure>
+    mount sense, write false
+
+match httponly-av
+  match chunk, share <HttpOnly>
+    mount sense, write false
+
+match extension-av
+  match class, class char
+    match shift
+      match crown
+        match class, class controls
+        match chunk, share <;>
+
+match cookie-header
+  match class, share <Cookie:>
+    mount sense, write false
+  match class, class OWS
+  match class, class cookie-string
+  match class, class OWS
+
+match cookie-string
+  match class, cookie-pair
+  match chain
+    match chunk, share <;>
+    match class, class SP
+    match class, class cookie-pair
+
+match cookie-date
+  match class, *delimiter date-token-list *delimiter
+
+match date-token-list
+  match class, date-token *( 1*delimiter date-token )
+
+match date-token
+  match class, 1*non-delimiter
+
+match delimiter
+  match class, %x09 / %x20-2F / %x3B-40 / %x5B-60 / %x7B-7E
+match non-delimiter
+  match class, %x00-08 / %x0A-1F / DIGIT / ":" / ALPHA / %x7F-FF
+match non-digit
+  match class, %x00-2F / %x3A-FF
+
+match day-of-month
+  match class, 1*2DIGIT ( non-digit *OCTET )
+match month
+  match class, ( "jan" / "feb" / "mar" / "apr" /
+                       "may" / "jun" / "jul" / "aug" /
+                       "sep" / "oct" / "nov" / "dec" ) *OCTET
+match year
+  match class, 2*4DIGIT ( non-digit *OCTET )
+match time
+  match class, hms-time ( non-digit *OCTET )
+match hms-time
+  match class, time-field ":" time-field ":" time-field
+match time-field
+  match class, 1*2DIGIT

@@ -1,0 +1,99 @@
+
+load ../field
+  load /term
+    link field term
+  load /source
+    link field source
+  load /template
+    link field template
+
+hash link
+  host term, list term
+
+  hash indented-term, form indented-term
+    line term
+
+  make source
+    seed term, share term
+    lead base
+
+hash indented-term
+  host name
+  host children, list term
+
+  hash name
+    save name
+  hash inline-input
+    line children
+  hash nested-input
+    line children
+
+  make term
+    seed name, share name
+    seed children, share children
+    lead base
+
+hash inline-input
+  hash inline-parenthesized-input
+    hash inline-value, form inline-value
+      lead base
+  hash inline-non-parenthesized-input
+    hash inline-value, form inline-value
+      lead base
+
+hash inline-value
+  host value
+
+  hash number
+    hash integer
+      head write
+
+      call convert-string-to-integer
+        seed string, share write
+        save value
+    hash decimal
+      head write
+
+      call convert-string-to-float
+        seed string, share write
+        save value
+
+  hash code
+    host type
+    host value
+
+    hash lowercase-ascii-letter
+      save type
+    hash word-symbol
+      save value
+
+  hash inline-template
+    hash template-line, form template-line
+
+  hash path
+  hash selector
+
+hash template-line
+  host chunk
+
+  hash inline-string, form inline-string
+    line chunk
+  hash inline-code, form inline-code
+    line chunk
+
+  make template
+    seed chunk, share chunk
+    lead base
+
+hash inline-code
+  hash name
+  hash inline-parenthesized-input
+    hash inline-value, form inline-value
+
+hash nested-input
+  hash nested-template
+    hash multiline-template-body
+      hash template-line
+  hash indented-term
+
+hash inline-string

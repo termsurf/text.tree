@@ -1,0 +1,49 @@
+
+match mailbox
+  match crown
+    match class, class address-spec
+    match block
+      match sieve
+        match class, class phrase
+      match class, class route-addr
+
+match address-spec
+  match chunk, share <@>
+  match class, class domain
+
+match local-part
+  match class, class word
+  match chain
+    match chunk, share <.>
+    match class, class word
+
+match domain
+  match class, class sub-domain
+  match chain
+    match chunk, share <.>
+    match class, class sub-domain
+
+match sub-domain
+  match crown
+    match class, class domain-ref
+    match class, class domain-literal
+
+match domain-ref
+  match class, class atom
+
+match domain-literal
+  match chunk, share <[>
+  match chain
+    match crown
+      match class, class dtext
+      match class, class quoted-pair
+  match chunk, share <]>
+
+match dtext
+  match class, class char
+    match leave
+      match crown
+        match chunk, share <[>
+        match chunk, share <]>
+        match chunk, share <\\>
+        match class, class carriage-return

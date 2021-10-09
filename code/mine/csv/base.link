@@ -1,0 +1,52 @@
+
+match csv
+  start separator, share <,>
+
+  match class, class header
+    mount separator, share separator
+  match chain
+    match class, class row
+      mount separator, share separator
+
+match header
+  start separator
+
+  match class, class row
+    mount separator, share separator
+
+match row
+  start separator
+
+  match class, class column
+    mount separator, share separator
+  match chain
+    match chunk, share separator
+    match class, class column
+      mount separator, share separator
+
+match column
+  start separator
+
+  match crown
+    match chain
+      match class, class non-separator
+        mount separator, share separator
+    match block
+      match chunk, share <">
+      match class, class non-quoted-string
+      match chunk, share <">
+
+match non-separator
+  start separator
+
+  match shift
+    match chunk, share separator
+
+match non-quote
+  match shift
+    match chunk, share <">
+
+match non-quoted-string
+  match crown
+    match class, class non-quote
+    match chunk, share <\\">

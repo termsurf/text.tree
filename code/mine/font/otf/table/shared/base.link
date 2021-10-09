@@ -1,0 +1,252 @@
+
+match byte
+  match shift
+    mount class, share uint8
+    mount count, share 1
+
+match char
+  match shift
+    mount class, share int8
+    mount count, share 1
+
+match card8
+  match class, class byte
+
+match ushort
+  match shift
+    mount class, share uint16
+    mount count, share 2
+
+match card16
+  match class, class ushort
+match sid
+  match class, class ushort
+match offset16
+  match class, class ushort
+
+match short
+  match shift
+    mount class, share int16
+    mount count, share 2
+
+match f2dot14
+  match shift
+    mount class, class int16
+    mount count, share 2
+
+match ulong
+  match shift
+    mount class, class uint32
+    mount count, share 4
+
+match offset32
+  match class, class uint32
+
+match ulong
+  match shift
+    mount class, class uint32
+    mount count, share 4
+
+match fixed
+  match class, class fixed-decimal
+  match class, class fixed-fraction
+  cause divide
+    mount start, share fraction
+    mount front, share 65535
+    store denominator
+  cause add
+    mount start, share decimal
+    mount front, share denominator
+
+match fixed-decimal
+  match class, class short
+
+match fixed-fraction
+  match class, class ushort
+
+match string
+  start length
+
+  match chain
+    mount start, share 0
+    mount front, share length
+    cause add
+      mount start, share offset
+      mount front, share block
+      store position
+    match class, class byte
+      mount offset, share position
+
+match tag
+  match class, class string
+    mount length, share 4
+
+match ulong-list
+  match class, class ulong
+    weave count
+  match chain
+    mount front, share count
+    match class, class uint32
+
+match ushort-list
+  match class, class ushort
+    weave count
+  match chain
+    mount front, share count
+    match class, class uint16
+
+match short-list
+  start count
+  match chain
+    mount front, share count
+    match class, class int16
+
+match byte-list
+  start count
+  match chain
+    mount front, share count
+    match class, class uint8
+
+match value-record
+  start value-format
+
+  check bitwise-and
+    mount start, share value-format
+    mount front, share #h0001
+    match class, class x-placement
+  check bitwise-and
+    mount start, share value-format
+    mount front, share #h0002
+    match class, class y-placement
+  check bitwise-and
+    mount start, share value-format
+    mount front, share #h0004
+    match class, class x-advance
+  check bitwise-and
+    mount start, share value-format
+    mount front, share #h0008
+    match class, class y-advance
+
+  check bitwise-and
+    mount start, share value-format
+    mount front, share #h0010
+    match class, class x-pla-device
+  check bitwise-and
+    mount start, share value-format
+    mount front, share #h0020
+    match class, class y-pla-device
+  check bitwise-and
+    mount start, share value-format
+    mount front, share #h0040
+    match class, class x-adv-device
+  check bitwise-and
+    mount start, share value-format
+    mount front, share #h0080
+    match class, class y-adv-device
+
+match x-placement
+  match class, class short
+
+match y-placement
+  match class, class short
+
+match x-advance
+  match class, class short
+
+match y-advance
+  match class, class short
+
+match x-pla-device
+  match class, class short
+
+match y-pla-device
+  match class, class short
+
+match x-adv-device
+  match class, class short
+
+match y-adv-device
+  match class, class short
+
+match script-list
+
+match feature-list
+
+match lookup-list
+
+match feature-variation-list
+
+match class-definition
+  match class, class class-definition-format
+    weave format
+  check or
+    check match
+      mount start, share format
+      mount front, share 1
+    check match
+      mount start, share format
+      mount front, share 2
+    catch fault
+      leave build
+  check match
+    mount start, share format
+    mount front, share 1
+    match class, class start-glyph
+    match chain
+      match class, class class
+
+match class-definition-format
+  match class, class ushort
+
+match start-glyph
+  match class, class ushort
+
+match class
+  match class, class ushort
+
+match coverage
+  match class, class coverage-format
+    weave format
+  match class, class coverage-count
+    weave count
+  check or
+    check match
+      mount start, share format
+      mount front, share 1
+    check match
+      mount start, share format
+      mount front, share 2
+    catch fault
+      leave build
+  check match
+    mount start, share format
+    mount front, share 1
+    match chain
+      mount count, share count
+      match class, class coverage-glyph
+  check match
+    mount start, share format
+    mount front, share 2
+    match chain
+      mount count, share count
+      match class, class coverage-range-start
+      match class, class coverage-range-end
+      match class, class coverage-range-index
+
+match coverage-format
+  match class, class ushort
+
+match coverage-count
+  match class, class ushort
+
+match coverage-glyph
+  match class, class ushort
+
+match coverage-range-start
+  match class, class ushort
+
+match coverage-range-end
+  match class, class ushort
+
+match coverage-range-index
+  match class, class ushort

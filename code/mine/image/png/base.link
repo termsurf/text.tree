@@ -1,0 +1,162 @@
+http://www.libpng.org/pub/png/spec/1.2/PNG-Contents.html
+
+match png
+  match class, class first-8
+
+match first-8
+  match chunk, share 137
+  match chunk, share 80
+  match chunk, share 78
+  match chunk, share 71
+  match chunk, share 13
+  match chunk, share 10
+  match chunk, share 26
+  match chunk, share 10
+
+match chunk
+  match class, class chunk-length
+  match class, class chunk-type
+  match class, class chunk-data
+  match class, class chunk-crc
+
+match chunk-length
+  match count
+    mount scale, share 8
+    mount count, share 4
+
+match chunk-type
+  match count
+    mount scale, share 8
+    mount count, share 4
+    match crown
+      mount bound
+        mount start, share <a>
+        mount front, share <a>
+      mount bound
+        mount start, share <A>
+        mount front, share <Z>
+
+match chunk-data
+
+match chunk-crc
+  match count
+    mount scale, share 8
+    mount count, share 4
+
+match ihdr-image-header-chunk
+  match class, class ihdr-image-header-chunk-width
+  match class, class ihdr-image-header-chunk-height
+  match class, class ihdr-image-header-chunk-bit-depth
+  match class, class ihdr-image-header-chunk-color-type
+  match class, class ihdr-image-header-chunk-compression-method
+  match class, class ihdr-image-header-chunk-filter-method
+  match class, class ihdr-image-header-chunk-interlace
+
+# determined from chunk-length
+match plte-palette-chunk
+  start chunk-length
+
+  match chain
+    mount start, share 1
+    mount front, share 256
+    mount count, share chunk-length
+    mount class, class rgb-bytes
+
+match idat-image-data-chunk
+
+match iend-image-trailer-chunk
+
+match chrm-chunk
+
+match gama-chunk
+
+match sBIT-chunk
+
+match bKGD-chunk
+
+match hIST-chunk
+
+match tRNS-chunk
+
+match pHYs-chunk
+
+match tIME-chunk
+
+match tEXt-chunk
+
+match zTXt-chunk
+
+match rgb-bytes
+  match class, class red-byte
+  match class, class blue-byte
+  match class, class green-byte
+
+match red-byte
+  match count
+
+match blue-byte
+  match count
+
+match green-byte
+  match count
+
+match ihdr-image-header-chunk-width
+  match count
+    match count 4
+
+match ihdr-image-header-chunk-height
+  match count
+    match count 4
+
+match ihdr-image-header-chunk-bit-depth
+  match count
+    match count 1
+
+match ihdr-image-header-chunk-color-type
+  match count
+    match count 1
+
+match ihdr-image-header-chunk-compression-method
+  match count
+    match count 1
+
+match ihdr-image-header-chunk-filter-method
+  match count
+    match count 1
+
+match ihdr-image-header-chunk-interlace
+  match count
+    match count 1
+
+http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html
+http://www.libpng.org/pub/png/spec/iso/
+http://www.libpng.org/pub/mng/spec/#objects
+https://datatracker.ietf.org/doc/html/rfc2083
+
+color-type 0
+  bit-depth 1
+  bit-depth 2
+  bit-depth 4
+  bit-depth 8
+  bit-depth 16
+  description <Each pixel is a grayscale sample.>
+
+color-type 2
+  bit-depth 8
+  bit-depth 16
+  description <Each pixel is an R,G,B triple.>
+
+color-type 3
+  bit-depth 1
+  bit-depth 2
+  bit-depth 4
+  bit-depth 8
+  description <Each pixel is a palette index; a PLTE chunk must appear.>
+
+color-type 4
+  bit-depth 8,16
+  description <Each pixel is a grayscale sample, followed by an alpha sample.>
+
+color-type 6
+  bit-depth 8,16
+  description <Each pixel is an R,G,B triple, followed by an alpha sample.>

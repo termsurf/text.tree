@@ -1,0 +1,42 @@
+
+write document
+  field document
+  write chunk, write <\<!doctype html\>>
+  drive document/node
+    write class, class node
+      mount node, share block
+
+write node
+  start node
+
+  write class, class node-start
+  write sieve, write class, class content
+  write class, class node-end
+
+write attribute-list
+  start node
+
+  drive node/attribute
+    write chunk, share block/name
+    write chunk, <=>
+    write chunk, <'>
+    write class, class attribute-value
+      mount value, share block/value
+    write chunk, <'>
+
+write node-start
+  start node
+
+  write chunk, <\<>
+  write chunk, share node/name
+  write chunk, chord < >
+  write attribute-list, start node
+  write chunk, <\>>
+
+write node-end
+  write chunk, <\</>
+  write chunk, share node/name
+  write chunk, <\>>
+
+write attribute-value
+  shift escape-single-quotes

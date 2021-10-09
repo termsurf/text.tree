@@ -1,0 +1,162 @@
+
+match os2-table
+  match class, class version
+    weave version
+  match class, class x-average-character-width
+  match class, class us-weight-class
+  match class, class us-width-class
+  match class, class fs-type
+  match class, class y-subscript-x-size
+  match class, class y-subscript-y-size
+  match class, class ySubscriptXOffset
+  match class, class ySubscriptYOffset
+  match class, class ySuperscriptXSize
+  match class, class ySuperscriptYSize
+  match class, class ySuperscriptXOffset
+  match class, class ySuperscriptYOffset
+  match class, class yStrikeoutSize
+  match class, class yStrikeoutPosition
+  match class, class sFamilyClass
+  match chain
+    mount front, share 10
+    match class, class panose
+  match class, class ulUnicodeRange1
+  match class, class ulUnicodeRange2
+  match class, class ulUnicodeRange3
+  match class, class ulUnicodeRange4
+  match class, class achVendID
+  match class, class fsSelection
+  match class, class usFirstCharIndex
+  match class, class usLastCharIndex
+  match class, class sTypoAscender
+  match class, class sTypoDescender
+  match class, class sTypoLineGap
+  match class, class usWinAscent
+  match class, class usWinDescent
+  check gte
+    mount start, share version
+    mount front, share 1
+    match class, class ulCodePageRange1
+    match class, class ulCodePageRange2
+
+  check gte
+    mount start, share version
+    mount front, share 2
+    match class, class sxHeight
+    match class, class sCapHeight
+    match class, class usDefaultChar
+    match class, class usBreakChar
+    match class, class usMaxContent
+
+match version
+  match class, class ushort
+
+match x-average-character-width
+  match class, class short
+
+match us-weight-class
+  match class, class ushort
+
+match us-width-class
+  match class, class ushort
+
+match fs-type
+  match class, class ushort
+
+match y-subscript-size-x
+  match class, class short
+
+match y-subscript-y-size
+  match class, class short
+
+match ySubscriptXOffset
+  match class, class short
+
+match ySubscriptYOffset
+  match class, class short
+
+match ySuperscriptXSize
+  match class, class short
+
+match ySuperscriptYSize
+  match class, class short
+
+match ySuperscriptXOffset
+  match class, class short
+
+match ySuperscriptYOffset
+  match class, class short
+
+match yStrikeoutSize
+  match class, class short
+
+match yStrikeoutPosition
+  match class, class short
+
+match sFamilyClass
+  match class, class short
+
+match panose
+  match class, class byte
+
+match achVendID
+  match chain
+    mount front, share 4
+    match class, class byte
+
+match ulUnicodeRange1
+  match class, class ulong
+
+match ulUnicodeRange2
+  match class, class ulong
+
+match ulUnicodeRange3
+  match class, class ulong
+
+match ulUnicodeRange4
+  match class, class ulong
+
+match fsSelection
+  match class, class ushort
+
+match usFirstCharIndex
+  match class, class ushort
+
+match usLastCharIndex
+  match class, class ushort
+
+match sTypoAscender
+  match class, class short
+
+match sTypoDescender
+  match class, class short
+
+match sTypoLineGap
+  match class, class short
+
+match usWinAscent
+  match class, class ushort
+
+match usWinDescent
+  match class, class ushort
+
+match ulCodePageRange1
+  match class, class ulong
+
+match ulCodePageRange2
+  match class, class ulong
+
+match sxHeight
+  match class, class short
+
+match sCapHeight
+  match class, class short
+
+match usDefaultChar
+  match class, class ushort
+
+match usBreakChar
+  match class, class ushort
+
+match usMaxContent
+  match class, class ushort

@@ -1,0 +1,1676 @@
+
+match property-declaration
+  match crown
+    match class, class accent-color-declaration
+    match class, class align-content-declaration
+    match class, class align-items-declaration
+    match class, class align-self-declaration
+    match class, class alignment-baseline-declaration
+    match class, class all-declaration
+    match class, class animation-declaration
+    match class, class animation-delay-declaration
+    match class, class animation-direction-declaration
+    match class, class animation-duration-declaration
+    match class, class animation-fill-mode-declaration
+    match class, class animation-iteration-count-declaration
+    match class, class animation-name-declaration
+    match class, class animation-play-state-declaration
+    match class, class animation-timing-function-declaration
+    match class, class appearance-declaration
+    match class, class aspect-ratio-declaration
+    match class, class azimuth-declaration
+    match class, class backface-visibility-declaration
+    match class, class background-declaration
+    match class, class background-attachment-declaration
+    match class, class background-blend-mode-declaration
+    match class, class background-clip-declaration
+    match class, class background-color-declaration
+    match class, class background-image-declaration
+    match class, class background-origin-declaration
+    match class, class background-position-declaration
+    match class, class background-repeat-declaration
+    match class, class background-size-declaration
+    match class, class baseline-shift-declaration
+    match class, class baseline-source-declaration
+    match class, class block-ellipsis-declaration
+    match class, class block-size-declaration
+    match class, class block-step-declaration
+    match class, class block-step-align-declaration
+    match class, class block-step-insert-declaration
+    match class, class block-step-round-declaration
+    match class, class block-step-size-declaration
+    match class, class bookmark-label-declaration
+    match class, class bookmark-level-declaration
+    match class, class bookmark-state-declaration
+    match class, class border-declaration
+    match class, class border-block-declaration
+    match class, class border-block-color-declaration
+    match class, class border-block-end-declaration
+    match class, class border-block-end-color-declaration
+    match class, class border-block-end-style-declaration
+    match class, class border-block-end-width-declaration
+    match class, class border-block-start-declaration
+    match class, class border-block-start-color-declaration
+    match class, class border-block-start-style-declaration
+    match class, class border-block-start-width-declaration
+    match class, class border-block-style-declaration
+    match class, class border-block-width-declaration
+    match class, class border-bottom-declaration
+    match class, class border-bottom-color-declaration
+    match class, class border-bottom-left-radius-declaration
+    match class, class border-bottom-right-radius-declaration
+    match class, class border-bottom-style-declaration
+    match class, class border-bottom-width-declaration
+    match class, class border-boundary-declaration
+    match class, class border-collapse-declaration
+    match class, class border-color-declaration
+    match class, class border-end-end-radius-declaration
+    match class, class border-end-start-radius-declaration
+    match class, class border-image-declaration
+    match class, class border-image-outset-declaration
+    match class, class border-image-repeat-declaration
+    match class, class border-image-slice-declaration
+    match class, class border-image-source-declaration
+    match class, class border-image-width-declaration
+    match class, class border-inline-declaration
+    match class, class border-inline-color-declaration
+    match class, class border-inline-end-declaration
+    match class, class border-inline-end-color-declaration
+    match class, class border-inline-end-style-declaration
+    match class, class border-inline-end-width-declaration
+    match class, class border-inline-start-declaration
+    match class, class border-inline-start-color-declaration
+    match class, class border-inline-start-style-declaration
+    match class, class border-inline-start-width-declaration
+    match class, class border-inline-style-declaration
+    match class, class border-inline-width-declaration
+    match class, class border-left-declaration
+    match class, class border-left-color-declaration
+    match class, class border-left-style-declaration
+    match class, class border-left-width-declaration
+    match class, class border-radius-declaration
+    match class, class border-right-declaration
+    match class, class border-right-color-declaration
+    match class, class border-right-style-declaration
+    match class, class border-right-width-declaration
+    match class, class border-spacing-declaration
+    match class, class border-start-end-radius-declaration
+    match class, class border-start-start-radius-declaration
+    match class, class border-style-declaration
+    match class, class border-top-declaration
+    match class, class border-top-color-declaration
+    match class, class border-top-left-radius-declaration
+    match class, class border-top-right-radius-declaration
+    match class, class border-top-style-declaration
+    match class, class border-top-width-declaration
+    match class, class border-width-declaration
+    match class, class bottom-declaration
+    match class, class box-decoration-break-declaration
+    match class, class box-shadow-declaration
+    match class, class box-sizing-declaration
+    match class, class box-snap-declaration
+    match class, class break-after-declaration
+    match class, class break-before-declaration
+    match class, class break-inside-declaration
+    match class, class caption-side-declaration
+    match class, class caret-declaration
+    match class, class caret-color-declaration
+    match class, class caret-shape-declaration
+    match class, class chains-declaration
+    match class, class clear-declaration
+    match class, class clip-declaration
+    match class, class clip-path-declaration
+    match class, class clip-rule-declaration
+    match class, class color-declaration
+    match class, class color-adjust-declaration
+    match class, class color-interpolation-filters-declaration
+    match class, class color-scheme-declaration
+    match class, class column-count-declaration
+    match class, class column-fill-declaration
+    match class, class column-gap-declaration
+    match class, class column-rule-declaration
+    match class, class column-rule-color-declaration
+    match class, class column-rule-style-declaration
+    match class, class column-rule-width-declaration
+    match class, class column-span-declaration
+    match class, class column-width-declaration
+    match class, class columns-declaration
+    match class, class contain-declaration
+    match class, class contain-intrinsic-block-size-declaration
+    match class, class contain-intrinsic-height-declaration
+    match class, class contain-intrinsic-inline-size-declaration
+    match class, class contain-intrinsic-size-declaration
+    match class, class contain-intrinsic-width-declaration
+    match class, class content-declaration
+    match class, class content-visibility-declaration
+    match class, class continue-declaration
+    match class, class counter-increment-declaration
+    match class, class counter-reset-declaration
+    match class, class counter-set-declaration
+    match class, class cue-declaration
+    match class, class cue-after-declaration
+    match class, class cue-before-declaration
+    match class, class cursor-declaration
+    match class, class direction-declaration
+    match class, class display-declaration
+    match class, class dominant-baseline-declaration
+    match class, class elevation-declaration
+    match class, class empty-cells-declaration
+    match class, class fill-declaration
+    match class, class fill-break-declaration
+    match class, class fill-color-declaration
+    match class, class fill-image-declaration
+    match class, class fill-opacity-declaration
+    match class, class fill-origin-declaration
+    match class, class fill-position-declaration
+    match class, class fill-repeat-declaration
+    match class, class fill-rule-declaration
+    match class, class fill-size-declaration
+    match class, class filter-declaration
+    match class, class flex-declaration
+    match class, class flex-basis-declaration
+    match class, class flex-direction-declaration
+    match class, class flex-flow-declaration
+    match class, class flex-grow-declaration
+    match class, class flex-shrink-declaration
+    match class, class flex-wrap-declaration
+    match class, class float-declaration
+    match class, class float-defer-declaration
+    match class, class float-offset-declaration
+    match class, class float-reference-declaration
+    match class, class flood-color-declaration
+    match class, class flood-opacity-declaration
+    match class, class flow-declaration
+    match class, class flow-from-declaration
+    match class, class flow-into-declaration
+    match class, class font-declaration
+    match class, class font-family-declaration
+    match class, class font-feature-settings-declaration
+    match class, class font-kerning-declaration
+    match class, class font-language-override-declaration
+    match class, class font-optical-sizing-declaration
+    match class, class font-palette-declaration
+    match class, class font-size-declaration
+    match class, class font-size-adjust-declaration
+    match class, class font-stretch-declaration
+    match class, class font-style-declaration
+    match class, class font-synthesis-declaration
+    match class, class font-synthesis-small-caps-declaration
+    match class, class font-synthesis-style-declaration
+    match class, class font-synthesis-weight-declaration
+    match class, class font-variant-declaration
+    match class, class font-variant-alternates-declaration
+    match class, class font-variant-caps-declaration
+    match class, class font-variant-east-asian-declaration
+    match class, class font-variant-emoji-declaration
+    match class, class font-variant-ligatures-declaration
+    match class, class font-variant-numeric-declaration
+    match class, class font-variant-position-declaration
+    match class, class font-variation-settings-declaration
+    match class, class font-weight-declaration
+    match class, class footnote-display-declaration
+    match class, class footnote-policy-declaration
+    match class, class forced-color-adjust-declaration
+    match class, class gap-declaration
+    match class, class glyph-orientation-vertical-declaration
+    match class, class grid-declaration
+    match class, class grid-area-declaration
+    match class, class grid-auto-columns-declaration
+    match class, class grid-auto-flow-declaration
+    match class, class grid-auto-rows-declaration
+    match class, class grid-column-declaration
+    match class, class grid-column-end-declaration
+    match class, class grid-column-start-declaration
+    match class, class grid-row-declaration
+    match class, class grid-row-end-declaration
+    match class, class grid-row-start-declaration
+    match class, class grid-template-declaration
+    match class, class grid-template-areas-declaration
+    match class, class grid-template-columns-declaration
+    match class, class grid-template-rows-declaration
+    match class, class hanging-punctuation-declaration
+    match class, class height-declaration
+    match class, class hyphenate-character-declaration
+    match class, class hyphenate-limit-chars-declaration
+    match class, class hyphenate-limit-last-declaration
+    match class, class hyphenate-limit-lines-declaration
+    match class, class hyphenate-limit-zone-declaration
+    match class, class hyphens-declaration
+    match class, class image-orientation-declaration
+    match class, class image-rendering-declaration
+    match class, class image-resolution-declaration
+    match class, class initial-letter-declaration
+    match class, class initial-letter-align-declaration
+    match class, class initial-letter-wrap-declaration
+    match class, class inline-size-declaration
+    match class, class inline-sizing-declaration
+    match class, class inset-declaration
+    match class, class inset-block-declaration
+    match class, class inset-block-end-declaration
+    match class, class inset-block-start-declaration
+    match class, class inset-inline-declaration
+    match class, class inset-inline-end-declaration
+    match class, class inset-inline-start-declaration
+    match class, class isolation-declaration
+    match class, class justify-content-declaration
+    match class, class justify-items-declaration
+    match class, class justify-self-declaration
+    match class, class leading-trim-declaration
+    match class, class left-declaration
+    match class, class letter-spacing-declaration
+    match class, class lighting-color-declaration
+    match class, class line-break-declaration
+    match class, class line-clamp-declaration
+    match class, class line-grid-declaration
+    match class, class line-height-declaration
+    match class, class line-height-step-declaration
+    match class, class line-padding-declaration
+    match class, class line-snap-declaration
+    match class, class list-style-declaration
+    match class, class list-style-image-declaration
+    match class, class list-style-position-declaration
+    match class, class list-style-type-declaration
+    match class, class margin-declaration
+    match class, class margin-block-declaration
+    match class, class margin-block-end-declaration
+    match class, class margin-block-start-declaration
+    match class, class margin-bottom-declaration
+    match class, class margin-break-declaration
+    match class, class margin-inline-declaration
+    match class, class margin-inline-end-declaration
+    match class, class margin-inline-start-declaration
+    match class, class margin-left-declaration
+    match class, class margin-right-declaration
+    match class, class margin-top-declaration
+    match class, class margin-trim-declaration
+    match class, class marker-declaration
+    match class, class marker-end-declaration
+    match class, class marker-knockout-left-declaration
+    match class, class marker-knockout-right-declaration
+    match class, class marker-mid-declaration
+    match class, class marker-pattern-declaration
+    match class, class marker-segment-declaration
+    match class, class marker-side-declaration
+    match class, class marker-start-declaration
+    match class, class mask-declaration
+    match class, class mask-border-declaration
+    match class, class mask-border-mode-declaration
+    match class, class mask-border-outset-declaration
+    match class, class mask-border-repeat-declaration
+    match class, class mask-border-slice-declaration
+    match class, class mask-border-source-declaration
+    match class, class mask-border-width-declaration
+    match class, class mask-clip-declaration
+    match class, class mask-composite-declaration
+    match class, class mask-image-declaration
+    match class, class mask-mode-declaration
+    match class, class mask-origin-declaration
+    match class, class mask-position-declaration
+    match class, class mask-repeat-declaration
+    match class, class mask-size-declaration
+    match class, class mask-type-declaration
+    match class, class max-block-size-declaration
+    match class, class max-height-declaration
+    match class, class max-inline-size-declaration
+    match class, class max-lines-declaration
+    match class, class max-width-declaration
+    match class, class min-block-size-declaration
+    match class, class min-height-declaration
+    match class, class min-inline-size-declaration
+    match class, class min-intrinsic-sizing-declaration
+    match class, class min-width-declaration
+    match class, class mix-blend-mode-declaration
+    match class, class nav-down-declaration
+    match class, class nav-left-declaration
+    match class, class nav-right-declaration
+    match class, class nav-up-declaration
+    match class, class object-fit-declaration
+    match class, class object-position-declaration
+    match class, class offset-declaration
+    match class, class offset-anchor-declaration
+    match class, class offset-distance-declaration
+    match class, class offset-path-declaration
+    match class, class offset-position-declaration
+    match class, class offset-rotate-declaration
+    match class, class opacity-declaration
+    match class, class order-declaration
+    match class, class orphans-declaration
+    match class, class outline-declaration
+    match class, class outline-color-declaration
+    match class, class outline-offset-declaration
+    match class, class outline-style-declaration
+    match class, class outline-width-declaration
+    match class, class overflow-declaration
+    match class, class overflow-anchor-declaration
+    match class, class overflow-block-declaration
+    match class, class overflow-clip-margin-declaration
+    match class, class overflow-inline-declaration
+    match class, class overflow-wrap-declaration
+    match class, class overflow-x-declaration
+    match class, class overflow-y-declaration
+    match class, class overscroll-behavior-declaration
+    match class, class overscroll-behavior-block-declaration
+    match class, class overscroll-behavior-inline-declaration
+    match class, class overscroll-behavior-x-declaration
+    match class, class overscroll-behavior-y-declaration
+    match class, class padding-declaration
+    match class, class padding-block-declaration
+    match class, class padding-block-end-declaration
+    match class, class padding-block-start-declaration
+    match class, class padding-bottom-declaration
+    match class, class padding-inline-declaration
+    match class, class padding-inline-end-declaration
+    match class, class padding-inline-start-declaration
+    match class, class padding-left-declaration
+    match class, class padding-right-declaration
+    match class, class padding-top-declaration
+    match class, class page-declaration
+    match class, class page-break-after-declaration
+    match class, class page-break-before-declaration
+    match class, class page-break-inside-declaration
+    match class, class pause-declaration
+    match class, class pause-after-declaration
+    match class, class pause-before-declaration
+    match class, class perspective-declaration
+    match class, class perspective-origin-declaration
+    match class, class pitch-declaration
+    match class, class pitch-range-declaration
+    match class, class place-content-declaration
+    match class, class place-items-declaration
+    match class, class place-self-declaration
+    match class, class play-during-declaration
+    match class, class position-declaration
+    match class, class print-color-adjust-declaration
+    match class, class quotes-declaration
+    match class, class region-fragment-declaration
+    match class, class resize-declaration
+    match class, class rest-declaration
+    match class, class rest-after-declaration
+    match class, class rest-before-declaration
+    match class, class richness-declaration
+    match class, class right-declaration
+    match class, class rotate-declaration
+    match class, class row-gap-declaration
+    match class, class ruby-align-declaration
+    match class, class ruby-merge-declaration
+    match class, class ruby-overhang-declaration
+    match class, class ruby-position-declaration
+    match class, class running-declaration
+    match class, class scale-declaration
+    match class, class scroll-behavior-declaration
+    match class, class scroll-margin-declaration
+    match class, class scroll-margin-block-declaration
+    match class, class scroll-margin-block-end-declaration
+    match class, class scroll-margin-block-start-declaration
+    match class, class scroll-margin-bottom-declaration
+    match class, class scroll-margin-inline-declaration
+    match class, class scroll-margin-inline-end-declaration
+    match class, class scroll-margin-inline-start-declaration
+    match class, class scroll-margin-left-declaration
+    match class, class scroll-margin-right-declaration
+    match class, class scroll-margin-top-declaration
+    match class, class scroll-padding-declaration
+    match class, class scroll-padding-block-declaration
+    match class, class scroll-padding-block-end-declaration
+    match class, class scroll-padding-block-start-declaration
+    match class, class scroll-padding-bottom-declaration
+    match class, class scroll-padding-inline-declaration
+    match class, class scroll-padding-inline-end-declaration
+    match class, class scroll-padding-inline-start-declaration
+    match class, class scroll-padding-left-declaration
+    match class, class scroll-padding-right-declaration
+    match class, class scroll-padding-top-declaration
+    match class, class scroll-snap-align-declaration
+    match class, class scroll-snap-stop-declaration
+    match class, class scroll-snap-type-declaration
+    match class, class scrollbar-color-declaration
+    match class, class scrollbar-gutter-declaration
+    match class, class scrollbar-width-declaration
+    match class, class shape-image-threshold-declaration
+    match class, class shape-inside-declaration
+    match class, class shape-margin-declaration
+    match class, class shape-outside-declaration
+    match class, class spatial-navigation-action-declaration
+    match class, class spatial-navigation-contain-declaration
+    match class, class spatial-navigation-function-declaration
+    match class, class speak-declaration
+    match class, class speak-as-declaration
+    match class, class speak-header-declaration
+    match class, class speak-numeral-declaration
+    match class, class speak-punctuation-declaration
+    match class, class speech-rate-declaration
+    match class, class stress-declaration
+    match class, class string-set-declaration
+    match class, class stroke-declaration
+    match class, class stroke-align-declaration
+    match class, class stroke-alignment-declaration
+    match class, class stroke-break-declaration
+    match class, class stroke-color-declaration
+    match class, class stroke-dash-corner-declaration
+    match class, class stroke-dash-justify-declaration
+    match class, class stroke-dashadjust-declaration
+    match class, class stroke-dasharray-declaration
+    match class, class stroke-dashcorner-declaration
+    match class, class stroke-dashoffset-declaration
+    match class, class stroke-image-declaration
+    match class, class stroke-linecap-declaration
+    match class, class stroke-linejoin-declaration
+    match class, class stroke-miterlimit-declaration
+    match class, class stroke-opacity-declaration
+    match class, class stroke-origin-declaration
+    match class, class stroke-position-declaration
+    match class, class stroke-repeat-declaration
+    match class, class stroke-size-declaration
+    match class, class stroke-width-declaration
+    match class, class tab-size-declaration
+    match class, class table-layout-declaration
+    match class, class text-align-declaration
+    match class, class text-align-all-declaration
+    match class, class text-align-last-declaration
+    match class, class text-combine-upright-declaration
+    match class, class text-decoration-declaration
+    match class, class text-decoration-color-declaration
+    match class, class text-decoration-line-declaration
+    match class, class text-decoration-skip-declaration
+    match class, class text-decoration-skip-box-declaration
+    match class, class text-decoration-skip-ink-declaration
+    match class, class text-decoration-skip-inset-declaration
+    match class, class text-decoration-skip-self-declaration
+    match class, class text-decoration-skip-spaces-declaration
+    match class, class text-decoration-style-declaration
+    match class, class text-decoration-thickness-declaration
+    match class, class text-edge-declaration
+    match class, class text-emphasis-declaration
+    match class, class text-emphasis-color-declaration
+    match class, class text-emphasis-position-declaration
+    match class, class text-emphasis-skip-declaration
+    match class, class text-emphasis-style-declaration
+    match class, class text-group-align-declaration
+    match class, class text-indent-declaration
+    match class, class text-justify-declaration
+    match class, class text-orientation-declaration
+    match class, class text-overflow-declaration
+    match class, class text-shadow-declaration
+    match class, class text-space-collapse-declaration
+    match class, class text-space-trim-declaration
+    match class, class text-spacing-declaration
+    match class, class text-transform-declaration
+    match class, class text-underline-offset-declaration
+    match class, class text-underline-position-declaration
+    match class, class text-wrap-declaration
+    match class, class top-declaration
+    match class, class transform-declaration
+    match class, class transform-box-declaration
+    match class, class transform-origin-declaration
+    match class, class transform-style-declaration
+    match class, class transition-declaration
+    match class, class transition-delay-declaration
+    match class, class transition-duration-declaration
+    match class, class transition-property-declaration
+    match class, class transition-timing-function-declaration
+    match class, class translate-declaration
+    match class, class unicode-bidi-declaration
+    match class, class user-select-declaration
+    match class, class vertical-align-declaration
+    match class, class visibility-declaration
+    match class, class voice-balance-declaration
+    match class, class voice-duration-declaration
+    match class, class voice-family-declaration
+    match class, class voice-pitch-declaration
+    match class, class voice-range-declaration
+    match class, class voice-rate-declaration
+    match class, class voice-stress-declaration
+    match class, class voice-volume-declaration
+    match class, class volume-declaration
+    match class, class white-space-declaration
+    match class, class widows-declaration
+    match class, class width-declaration
+    match class, class will-change-declaration
+    match class, class word-boundary-detection-declaration
+    match class, class word-boundary-expansion-declaration
+    match class, class word-break-declaration
+    match class, class word-spacing-declaration
+    match class, class word-wrap-declaration
+    match class, class wrap-after-declaration
+    match class, class wrap-before-declaration
+    match class, class wrap-flow-declaration
+    match class, class wrap-inside-declaration
+    match class, class wrap-through-declaration
+    match class, class writing-mode-declaration
+    match class, class z-index-declaration
+
+match accent-color-declaration
+  match crown
+    match class, class global-setter
+    match class, class keyword-setter
+    match class, class color
+
+match align-content-declaration
+  align-content: center;
+  align-content: start;
+  align-content: end;
+  align-content: flex-start;
+  align-content: flex-end;
+  align-content: normal;
+  align-content: baseline;
+  align-content: first baseline;
+  align-content: last baseline;
+  align-content: space-between;
+  align-content: space-around;
+  align-content: space-evenly;
+  align-content: stretch;
+  align-content: safe center;
+  align-content: unsafe center;
+  align-content: inherit;
+  align-content: initial;
+  align-content: revert;
+  align-content: unset;
+
+match align-items-declaration
+  align-items: normal;
+  align-items: stretch;
+
+  /* Positional alignment */
+  /* align-items does not take left and right values */
+  align-items: center; /* Pack items around the center */
+  align-items: start; /* Pack items from the start */
+  align-items: end; /* Pack items from the end */
+  align-items: flex-start; /* Pack flex items from the start */
+  align-items: flex-end; /* Pack flex items from the end */
+
+  /* Baseline alignment */
+  align-items: baseline;
+  align-items: first baseline;
+  align-items: last baseline; /* Overflow alignment (for positional alignment only) */
+  align-items: safe center;
+  align-items: unsafe center;
+
+  /* Global values */
+  align-items: inherit;
+  align-items: initial;
+  align-items: revert;
+  align-items: unset;
+
+match align-self-declaration
+
+match alignment-baseline-declaration
+
+match all-declaration
+  match chord, chord <all:>
+  match class, class global-value
+
+match animation-declaration
+
+match animation-delay-declaration
+
+match animation-direction-declaration
+
+match animation-duration-declaration
+
+match animation-fill-mode-declaration
+
+match animation-iteration-count-declaration
+
+match animation-name-declaration
+
+match animation-play-state-declaration
+
+match animation-timing-function-declaration
+
+match appearance-declaration
+
+match aspect-ratio-declaration
+
+match azimuth-declaration
+
+match backface-visibility-declaration
+
+match background-declaration
+
+match background-attachment-declaration
+
+match background-blend-mode-declaration
+
+match background-clip-declaration
+
+match background-color-declaration
+
+match background-image-declaration
+
+match background-origin-declaration
+
+match background-position-declaration
+
+match background-repeat-declaration
+
+match background-size-declaration
+
+match baseline-shift-declaration
+
+match baseline-source-declaration
+
+match block-ellipsis-declaration
+
+match block-size-declaration
+
+match block-step-declaration
+
+match block-step-align-declaration
+
+match block-step-insert-declaration
+
+match block-step-round-declaration
+
+match block-step-size-declaration
+
+match bookmark-label-declaration
+
+match bookmark-level-declaration
+
+match bookmark-state-declaration
+
+match border-declaration
+
+match border-block-declaration
+
+match border-block-color-declaration
+
+match border-block-end-declaration
+
+match border-block-end-color-declaration
+
+match border-block-end-style-declaration
+
+match border-block-end-width-declaration
+
+match border-block-start-declaration
+
+match border-block-start-color-declaration
+
+match border-block-start-style-declaration
+
+match border-block-start-width-declaration
+
+match border-block-style-declaration
+
+match border-block-width-declaration
+
+match border-bottom-declaration
+
+match border-bottom-color-declaration
+
+match border-bottom-left-radius-declaration
+
+match border-bottom-right-radius-declaration
+
+match border-bottom-style-declaration
+
+match border-bottom-width-declaration
+
+match border-boundary-declaration
+
+match border-collapse-declaration
+
+match border-color-declaration
+
+match border-end-end-radius-declaration
+
+match border-end-start-radius-declaration
+
+match border-image-declaration
+
+match border-image-outset-declaration
+
+match border-image-repeat-declaration
+
+match border-image-slice-declaration
+
+match border-image-source-declaration
+
+match border-image-width-declaration
+
+match border-inline-declaration
+
+match border-inline-color-declaration
+
+match border-inline-end-declaration
+
+match border-inline-end-color-declaration
+
+match border-inline-end-style-declaration
+
+match border-inline-end-width-declaration
+
+match border-inline-start-declaration
+
+match border-inline-start-color-declaration
+
+match border-inline-start-style-declaration
+
+match border-inline-start-width-declaration
+
+match border-inline-style-declaration
+
+match border-inline-width-declaration
+
+match border-left-declaration
+
+match border-left-color-declaration
+
+match border-left-style-declaration
+
+match border-left-width-declaration
+
+match border-radius-declaration
+
+match border-right-declaration
+
+match border-right-color-declaration
+
+match border-right-style-declaration
+
+match border-right-width-declaration
+
+match border-spacing-declaration
+
+match border-start-end-radius-declaration
+
+match border-start-start-radius-declaration
+
+match border-style-declaration
+
+match border-top-declaration
+
+match border-top-color-declaration
+
+match border-top-left-radius-declaration
+
+match border-top-right-radius-declaration
+
+match border-top-style-declaration
+
+match border-top-width-declaration
+
+match border-width-declaration
+
+match bottom-declaration
+
+match box-decoration-break-declaration
+
+match box-shadow-declaration
+
+match box-sizing-declaration
+
+match box-snap-declaration
+
+match break-after-declaration
+
+match break-before-declaration
+
+match break-inside-declaration
+
+match caption-side-declaration
+
+match caret-declaration
+
+match caret-color-declaration
+
+match caret-shape-declaration
+
+match chains-declaration
+
+match clear-declaration
+
+match clip-declaration
+
+match clip-path-declaration
+
+match clip-rule-declaration
+
+match color-declaration
+
+match color-adjust-declaration
+
+match color-interpolation-filters-declaration
+
+match color-scheme-declaration
+
+match column-count-declaration
+
+match column-fill-declaration
+
+match column-gap-declaration
+
+match column-rule-declaration
+
+match column-rule-color-declaration
+
+match column-rule-style-declaration
+
+match column-rule-width-declaration
+
+match column-span-declaration
+
+match column-width-declaration
+
+match columns-declaration
+
+match contain-declaration
+
+match contain-intrinsic-block-size-declaration
+
+match contain-intrinsic-height-declaration
+
+match contain-intrinsic-inline-size-declaration
+
+match contain-intrinsic-size-declaration
+
+match contain-intrinsic-width-declaration
+
+match content-declaration
+
+match content-visibility-declaration
+
+match continue-declaration
+
+match counter-increment-declaration
+
+match counter-reset-declaration
+
+match counter-set-declaration
+
+match cue-declaration
+
+match cue-after-declaration
+
+match cue-before-declaration
+
+match cursor-declaration
+
+match direction-declaration
+
+match display-declaration
+
+match dominant-baseline-declaration
+
+match elevation-declaration
+
+match empty-cells-declaration
+
+match fill-declaration
+
+match fill-break-declaration
+
+match fill-color-declaration
+
+match fill-image-declaration
+
+match fill-opacity-declaration
+
+match fill-origin-declaration
+
+match fill-position-declaration
+
+match fill-repeat-declaration
+
+match fill-rule-declaration
+
+match fill-size-declaration
+
+match filter-declaration
+
+match flex-declaration
+
+match flex-basis-declaration
+
+match flex-direction-declaration
+
+match flex-flow-declaration
+
+match flex-grow-declaration
+
+match flex-shrink-declaration
+
+match flex-wrap-declaration
+
+match float-declaration
+
+match float-defer-declaration
+
+match float-offset-declaration
+
+match float-reference-declaration
+
+match flood-color-declaration
+
+match flood-opacity-declaration
+
+match flow-declaration
+
+match flow-from-declaration
+
+match flow-into-declaration
+
+match font-declaration
+
+match font-family-declaration
+
+match font-feature-settings-declaration
+
+match font-kerning-declaration
+
+match font-language-override-declaration
+
+match font-optical-sizing-declaration
+
+match font-palette-declaration
+
+match font-size-declaration
+
+match font-size-adjust-declaration
+
+match font-stretch-declaration
+
+match font-style-declaration
+
+match font-synthesis-declaration
+
+match font-synthesis-small-caps-declaration
+
+match font-synthesis-style-declaration
+
+match font-synthesis-weight-declaration
+
+match font-variant-declaration
+
+match font-variant-alternates-declaration
+
+match font-variant-caps-declaration
+
+match font-variant-east-asian-declaration
+
+match font-variant-emoji-declaration
+
+match font-variant-ligatures-declaration
+
+match font-variant-numeric-declaration
+
+match font-variant-position-declaration
+
+match font-variation-settings-declaration
+
+match font-weight-declaration
+
+match footnote-display-declaration
+
+match footnote-policy-declaration
+
+match forced-color-adjust-declaration
+
+match gap-declaration
+
+match glyph-orientation-vertical-declaration
+
+match grid-declaration
+
+match grid-area-declaration
+
+match grid-auto-columns-declaration
+
+match grid-auto-flow-declaration
+
+match grid-auto-rows-declaration
+
+match grid-column-declaration
+
+match grid-column-end-declaration
+
+match grid-column-start-declaration
+
+match grid-row-declaration
+
+match grid-row-end-declaration
+
+match grid-row-start-declaration
+
+match grid-template-declaration
+
+match grid-template-areas-declaration
+
+match grid-template-columns-declaration
+
+match grid-template-rows-declaration
+
+match hanging-punctuation-declaration
+
+match height-declaration
+
+match hyphenate-character-declaration
+
+match hyphenate-limit-chars-declaration
+
+match hyphenate-limit-last-declaration
+
+match hyphenate-limit-lines-declaration
+
+match hyphenate-limit-zone-declaration
+
+match hyphens-declaration
+
+match image-orientation-declaration
+
+match image-rendering-declaration
+
+match image-resolution-declaration
+
+match initial-letter-declaration
+
+match initial-letter-align-declaration
+
+match initial-letter-wrap-declaration
+
+match inline-size-declaration
+
+match inline-sizing-declaration
+
+match inset-declaration
+
+match inset-block-declaration
+
+match inset-block-end-declaration
+
+match inset-block-start-declaration
+
+match inset-inline-declaration
+
+match inset-inline-end-declaration
+
+match inset-inline-start-declaration
+
+match isolation-declaration
+
+match justify-content-declaration
+
+match justify-items-declaration
+
+match justify-self-declaration
+
+match leading-trim-declaration
+
+match left-declaration
+
+match letter-spacing-declaration
+
+match lighting-color-declaration
+
+match line-break-declaration
+
+match line-clamp-declaration
+
+match line-grid-declaration
+
+match line-height-declaration
+
+match line-height-step-declaration
+
+match line-padding-declaration
+
+match line-snap-declaration
+
+match list-style-declaration
+
+match list-style-image-declaration
+
+match list-style-position-declaration
+
+match list-style-type-declaration
+
+match margin-declaration
+
+match margin-block-declaration
+
+match margin-block-end-declaration
+
+match margin-block-start-declaration
+
+match margin-bottom-declaration
+
+match margin-break-declaration
+
+match margin-inline-declaration
+
+match margin-inline-end-declaration
+
+match margin-inline-start-declaration
+
+match margin-left-declaration
+
+match margin-right-declaration
+
+match margin-top-declaration
+
+match margin-trim-declaration
+
+match marker-declaration
+
+match marker-end-declaration
+
+match marker-knockout-left-declaration
+
+match marker-knockout-right-declaration
+
+match marker-mid-declaration
+
+match marker-pattern-declaration
+
+match marker-segment-declaration
+
+match marker-side-declaration
+
+match marker-start-declaration
+
+match mask-declaration
+
+match mask-border-declaration
+
+match mask-border-mode-declaration
+
+match mask-border-outset-declaration
+
+match mask-border-repeat-declaration
+
+match mask-border-slice-declaration
+
+match mask-border-source-declaration
+
+match mask-border-width-declaration
+
+match mask-clip-declaration
+
+match mask-composite-declaration
+
+match mask-image-declaration
+
+match mask-mode-declaration
+
+match mask-origin-declaration
+
+match mask-position-declaration
+
+match mask-repeat-declaration
+
+match mask-size-declaration
+
+match mask-type-declaration
+
+match max-block-size-declaration
+
+match max-height-declaration
+
+match max-inline-size-declaration
+
+match max-lines-declaration
+
+match max-width-declaration
+
+match min-block-size-declaration
+
+match min-height-declaration
+
+match min-inline-size-declaration
+
+match min-intrinsic-sizing-declaration
+
+match min-width-declaration
+
+match mix-blend-mode-declaration
+
+match nav-down-declaration
+
+match nav-left-declaration
+
+match nav-right-declaration
+
+match nav-up-declaration
+
+match object-fit-declaration
+
+match object-position-declaration
+
+match offset-declaration
+
+match offset-anchor-declaration
+
+match offset-distance-declaration
+
+match offset-path-declaration
+
+match offset-position-declaration
+
+match offset-rotate-declaration
+
+match opacity-declaration
+
+match order-declaration
+
+match orphans-declaration
+
+match outline-declaration
+
+match outline-color-declaration
+
+match outline-offset-declaration
+
+match outline-style-declaration
+
+match outline-width-declaration
+
+match overflow-declaration
+
+match overflow-anchor-declaration
+
+match overflow-block-declaration
+
+match overflow-clip-margin-declaration
+
+match overflow-inline-declaration
+
+match overflow-wrap-declaration
+
+match overflow-x-declaration
+
+match overflow-y-declaration
+
+match overscroll-behavior-declaration
+
+match overscroll-behavior-block-declaration
+
+match overscroll-behavior-inline-declaration
+
+match overscroll-behavior-x-declaration
+
+match overscroll-behavior-y-declaration
+
+match padding-declaration
+
+match padding-block-declaration
+
+match padding-block-end-declaration
+
+match padding-block-start-declaration
+
+match padding-bottom-declaration
+
+match padding-inline-declaration
+
+match padding-inline-end-declaration
+
+match padding-inline-start-declaration
+
+match padding-left-declaration
+
+match padding-right-declaration
+
+match padding-top-declaration
+
+match page-declaration
+
+match page-break-after-declaration
+
+match page-break-before-declaration
+
+match page-break-inside-declaration
+
+match pause-declaration
+
+match pause-after-declaration
+
+match pause-before-declaration
+
+match perspective-declaration
+
+match perspective-origin-declaration
+
+match pitch-declaration
+
+match pitch-range-declaration
+
+match place-content-declaration
+
+match place-items-declaration
+
+match place-self-declaration
+
+match play-during-declaration
+
+match position-declaration
+
+match print-color-adjust-declaration
+
+match quotes-declaration
+
+match region-fragment-declaration
+
+match resize-declaration
+
+match rest-declaration
+
+match rest-after-declaration
+
+match rest-before-declaration
+
+match richness-declaration
+
+match right-declaration
+
+match rotate-declaration
+
+match row-gap-declaration
+
+match ruby-align-declaration
+  ruby-align: start;
+  ruby-align: center;
+  ruby-align: space-between;
+  ruby-align: space-around;
+
+  /* Global values */
+  ruby-align: inherit;
+  ruby-align: initial;
+  ruby-align: revert;
+  ruby-align: unset;
+
+match ruby-overhang-declaration
+
+match ruby-position-declaration
+
+match running-declaration
+
+match scale-declaration
+
+match scroll-behavior-declaration
+
+match scroll-margin-declaration
+
+match scroll-margin-block-declaration
+
+match scroll-margin-block-end-declaration
+
+match scroll-margin-block-start-declaration
+
+match scroll-margin-bottom-declaration
+
+match scroll-margin-inline-declaration
+
+match scroll-margin-inline-end-declaration
+
+match scroll-margin-inline-start-declaration
+
+match scroll-margin-left-declaration
+
+match scroll-margin-right-declaration
+
+match scroll-margin-top-declaration
+
+match scroll-padding-declaration
+
+match scroll-padding-block-declaration
+
+match scroll-padding-block-end-declaration
+
+match scroll-padding-block-start-declaration
+
+match scroll-padding-bottom-declaration
+
+match scroll-padding-inline-declaration
+
+match scroll-padding-inline-end-declaration
+
+match scroll-padding-inline-start-declaration
+
+match scroll-padding-left-declaration
+
+match scroll-padding-right-declaration
+
+match scroll-padding-top-declaration
+
+match scroll-snap-align-declaration
+
+match scroll-snap-stop-declaration
+
+match scroll-snap-type-declaration
+
+match scrollbar-color-declaration
+
+match scrollbar-gutter-declaration
+
+match scrollbar-width-declaration
+
+match shape-image-threshold-declaration
+
+match shape-inside-declaration
+
+match shape-margin-declaration
+
+match shape-outside-declaration
+
+match spatial-navigation-action-declaration
+
+match spatial-navigation-contain-declaration
+
+match spatial-navigation-function-declaration
+
+match speak-declaration
+
+match speak-as-declaration
+
+match speak-header-declaration
+
+match speak-numeral-declaration
+
+match speak-punctuation-declaration
+
+match speech-rate-declaration
+
+match stress-declaration
+
+match string-set-declaration
+
+match stroke-declaration
+
+match stroke-align-declaration
+
+match stroke-alignment-declaration
+
+match stroke-break-declaration
+
+match stroke-color-declaration
+
+match stroke-dash-corner-declaration
+
+match stroke-dash-justify-declaration
+
+match stroke-dashadjust-declaration
+
+match stroke-dasharray-declaration
+
+match stroke-dashcorner-declaration
+
+match stroke-dashoffset-declaration
+
+match stroke-image-declaration
+
+match stroke-linecap-declaration
+
+match stroke-linejoin-declaration
+
+match stroke-miterlimit-declaration
+
+match stroke-opacity-declaration
+
+match stroke-origin-declaration
+
+match stroke-position-declaration
+
+match stroke-repeat-declaration
+
+match stroke-size-declaration
+
+match stroke-width-declaration
+
+match tab-size-declaration
+
+match table-layout-declaration
+
+match text-align-declaration
+
+match text-align-all-declaration
+
+match text-align-last-declaration
+
+match text-combine-upright-declaration
+
+match text-decoration-declaration
+
+match text-decoration-color-declaration
+
+match text-decoration-line-declaration
+
+match text-decoration-skip-declaration
+
+match text-decoration-skip-box-declaration
+
+match text-decoration-skip-ink-declaration
+
+match text-decoration-skip-inset-declaration
+
+match text-decoration-skip-self-declaration
+
+match text-decoration-skip-spaces-declaration
+
+match text-decoration-style-declaration
+
+match text-decoration-thickness-declaration
+
+match text-edge-declaration
+
+match text-emphasis-declaration
+
+match text-emphasis-color-declaration
+
+match text-emphasis-position-declaration
+
+match text-emphasis-skip-declaration
+
+match text-emphasis-style-declaration
+
+match text-group-align-declaration
+
+match text-indent-declaration
+
+match text-justify-declaration
+
+match text-orientation-declaration
+
+match text-overflow-declaration
+
+match text-shadow-declaration
+
+match text-space-collapse-declaration
+
+match text-space-trim-declaration
+
+match text-spacing-declaration
+
+match text-transform-declaration
+
+match text-underline-offset-declaration
+
+match text-underline-position-declaration
+
+match text-wrap-declaration
+
+match top-declaration
+
+match transform-declaration
+
+match transform-box-declaration
+
+match transform-origin-declaration
+
+match transform-style-declaration
+
+match transition-declaration
+
+match transition-delay-declaration
+
+match transition-duration-declaration
+
+match transition-property-declaration
+
+match transition-timing-function-declaration
+
+match translate-declaration
+
+match unicode-bidi-declaration
+
+match user-select-declaration
+
+match vertical-align-declaration
+
+match visibility-declaration
+
+match voice-balance-declaration
+
+match voice-duration-declaration
+
+match voice-family-declaration
+
+match voice-pitch-declaration
+
+match voice-range-declaration
+
+match voice-rate-declaration
+
+match voice-stress-declaration
+
+match voice-volume-declaration
+
+match volume-declaration
+
+match white-space-declaration
+
+match widows-declaration
+
+match width-declaration
+
+match will-change-declaration
+
+match word-boundary-detection-declaration
+
+match word-boundary-expansion-declaration
+
+match word-break-declaration
+
+match word-spacing-declaration
+
+match word-wrap-declaration
+
+match wrap-after-declaration
+
+match wrap-before-declaration
+
+match wrap-flow-declaration
+
+match wrap-inside-declaration
+
+match wrap-through-declaration
+
+match writing-mode-declaration
+
+match z-index-declaration
+
+match global-value
+  match chord, chord <initial>
+  match chord, chord <inherit>
+  match chord, chord <revert>
+  match chord, chord <unset>

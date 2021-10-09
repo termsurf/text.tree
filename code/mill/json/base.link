@@ -1,0 +1,95 @@
+
+mill json
+  mill value, form value
+    turn seed
+
+mill value
+  mill string, form string
+    turn seed
+  mill number, form number
+    turn seed
+  mill object, form object
+    turn seed
+  mill array, form array
+    turn seed
+  mill boolean, form boolean
+    turn seed
+  mill null
+    head text
+    call parse-string-to-null
+      bind text, link text
+      turn seed
+
+mill boolean
+  head text
+  call parse-string-to-boolean
+    bind text, link text
+    turn seed
+
+mill string
+  host symbol
+
+  mill esc
+    line symbol
+  mill safecodepoint
+    line symbol
+
+  turn seed, link symbol
+
+mill number
+  host minus, base false
+  host number
+  mill minus-sign
+    head text
+    test is-equal
+      bind base, link text
+      bind head, text <->
+      hook mesh
+        save minus, link true
+  mill integer
+    head text
+    call parse-string-to-integer
+      bind text, link text
+      save number
+  mill float
+    head text
+    call parse-string-to-float
+      bind text, link text
+      save number
+  mill exponent
+    mill sign
+    mill integer
+
+  test is-existant
+    bind seed, link minus
+    call multiply
+      bind base, text -1
+      bind head, link number
+      save number
+
+mill object
+  make object
+    save object
+  mill pair
+    mill string, form string
+      save key
+    mill value, form value
+      hook base
+        head base
+        save object[key], link base
+  turn seed, link object
+
+mill array
+  mill value, form value
+    line item
+  turn seed, link item
+
+mill esc
+  mill unicode, form unicode
+
+mill unicode
+  mill hex
+    head text
+    call hex-to-unicode-string
+      bind hex, link text
+      turn seed

@@ -1,0 +1,42 @@
+
+match asctime-date
+  match class, class short-weekday
+  match class, class sp
+  match class, class date3
+  match class, class sp
+  match class, class time
+  match class, class sp
+  match chain
+    match count, share 4
+    match class, class digit
+
+match date3
+  match class, class month
+  match class, class sp
+  match crown
+    match class, class digit2
+    match chunk
+      match class, class sp
+      match class, class digit
+
+match short-weekday
+  match crown
+    match chord, share <Mon>
+    match chord, share <Tue>
+    match chord, share <Wed>
+    match chord, share <Thu>
+    match chord, share <Fri>
+    match chord, share <Sat>
+    match chord, share <Sun>
+
+match time
+  match class, class digit2
+  match chord, share <:>
+  match class, class digit2
+  match chord, share <:>
+  match class, class digit2
+
+match digit2
+  match chain
+    match count, share 2
+    match class, class digit

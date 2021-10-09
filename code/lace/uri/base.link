@@ -1,0 +1,39 @@
+
+flow uri
+  head uri
+
+  test has
+    seed build, link uri/scheme
+    flow chunk, link uri/scheme
+    flow chunk, link <:>
+  test has
+    seed build, link uri/login
+    flow chunk, link uri/login
+    flow chunk, link <@>
+  test has
+    seed build, link uri/host
+    flow chunk, link uri/host
+  test has
+    seed build, link uri/port
+    flow chunk, link <:>
+    flow chunk, link uri/port
+  flow class, class absolute-uri
+    seed uri, link uri
+
+flow absolute-uri
+  head uri
+
+  drive uri/path
+    flow chunk, link </>
+    flow chunk, link block
+  test has
+    seed build, link login/query
+    flow chunk, link <?>
+    drive login/query
+      flow chunk, link block/key
+      flow chunk, link <=>
+      flow chunk, link block/value
+  test has
+    seed build, link login/fragment
+    flow chunk, link <#>
+    flow chunk, link login/fragment

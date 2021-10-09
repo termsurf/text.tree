@@ -1,0 +1,17 @@
+
+match carriage-return
+  match chord, share 13
+
+match line-feed
+  match chord, share 10
+
+match space
+  match chord, share 32
+
+match horizontal-tab
+  match chord, share 9
+
+match carriage-return-line-feed
+  match carriage-return
+  match line-feed
+

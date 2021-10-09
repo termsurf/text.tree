@@ -1,0 +1,239 @@
+
+http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
+
+http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
+
+state clear, 0
+state bold, 1
+state faint, 2
+state standout, 3
+state ridge, 4
+state blink, 5
+state opposite, 7
+state hidden, 8
+
+lace ansi
+  start sheet, field sheet
+
+  lace chunk, share <\x1b[>
+  lace class, class sheet
+    start sheet, share sheet
+  lace chunk, share <m>
+
+## Font attributes ##
+# off
+off = '<\x1b[>0m' # off
+default = '<\x1b[>39m' # default foreground
+DEFAULT = '<\x1b[>49m' # default background
+#
+bd = '<\x1b[>1m' # bold
+ft = '<\x1b[>2m' # faint
+st = '<\x1b[>3m' # standout
+ul = '<\x1b[>4m' # underlined
+bk = '<\x1b[>5m' # blink
+rv = '<\x1b[>7m' # reverse
+hd = '<\x1b[>8m' # hidden
+nost = '<\x1b[>23m' # no standout
+noul = '<\x1b[>24m' # no underlined
+nobk = '<\x1b[>25m' # no blink
+norv = '<\x1b[>27m' # no reverse
+# colors
+prime black, 30
+prime BLACK, 40
+prime red, 31
+prime RED, 41
+prime green, 32
+prime GREEN, 42
+prime yellow, 33
+prime YELLOW, 43
+prime blue, 34
+prime BLUE, 44
+prime magenta, 35
+prime MAGENTA, 45
+prime cyan, 36
+prime CYAN, 46
+prime white, 37
+prime WHITE, 47
+# light colors
+prime dgray, 90
+prime DGRAY, 100
+prime lred, 91
+prime LRED, 101
+prime lgreen, 92
+prime LGREEN, 102
+prime lyellow, 93
+prime LYELLOW, 103
+prime lblue, 94
+prime LBLUE, 104
+prime lmagenta, 95
+prime LMAGENTA, 105
+prime lcyan, 96
+prime LCYAN, 106
+prime lgray, 97
+prime LGRAY, 107
+
+Black: \u001b[30m
+Red: \u001b[31m
+Green: \u001b[32m
+Yellow: \u001b[33m
+Blue: \u001b[34m
+Magenta: \u001b[35m
+Cyan: \u001b[36m
+White: \u001b[37m
+Reset: \u001b[0m
+
+Bright Black: \u001b[30;1m
+Bright Red: \u001b[31;1m
+Bright Green: \u001b[32;1m
+Bright Yellow: \u001b[33;1m
+Bright Blue: \u001b[34;1m
+Bright Magenta: \u001b[35;1m
+Bright Cyan: \u001b[36;1m
+Bright White: \u001b[37;1m
+Reset: \u001b[0m
+
+Background Black: \u001b[40m
+Background Red: \u001b[41m
+Background Green: \u001b[42m
+Background Yellow: \u001b[43m
+Background Blue: \u001b[44m
+Background Magenta: \u001b[45m
+Background Cyan: \u001b[46m
+Background White: \u001b[47m
+
+Background Bright Black: \u001b[40;1m
+Background Bright Red: \u001b[41;1m
+Background Bright Green: \u001b[42;1m
+Background Bright Yellow: \u001b[43;1m
+Background Bright Blue: \u001b[44;1m
+Background Bright Magenta: \u001b[45;1m
+Background Bright Cyan: \u001b[46;1m
+Background Bright White: \u001b[47;1m
+
+Bold: \u001b[1m
+Underline: \u001b[4m
+Reversed: \u001b[7m
+
+write count
+  start climb-count
+  start cross-count
+
+  write chunk, share <\x1b[>
+  write chunk, share climb-count
+  write chunk, share <;>
+  write chunk, share cross-count
+  write chunk, share <H>
+
+write move-mouse-up
+  start count, field count
+    mount floor, write 0
+  write chunk, share <\x1b[>
+  write chunk, share count
+  write chunk, share <A>
+
+write move-mouse-down
+  start count, field count
+    mount floor, write 0
+  write chunk, share <\x1b[>
+  write chunk, share count
+  write chunk, share <B>
+
+write move-mouse-forward
+  start count, field count
+    mount floor, write 0
+  write chunk, share <\x1b[>
+  write chunk, share count
+  write chunk, share <C>
+
+write move-mouse-backward
+  start count, field count
+    mount floor, write 0
+  write chunk, share <\x1b[>
+  write chunk, share count
+  write chunk, share <D>
+
+write move-mouse-bottom
+  start count, field count
+    mount floor, write 0
+  write chunk, share <\x1b[>
+  write chunk, share count
+  write chunk, share <E>
+
+write move-mouse-top
+  start count, field count
+    mount floor, write 0
+  write chunk, share <\x1b[>
+  write chunk, share count
+  write chunk, share <F>
+
+write move-mouse-end-of-line
+  start count, field count
+    mount floor, write 0
+  write chunk, share <\x1b[>
+  write chunk, share count
+  write chunk, share <G>
+
+write count
+  start cross, field count
+    mount floor, write 0
+  start climb, field count
+    mount floor, write 0
+  write chunk, share <\x1b[>
+  write chunk, share climb
+  write chunk, share <;>
+  write chunk, share cross
+  write chunk, share <G>
+
+write clear screen
+  write chunk, share <\x1b[2J>
+
+write clear screen mount floor, write
+  write chunk, share <\x1b[0J>
+
+write clear screen crest
+  write chunk, share <\x1b[1J>
+
+write clear line end
+  write chunk, share <\x1b[0K>
+
+write clear line start
+  write chunk, share <\x1b[1K>
+
+write clear line
+  write chunk, share <\x1b[2K>
+
+write sheet-paint-256
+  start count, field count
+    mount floor, write 0
+    mount crest, write 255
+  write chunk, share <\x1b[48;5;>
+  write chunk, share count
+  write chunk, share <m>
+
+write print-paint-256
+  start count, field count
+    mount floor, write 0
+    mount crest, write 255
+  write chunk, share <\x1b[38;5;>
+  write chunk, share count
+  write chunk, share <m>
+
+write sheet-paint
+  start paint, class paint shade
+  write chunk, share <\x1b[>48;2;
+  write chunk, share paint/rouge
+  write chunk, share <;>
+  write chunk, share paint/green
+  write chunk, share <;>
+  write chunk, share paint/steel
+  write chunk, share <m>
+
+write paint
+  start paint, class paint-shade
+  write chunk, share <\x1b[>38;2;
+  write chunk, share paint/rouge
+  write chunk, share chunk <;>
+  write chunk, share paint/green
+  write chunk, share <;>
+  write chunk, share paint/steel
+  write chunk, share <m>

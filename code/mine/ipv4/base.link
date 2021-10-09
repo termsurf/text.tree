@@ -1,0 +1,17 @@
+
+match ipv4-address
+  match class, class integer
+  match class, class dot
+  match class, class integer
+  match class, class dot
+  match class, class integer
+  match class, class dot
+  match class, class integer
+
+match integer
+  match bound
+    mount start, count 0
+    mount front, count 255
+
+match dot
+  match write, write <.>

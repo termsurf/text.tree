@@ -1,0 +1,66 @@
+
+state Program
+  field body
+  field source (module)
+state ClassDeclaration
+  field id
+  field super
+  field body
+state ClassBody
+  field body
+state MethodDefinition
+  field static
+  field kind
+  field computed
+  field key
+  field value
+state NewExpression
+  field callee
+  field arguments
+state Literal
+  field raw
+  field regex
+  field value
+state AssignmentExpression
+  field left
+  field operator
+  field right
+state IfStatement
+  field test
+  field consequent
+state ThrowStatement
+  field argument
+state TryStatement
+  field block
+  field handler
+  field finalizer
+state CatchClause
+  field param
+  field body
+state VariableDeclaration
+state VariableDeclarator
+state FunctionDeclaration
+  field id, Identifier
+  field expression
+  field generator
+  field async
+  field params
+state Identifier
+  field name
+state BlockStatement
+  field body
+state ExpressionStatement
+  field expression
+state CallExpression
+  field callee
+  field arguments
+state MemberExpression
+  field object
+  field property
+state ArrowFunctionExpression
+state BinaryExpression
+state TemplateLiteral
+  field expressions
+  field quasis
+field TemplateElement
+field UnaryExpression

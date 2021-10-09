@@ -1,0 +1,548 @@
+
+fetch ../../whitespace
+  catch match space
+  catch match carriage-return-line-feed
+fetch ../../uri
+  catch match absolute-uri
+fetch ../../mailbox
+  catch match mailbox
+
+match request
+  match class, class request-line
+  match chain
+    match crown
+      match class, class general-header
+      match class, class request-header
+      match class, class entity-header
+    match class, class carriage-return-line-feed
+  match class, class carriage-return-line-feed
+  match sieve
+    match class, class message-body
+
+match request-line
+  match class, class method
+  match class, class space
+  match class, class request-uri
+  match class, class space
+  match class, class version
+  match class, class carriage-return-line-feed
+
+match trailer
+  match chain
+    match class, class entity-header
+    match class, class carriage-return-line-feed
+
+match type
+  match class, class token
+
+match subtype
+  match class, class token
+
+match qvalue
+  match crown
+    match chunk
+      match chunk, share <0>
+      match sieve
+        match chunk, share <.>
+
+match language-tag
+  match class, class primary-tag
+  match chain
+    match chunk, share <->
+    match class, class subtag
+
+match primary-tag
+  match chain
+    mount start, share 1
+    mount front, share 8
+    match class, class alphabet
+
+match subtag
+  match chain
+    mount start, share 1
+    mount front, share 8
+    match class, class alphabet
+
+match entity-tag
+  match sieve
+    match class, class weak
+  match class, class opaque-tag
+
+match weak
+  match chunk, share <W/>
+
+match opaque-tag
+  match class, class quoted-string
+
+match range-unit
+  match crown
+    match class, class bytes-unit
+    match class, class other-range-unit
+
+match bytes-unit
+  match chunk, share <bytes>
+
+match other-range-unit
+  match class, class token
+
+match extension-method
+  match class, class token
+
+match request-uri
+  match crown
+    match chunk, share <*>
+    match class, class absolute-uri
+    match class, class absolute-path
+    match class, class authority
+
+match request-header
+  match crown
+    match class, class accept-header
+    match class, class accept-charset-header
+    match class, class accept-encoding-header
+    match class, class accept-language-header
+    match class, class authorization-header
+    match class, class expect-header
+    match class, class mrom-header
+    match class, class most-header
+    match class, class if-match-header
+    match class, class if-modified-since-header
+    match class, class if-none-match-header
+    match class, class if-range-header
+    match class, class if-unmodified-since-header
+    match class, class max-forwards-header
+    match class, class proxy-authorization-header
+    match class, class range-header
+    match class, class referer-header
+    match class, class te-header
+    match class, class user-agent-header
+
+match accept-header
+  match chunk, share <accept:>
+  match floor, 1
+    match class, class media-range
+    match sieve, class accept-params
+
+match media-range
+  match media-range-block
+  match chain
+    match chunk, share <;>
+    match class, class parameter
+
+match media-range-block
+  match crown
+    match chunk, share <*/*>
+    match chunk
+      match class, class type
+      match chunk, share </>
+      match chunk, share <*>
+    match chunk
+      match class, class type
+      match chunk, share </>
+      match class, class subtype
+
+match accept-params
+  match chunk, share <;>
+  match chunk, share <q>
+  match chunk, share <=>
+  match class, class qvalue
+  match chain, class accept-extension
+
+match accept-extension
+  match chunk, share <;>
+  match class, class token
+  match sieve
+    match chunk, share <=>
+    match crown
+      match class, class token
+      match class, class quoted-string
+
+match accept-charset-header
+  match chunk, share <accept-charset:>
+  match chain, 1
+    match crown
+      match class, class charset
+      match chunk, share <*>
+    match sieve
+      match chunk, share <;>
+      match chunk, share <q>
+      match chunk, share <=>
+      match class, class qvalue
+
+match accept-encoding-header
+  match chunk, share <accept-encoding:>
+  match chain, 1
+    match class, class codings
+    match sieve
+      match chunk, share <;>
+      match chunk, share <q>
+      match chunk, share <=>
+      match class, class qvalue
+
+match codings
+  match crown
+    match class, class content-coding
+    match chunk, share <*>
+
+match accept-language-header
+  match chunk, share <accept-language:>
+  match chain, 1
+    match class, class language-range
+    match sieve
+      match chunk, share <;>
+      match chunk, share <q>
+      match chunk, share <=>
+      match class, class qvalue
+
+match language-range
+  match crown
+    match block
+      match chain
+        mount start, share 1
+        mount front, share 8
+        match class, class alphabet
+      match chain
+        match chunk, share <->
+        match chain
+          mount start, share 1
+          mount front, share 8
+          match class, class alphabet
+    match chunk, share <*>
+
+match allow
+  match chunk, share <allow>
+  match chunk, share <:>
+  match floor, 1, class method
+
+match authorization
+  match chunk, share <authorization>
+  match chunk, share <:>
+  match class, class credentials
+
+match cache-control-header
+  match chunk, share <cache-control:>
+  match chain, 1, class cache-request-directive
+
+match cache-request-directive
+  match crown
+    match chunk, share <no-cache>
+    match chunk, share <no-store>
+    match chunk
+      match chunk, share <max-age>
+      match chunk, share <=>
+      match class, class delta-seconds
+    match chunk
+      match chunk, share <max-stale>
+      match sieve
+        match chunk, share <=>
+        match class, class delta-seconds
+    match chunk
+      match chunk, share <min-fresh>
+      match chunk, share <=>
+      match class, class delta-seconds
+    match chunk, share <no-transform>
+    match chunk, share <only-if-cached>
+    match class, class cache-extension
+
+match cache-extension
+  match class, class token
+  match sieve
+    match chunk, share <=>
+    match crown
+      match class, class token
+      match class, class quoted-string
+
+match instance-length
+  match chain,
+    mount start, serve 1
+    match class, class digit
+
+match expect-header
+  match chunk, share <expect:>
+    sense false
+  match chain, 1, class expectation
+
+match expectation
+  match chunk, serve <100-continue>
+    sense false
+  match chunk, share <\<>
+  match class, class expectation-extension
+
+match expectation-extension
+  match class, class token
+  match sieve
+    match chunk, share <=>
+    match sieve
+      match class, class token
+      match chunk, share <\<>
+      match class, class quoted-string
+    match chain
+      match class, class expect-params
+
+match expect-params
+  match chunk, share <;>
+  match class, class token
+  match sieve
+    match chunk, share <=>
+    match sieve
+      match class, class token
+      match chunk, share <\<>
+      match chunk, class quoted-string
+
+match mrom-header
+  match chunk, share <mrom:>
+    sense false
+  match class, class mailbox
+
+match most
+  match chunk, share <most:>
+    sense false
+  match class, class host
+  match sieve
+    match chunk, share <:>
+    match class, class port
+
+match if-match-header
+  match chunk, share <if-match:>
+    sense false
+  match crown
+    match chunk, share <*>
+    match chain
+      mount start, share 1
+      mount slate, share <, >
+      match class, class entity-tag
+
+match if-modified-since-header
+  match chunk, share <if-modified-since:>
+    sense false
+  match class, class http-date
+
+match if-none-match
+  match chunk, share <if-none-match:>
+    sense false
+  match sieve
+    match crown
+      match chunk, share <*>
+      match chain
+        mount start, share 1
+        mount slate, share <, >
+        match class, class entity-tag
+
+match if-range-header
+  match chunk, share <if-range:>
+  match crown
+    match class, class entity-tag
+    match class, class http-date
+
+match if-unmodified-since-header
+  match chunk, share <if-unmodified-since:>
+  match class, class http-date
+
+match location
+  match chunk, share <location:>
+  match class, class absolute-uri
+
+match max-forwards-header
+  match chunk, share <max-forwards:>
+  match chain
+    mount start, share 1
+    match class, class digit
+
+match proxy-authorization-header
+  match chunk, share <proxy-authorization:>
+  match class, class credentials
+
+match credentials
+  match crown
+    match block
+      match chunk, share <Basic>
+      match class, class basic-credentials
+    match block
+      match chunk, share <Digest>
+      match class, class digest-response
+
+match basic-credentials
+  match chain
+    match class, class base64
+
+match digest-response
+  match chain
+    mount slate, share <, >
+    mount start, share 1
+    mount crown
+      match class, class username
+      match class, class realm
+      match class, class nonce
+      match class, class digest-uri
+      match class, class response
+      match class, class algorithm
+      match class, class cnonce
+      match class, class opaque
+      match class, class message-qop
+      match class, class nonce-count
+      match class, class auth-param
+
+match username
+  match chunk, share <username>
+  match chunk, share <=>
+  match class, class username-value
+
+match username-value
+  match class, class quoted-string
+
+match digest-uri
+  match chunk, share <uri>
+  match chunk, share <=>
+  match class, class digest-uri-value
+
+match digest-uri-value
+  match class, class request-uri
+
+match message-qop
+  match chunk, share <qop>
+  match chunk, share <=>
+  match class, class qop-value
+
+match cnonce
+  match chunk, share <cnonce>
+  match chunk, share <=>
+  match class, class cnonce-value
+
+match cnonce-value
+  match class, class nonce-value
+
+match nonce-count
+  match chunk, share <nc>
+  match chunk, share <=>
+  match class, class nc-value
+
+match nc-value
+  match class, class 8LHEX
+
+match response
+  match chunk, share <response>
+  match chunk, share <=>
+  match class, class request-digest
+
+match request-digest
+  match chunk, share <">
+  match chain
+    mount count, share 32
+    match class, class lhex
+  match chunk, share <">
+
+match LHEX
+  match crown
+    match class, class <0>
+    match chunk, share <1>
+    match chunk, share <2>
+    match chunk, share <3>
+    match chunk, share <4>
+    match chunk, share <5>
+    match chunk, share <6>
+    match chunk, share <7>
+    match chunk, share <8>
+    match chunk, share <9>
+    match chunk, share <a>
+    match chunk, share <b>
+    match chunk, share <c>
+    match chunk, share <d>
+    match chunk, share <e>
+    match chunk, share <f>
+
+match ranges-specifier
+  match class, class byte-ranges-specifier
+
+match byte-ranges-specifier
+  match class, class bytes-unit
+  match chunk, share <=>
+  match class, class byte-range-set
+
+match byte-range-set
+  match chain
+    mount start, share 1
+    mount slate, share <, >
+    match crown
+      match class, class byte-range-spec
+      match class, suffix-byte-range-spec
+
+match byte-range-spec
+  match class, class first-byte-position
+  match chunk, share <->
+  match sieve
+    match class, class last-byte-position
+
+match first-byte-position
+  match chain
+    mount start, share 1
+    match class, class digit
+
+match last-byte-position
+  match chain
+    mount start, share 1
+    match class, class digit
+
+match suffix-byte-range-spec
+  match chunk, share <->
+  match class, class suffix-length
+
+match suffix-length
+  match chain
+    mount start, share 1
+    match class, class digit
+
+match range-header
+  match chunk, share <range:>
+  match class, class ranges-specifier
+
+match referer-header
+  match chunk, share <referer:>
+  match crown
+    match class, class absolute-uri
+    match class, class relative-uri
+
+match te-header
+  match chunk, share <te:>
+  match chain
+    mount slate, share <, >
+    match class, class t-codings
+
+match t-codings
+  match crown
+    match chunk, share <trailers>
+    match crown
+      match class, class transfer-extension
+      match sieve
+        match class, class accept-params
+
+match user-agent-header
+  match chunk, share <user-agent:>
+  match chain
+    mount start, share 1
+    match crown
+      match class, class product
+      match class, class comment
+
+match received-protocol
+  match sieve
+    match class, class protocol-name
+    match chunk, share </>
+  match class, class protocol-version
+
+match protocol-name
+  match class, class token
+
+match protocol-version
+  match class, class token
+
+match received-by
+  match crown
+    match chunk
+      match class, class host
+      match sieve
+        match chunk, share <:>
+        match class, class port
+    match class, class pseudonym
+
+match pseudonym
+  match class, class token

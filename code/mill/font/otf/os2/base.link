@@ -1,0 +1,125 @@
+
+state unicode-ranges
+  state #x0000, state #x007F # Basic Latin
+  state #x0080, state #x00FF # Latin-1 Supplement
+  state #x0100, state #x017F # Latin Extended-A
+  state #x0180, state #x024F # Latin Extended-B
+  state #x0250, state #x02AF # IPA Extensions
+  state #x02B0, state #x02FF # Spacing Modifier Letters
+  state #x0300, state #x036F # Combining Diacritical Marks
+  state #x0370, state #x03FF # Greek and Coptic
+  state #x2C80, state #x2CFF # Coptic
+  state #x0400, state #x04FF # Cyrillic
+  state #x0530, state #x058F # Armenian
+  state #x0590, state #x05FF # Hebrew
+  state #xA500, state #xA63F # Vai
+  state #x0600, state #x06FF # Arabic
+  state #x07C0, state #x07FF # NKo
+  state #x0900, state #x097F # Devanagari
+  state #x0980, state #x09FF # Bengali
+  state #x0A00, state #x0A7F # Gurmukhi
+  state #x0A80, state #x0AFF # Gujarati
+  state #x0B00, state #x0B7F # Oriya
+  state #x0B80, state #x0BFF # Tamil
+  state #x0C00, state #x0C7F # Telugu
+  state #x0C80, state #x0CFF # Kannada
+  state #x0D00, state #x0D7F # Malayalam
+  state #x0E00, state #x0E7F # Thai
+  state #x0E80, state #x0EFF # Lao
+  state #x10A0, state #x10FF # Georgian
+  state #x1B00, state #x1B7F # Balinese
+  state #x1100, state #x11FF # Hangul Jamo
+  state #x1E00, state #x1EFF # Latin Extended Additional
+  state #x1F00, state #x1FFF # Greek Extended
+  state #x2000, state #x206F # General Punctuation
+  state #x2070, state #x209F # Superscripts And Subscripts
+  state #x20A0, state #x20CF # Currency Symbol
+  state #x20D0, state #x20FF # Combining Diacritical Marks For Symbols
+  state #x2100, state #x214F # Letterlike Symbols
+  state #x2150, state #x218F # Number Forms
+  state #x2190, state #x21FF # Arrows
+  state #x2200, state #x22FF # Mathematical Operators
+  state #x2300, state #x23FF # Miscellaneous Technical
+  state #x2400, state #x243F # Control Pictures
+  state #x2440, state #x245F # Optical Character Recognition
+  state #x2460, state #x24FF # Enclosed Alphanumerics
+  state #x2500, state #x257F # Box Drawing
+  state #x2580, state #x259F # Block Elements
+  state #x25A0, state #x25FF # Geometric Shapes
+  state #x2600, state #x26FF # Miscellaneous Symbols
+  state #x2700, state #x27BF # Dingbats
+  state #x3000, state #x303F # CJK Symbols And Punctuation
+  state #x3040, state #x309F # Hiragana
+  state #x30A0, state #x30FF # Katakana
+  state #x3100, state #x312F # Bopomofo
+  state #x3130, state #x318F # Hangul Compatibility Jamo
+  state #xA840, state #xA87F # Phags-pa
+  state #x3200, state #x32FF # Enclosed CJK Letters And Months
+  state #x3300, state #x33FF # CJK Compatibility
+  state #xAC00, state #xD7AF # Hangul Syllables
+  state #xD800, state #xDFFF # Non-Plane 0 *
+  state #x10900, state #x1091F # Phoenicia
+  state #x4E00, state #x9FFF # CJK Unified Ideographs
+  state #xE000, state #xF8FF # Private Use Area (plane 0)
+  state #x31C0, state #x31EF # CJK Strokes
+  state #xFB00, state #xFB4F # Alphabetic Presentation Forms
+  state #xFB50, state #xFDFF # Arabic Presentation Forms-A
+  state #xFE20, state #xFE2F # Combining Half Marks
+  state #xFE10, state #xFE1F # Vertical Forms
+  state #xFE50, state #xFE6F # Small Form Variants
+  state #xFE70, state #xFEFF # Arabic Presentation Forms-B
+  state #xFF00, state #xFFEF # Halfwidth And Fullwidth Forms
+  state #xFFF0, state #xFFFF # Specials
+  state #x0F00, state #x0FFF # Tibetan
+  state #x0700, state #x074F # Syriac
+  state #x0780, state #x07BF # Thaana
+  state #x0D80, state #x0DFF # Sinhala
+  state #x1000, state #x109F # Myanmar
+  state #x1200, state #x137F # Ethiopic
+  state #x13A0, state #x13FF # Cherokee
+  state #x1400, state #x167F # Unified Canadian Aboriginal Syllabics
+  state #x1680, state #x169F # Ogham
+  state #x16A0, state #x16FF # Runic
+  state #x1780, state #x17FF # Khmer
+  state #x1800, state #x18AF # Mongolian
+  state #x2800, state #x28FF # Braille Patterns
+  state #xA000, state #xA48F # Yi Syllables
+  state #x1700, state #x171F # Tagalog
+  state #x10300, state #x1032F # Old Italic
+  state #x10330, state #x1034F # Gothic
+  state #x10400, state #x1044F # Deseret
+  state #x1D000, state #x1D0FF # Byzantine Musical Symbols
+  state #x1D400, state #x1D7FF # Mathematical Alphanumeric Symbols
+  state #xFF000, state #xFFFFD # Private Use (plane 15)
+  state #xFE00, state #xFE0F # Variation Selectors
+  state #xE0000, state #xE007F # Tags
+  state #x1900, state #x194F # Limbu
+  state #x1950, state #x197F # Tai Le
+  state #x1980, state #x19DF # New Tai Lue
+  state #x1A00, state #x1A1F # Buginese
+  state #x2C00, state #x2C5F # Glagolitic
+  state #x2D30, state #x2D7F # Tifinagh
+  state #x4DC0, state #x4DFF # Yijing Hexagram Symbols
+  state #xA800, state #xA82F # Syloti Nagri
+  state #x10000, state #x1007F # Linear B Syllabary
+  state #x10140, state #x1018F # Ancient Greek Numbers
+  state #x10380, state #x1039F # Ugaritic
+  state #x103A0, state #x103DF # Old Persian
+  state #x10450, state #x1047F # Shavian
+  state #x10480, state #x104AF # Osmanya
+  state #x10800, state #x1083F # Cypriot Syllabary
+  state #x10A00, state #x10A5F # Kharoshthi
+  state #x1D300, state #x1D35F # Tai Xuan Jing Symbols
+  state #x12000, state #x123FF # Cuneiform
+  state #x1D360, state #x1D37F # Counting Rod Numerals
+  state #x1B80, state #x1BBF # Sundanese
+  state #x1C00, state #x1C4F # Lepcha
+  state #x1C50, state #x1C7F # Ol Chiki
+  state #xA880, state #xA8DF # Saurashtra
+  state #xA900, state #xA92F # Kayah Li
+  state #xA930, state #xA95F # Rejang
+  state #xAA00, state #xAA5F # Cham
+  state #x10190, state #x101CF # Ancient Symbols
+  state #x101D0, state #x101FF # Phaistos Disc
+  state #x102A0, state #x102DF # Carian
+  state #x1F030, state #x1F09F  # Domino Tiles

@@ -1,0 +1,206 @@
+field AL, field r8r-without-rex
+field CL, field r8r-without-rex
+field DL, field r8r-without-rex
+field BL, field r8r-without-rex
+field AH, field r8r-without-rex
+field CH, field r8r-without-rex
+field DH, field r8r-without-rex
+field BH, field r8r-without-rex
+
+field AL, field r8r-with-rex
+field CL, field r8r-with-rex
+field DL, field r8r-with-rex
+field BL, field r8r-with-rex
+field SPL, field r8r-with-rex
+field BPL, field r8r-with-rex
+field SIL, field r8r-with-rex
+field DIL, field r8r-with-rex
+field R8B, field r8r-with-rex
+field R9B, field r8r-with-rex
+field R10B, field r8r-with-rex
+field R11B, field r8r-with-rex
+field R12B, field r8r-with-rex
+field R13B, field r8r-with-rex
+field R14B, field r8r-with-rex
+field R15B, field r8r-with-rex
+
+field AX, field r16r
+field CX, field r16r
+field DX, field r16r
+field BX, field r16r
+field SP, field r16r
+field BP, field r16r
+field SI, field r16r
+field DI, field r16r
+field R8W, field r16r
+field R9W, field r16r
+field R10W, field r16r
+field R11W, field r16r
+field R12W, field r16r
+field R13W, field r16r
+field R14W, field r16r
+field R15W, field r16r
+
+field EAX, field r32r
+field ECX, field r32r
+field EDX, field r32r
+field EBX, field r32r
+field ESP, field r32r
+field EBP, field r32r
+field ESI, field r32r
+field EDI, field r32r
+field R8D, field r32r
+field R9D, field r32r
+field R10D, field r32r
+field R11D, field r32r
+field R12D, field r32r
+field R13D, field r32r
+field R14D, field r32r
+field R15D, field r32r
+
+field RAX, field r64r
+field RCX, field r64r
+field RDX, field r64r
+field RBX, field r64r
+field RSP, field r64r
+field RBP, field r64r
+field RSI, field r64r
+field RDI, field r64r
+field R8, field r64r
+field R9, field r64r
+field R10, field r64r
+field R11, field r64r
+field R12, field r64r
+field R13, field r64r
+field R14, field r64r
+field R15, field r64r
+
+field MM0, field mmr
+field MM1, field mmr
+field MM2, field mmr
+field MM3, field mmr
+field MM4, field mmr
+field MM5, field mmr
+field MM6, field mmr
+field MM7, field mmr
+field MM0, field mmr
+field MM1, field mmr
+field MM2, field mmr
+field MM3, field mmr
+field MM4, field mmr
+field MM5, field mmr
+field MM6, field mmr
+field MM7, field mmr
+
+field XMM0, field xmmr
+field XMM1, field xmmr
+field XMM2, field xmmr
+field XMM3, field xmmr
+field XMM4, field xmmr
+field XMM5, field xmmr
+field XMM6, field xmmr
+field XMM7, field xmmr
+field XMM8, field xmmr
+field XMM9, field xmmr
+field XMM10, field xmmr
+field XMM11, field xmmr
+field XMM12, field xmmr
+field XMM13, field xmmr
+field XMM14, field xmmr
+field XMM15, field xmmr
+
+field YMM0, field ymmr
+field YMM1, field ymmr
+field YMM2, field ymmr
+field YMM3, field ymmr
+field YMM4, field ymmr
+field YMM5, field ymmr
+field YMM6, field ymmr
+field YMM7, field ymmr
+field YMM8, field ymmr
+field YMM9, field ymmr
+field YMM10, field ymmr
+field YMM11, field ymmr
+field YMM12, field ymmr
+field YMM13, field ymmr
+field YMM14, field ymmr
+field YMM15, field ymmr
+
+field ZMM0, field zmmr with MVEX/EVEX.R'=0
+field ZMM1, field zmmr with MVEX/EVEX.R'=0
+field ZMM2, field zmmr with MVEX/EVEX.R'=0
+field ZMM3, field zmmr with MVEX/EVEX.R'=0
+field ZMM4, field zmmr with MVEX/EVEX.R'=0
+field ZMM5, field zmmr with MVEX/EVEX.R'=0
+field ZMM6, field zmmr with MVEX/EVEX.R'=0
+field ZMM7, field zmmr with MVEX/EVEX.R'=0
+field ZMM8, field zmmr with MVEX/EVEX.R'=0
+field ZMM9, field zmmr with MVEX/EVEX.R'=0
+field ZMM10, field zmmr with MVEX/EVEX.R'=0
+field ZMM11, field zmmr with MVEX/EVEX.R'=0
+field ZMM12, field zmmr with MVEX/EVEX.R'=0
+field ZMM13, field zmmr with MVEX/EVEX.R'=0
+field ZMM14, field zmmr with MVEX/EVEX.R'=0
+field ZMM15, field zmmr with MVEX/EVEX.R'=0
+field ZMM16, field zmmr with MVEX/EVEX.R'=1
+field ZMM17, field zmmr with MVEX/EVEX.R'=1
+field ZMM18, field zmmr with MVEX/EVEX.R'=1
+field ZMM19, field zmmr with MVEX/EVEX.R'=1
+field ZMM20, field zmmr with MVEX/EVEX.R'=1
+field ZMM21, field zmmr with MVEX/EVEX.R'=1
+field ZMM22, field zmmr with MVEX/EVEX.R'=1
+field ZMM23, field zmmr with MVEX/EVEX.R'=1
+field ZMM24, field zmmr with MVEX/EVEX.R'=1
+field ZMM25, field zmmr with MVEX/EVEX.R'=1
+field ZMM26, field zmmr with MVEX/EVEX.R'=1
+field ZMM27, field zmmr with MVEX/EVEX.R'=1
+field ZMM28, field zmmr with MVEX/EVEX.R'=1
+field ZMM29, field zmmr with MVEX/EVEX.R'=1
+field ZMM30, field zmmr with MVEX/EVEX.R'=1
+field ZMM31, field zmmr with MVEX/EVEX.R'=1
+
+field ES, field sreg
+field CS, field sreg
+field SS, field sreg
+field DS, field sreg
+field FS, field sreg
+field GS, field sreg
+field ES, field sreg
+field CS, field sreg
+field SS, field sreg
+field DS, field sreg
+field FS, field sreg
+field GS, field sreg
+
+field CR0, field eee
+field CR1, field eee
+field CR2, field eee
+field CR3, field eee
+field CR4, field eee
+field CR5, field eee
+field CR6, field eee
+field CR7, field eee
+field CR8, field eee
+field CR9, field eee
+field CR10, field eee
+field CR11, field eee
+field CR12, field eee
+field CR13, field eee
+field CR14, field eee
+field CR15, field eee
+field DR0, field eee
+field DR1, field eee
+field DR2, field eee
+field DR3, field eee
+field DR4, field eee
+field DR5, field eee
+field DR6, field eee
+field DR7, field eee
+field DR8, field eee
+field DR9, field eee
+field DR10, field eee
+field DR11, field eee
+field DR12, field eee
+field DR13, field eee
+field DR14, field eee
+field DR15, field eee

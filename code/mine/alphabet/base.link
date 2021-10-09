@@ -1,0 +1,16 @@
+
+match uppercase-alphabet
+  match bound
+    mount start, share A
+    mount front, share Z
+
+match lowercase-alphabet
+  match bound
+    mount start, share a
+    mount front, share z
+
+match alphabet
+  match crown
+    match class, class uppercase-alphabet
+    match class, class lowercase-alphabet
+

@@ -1,0 +1,622 @@
+
+state name
+  chain <copyright>              # 0
+  chain <fontFamily>             # 1
+  chain <fontSubfamily>          # 2
+  chain <uniqueID>               # 3
+  chain <fullName>               # 4
+  chain <version>                # 5
+  chain <postScriptName>         # 6
+  chain <trademark>              # 7
+  chain <manufacturer>           # 8
+  chain <designer>               # 9
+  chain <description>            # 10
+  chain <manufacturerURL>        # 11
+  chain <designerURL>            # 12
+  chain <license>                # 13
+  chain <licenseURL>             # 14
+  chain <reserved>               # 15
+  chain <preferredFamily>        # 16
+  chain <preferredSubfamily>     # 17
+  chain <compatibleFullName>     # 18
+  chain <sampleText>             # 19
+  chain <postScriptFindFontName> # 20
+  chain <wwsFamily>              # 21
+  chain <wwsSubfamily>           # 22
+
+state mac-language
+  state 0, <en>
+  state 1, <fr>
+  state 2, <de>
+  state 3, <it>
+  state 4, <nl>
+  state 5, <sv>
+  state 6, <es>
+  state 7, <da>
+  state 8, <pt>
+  state 9, <no>
+  state 10, <he>
+  state 11, <ja>
+  state 12, <ar>
+  state 13, <fi>
+  state 14, <el>
+  state 15, <is>
+  state 16, <mt>
+  state 17, <tr>
+  state 18, <hr>
+  state 19, <zh-Hant>
+  state 20, <ur>
+  state 21, <hi>
+  state 22, <th>
+  state 23, <ko>
+  state 24, <lt>
+  state 25, <pl>
+  state 26, <hu>
+  state 27, <es>
+  state 28, <lv>
+  state 29, <se>
+  state 30, <fo>
+  state 31, <fa>
+  state 32, <ru>
+  state 33, <zh>
+  state 34, <nl-BE>
+  state 35, <ga>
+  state 36, <sq>
+  state 37, <ro>
+  state 38, <cz>
+  state 39, <sk>
+  state 40, <si>
+  state 41, <yi>
+  state 42, <sr>
+  state 43, <mk>
+  state 44, <bg>
+  state 45, <uk>
+  state 46, <be>
+  state 47, <uz>
+  state 48, <kk>
+  state 49, <az-Cyrl>
+  state 50, <az-Arab>
+  state 51, <hy>
+  state 52, <ka>
+  state 53, <mo>
+  state 54, <ky>
+  state 55, <tg>
+  state 56, <tk>
+  state 57, <mn-CN>
+  state 58, <mn>
+  state 59, <ps>
+  state 60, <ks>
+  state 61, <ku>
+  state 62, <sd>
+  state 63, <bo>
+  state 64, <ne>
+  state 65, <sa>
+  state 66, <mr>
+  state 67, <bn>
+  state 68, <as>
+  state 69, <gu>
+  state 70, <pa>
+  state 71, <or>
+  state 72, <ml>
+  state 73, <kn>
+  state 74, <ta>
+  state 75, <te>
+  state 76, <si>
+  state 77, <my>
+  state 78, <km>
+  state 79, <lo>
+  state 80, <vi>
+  state 81, <id>
+  state 82, <tl>
+  state 83, <ms>
+  state 84, <ms-Arab>
+  state 85, <am>
+  state 86, <ti>
+  state 87, <om>
+  state 88, <so>
+  state 89, <sw>
+  state 90, <rw>
+  state 91, <rn>
+  state 92, <ny>
+  state 93, <mg>
+  state 94, <eo>
+  state 128, <cy>
+  state 129, <eu>
+  state 130, <ca>
+  state 131, <la>
+  state 132, <qu>
+  state 133, <gn>
+  state 134, <ay>
+  state 135, <tt>
+  state 136, <ug>
+  state 137, <dz>
+  state 138, <jv>
+  state 139, <su>
+  state 140, <gl>
+  state 141, <af>
+  state 142, <br>
+  state 143, <iu>
+  state 144, <gd>
+  state 145, <gv>
+  state 146, <ga>
+  state 147, <to>
+  state 148, <el-polyton>
+  state 149, <kl>
+  state 150, <az>
+  state 151, <nn>
+
+state mac-script-encoding
+  state 0, <macintosh>           # smRoman
+  state 1, <x-mac-japanese>      # smJapanese
+  state 2, <x-mac-chinesetrad>   # smTradChinese
+  state 3, <x-mac-korean>        # smKorean
+  state 6, <x-mac-greek>         # smGreek
+  state 7, <x-mac-cyrillic>      # smCyrillic
+  state 9, <x-mac-devanagai>     # smDevanagari
+  state 10, <x-mac-gurmukhi>     # smGurmukhi
+  state 11, <x-mac-gujarati>     # smGujarati
+  state 12, <x-mac-oriya>        # smOriya
+  state 13, <x-mac-bengali>      # smBengali
+  state 14, <x-mac-tamil>        # smTamil
+  state 15, <x-mac-telugu>       # smTelugu
+  state 16, <x-mac-kannada>      # smKannada
+  state 17, <x-mac-malayalam>    # smMalayalam
+  state 18, <x-mac-sinhalese>    # smSinhalese
+  state 19, <x-mac-burmese>      # smBurmese
+  state 20, <x-mac-khmer>        # smKhmer
+  state 21, <x-mac-thai>         # smThai
+  state 22, <x-mac-lao>          # smLao
+  state 23, <x-mac-georgian>     # smGeorgian
+  state 24, <x-mac-armenian>     # smArmenian
+  state 25, <x-mac-chinesesimp>  # smSimpChinese
+  state 26, <x-mac-tibetan>      # smTibetan
+  state 27, <x-mac-mongolian>    # smMongolian
+  state 28, <x-mac-ethiopic>     # smEthiopic
+  state 29, <x-mac-ce>           # smCentralEuroRoman
+  state 30, <x-mac-vietnamese>   # smVietnamese
+  state 31, <x-mac-extarabic>    # smExtArabic
+
+state mac-language-encoding
+  state 15, <x-mac-icelandic>    # langIcelandic
+  state 17, <x-mac-turkish>      # langTurkish
+  state 18, <x-mac-croatian>     # langCroatian
+  state 24, <x-mac-ce>           # langLithuanian
+  state 25, <x-mac-ce>           # langPolish
+  state 26, <x-mac-ce>           # langHungarian
+  state 27, <x-mac-ce>           # langEstonian
+  state 28, <x-mac-ce>           # langLatvian
+  state 30, <x-mac-icelandic>    # langFaroese
+  state 37, <x-mac-romanian>     # langRomanian
+  state 38, <x-mac-ce>           # langCzech
+  state 39, <x-mac-ce>           # langSlovak
+  state 40, <x-mac-ce>           # langSlovenian
+  state 143, <x-mac-inuit>       # langInuktitut
+  state 146, <x-mac-gaelic>      # langIrishGaelicScript
+
+state mac-language-to-script
+  state 0, 0    # langEnglish → smRoman
+  state 1, 0    # langFrench → smRoman
+  state 2, 0    # langGerman → smRoman
+  state 3, 0    # langItalian → smRoman
+  state 4, 0    # langDutch → smRoman
+  state 5, 0    # langSwedish → smRoman
+  state 6, 0    # langSpanish → smRoman
+  state 7, 0    # langDanish → smRoman
+  state 8, 0    # langPortuguese → smRoman
+  state 9, 0    # langNorwegian → smRoman
+  state 10, 5   # langHebrew → smHebrew
+  state 11, 1   # langJapanese → smJapanese
+  state 12, 4   # langArabic → smArabic
+  state 13, 0   # langFinnish → smRoman
+  state 14, 6   # langGreek → smGreek
+  state 15, 0   # langIcelandic → smRoman (modified)
+  state 16, 0   # langMaltese → smRoman
+  state 17, 0   # langTurkish → smRoman (modified)
+  state 18, 0   # langCroatian → smRoman (modified)
+  state 19, 2   # langTradChinese → smTradChinese
+  state 20, 4   # langUrdu → smArabic
+  state 21, 9   # langHindi → smDevanagari
+  state 22, 21    # langThai → smThai
+  state 23, 3   # langKorean → smKorean
+  state 24, 29    # langLithuanian → smCentralEuroRoman
+  state 25, 29    # langPolish → smCentralEuroRoman
+  state 26, 29    # langHungarian → smCentralEuroRoman
+  state 27, 29    # langEstonian → smCentralEuroRoman
+  state 28, 29    # langLatvian → smCentralEuroRoman
+  state 29, 0   # langSami → smRoman
+  state 30, 0   # langFaroese → smRoman (modified)
+  state 31, 4   # langFarsi → smArabic (modified)
+  state 32, 7   # langRussian → smCyrillic
+  state 33, 25    # langSimpChinese → smSimpChinese
+  state 34, 0   # langFlemish → smRoman
+  state 35, 0   # langIrishGaelic → smRoman (modified)
+  state 36, 0   # langAlbanian → smRoman
+  state 37, 0   # langRomanian → smRoman (modified)
+  state 38, 29    # langCzech → smCentralEuroRoman
+  state 39, 29    # langSlovak → smCentralEuroRoman
+  state 40, 0   # langSlovenian → smRoman (modified)
+  state 41, 5   # langYiddish → smHebrew
+  state 42, 7   # langSerbian → smCyrillic
+  state 43, 7   # langMacedonian → smCyrillic
+  state 44, 7   # langBulgarian → smCyrillic
+  state 45, 7   # langUkrainian → smCyrillic (modified)
+  state 46, 7   # langByelorussian → smCyrillic
+  state 47, 7   # langUzbek → smCyrillic
+  state 48, 7   # langKazakh → smCyrillic
+  state 49, 7   # langAzerbaijani → smCyrillic
+  state 50, 4   # langAzerbaijanAr → smArabic
+  state 51, 24    # langArmenian → smArmenian
+  state 52, 23    # langGeorgian → smGeorgian
+  state 53, 7   # langMoldavian → smCyrillic
+  state 54, 7   # langKirghiz → smCyrillic
+  state 55, 7   # langTajiki → smCyrillic
+  state 56, 7   # langTurkmen → smCyrillic
+  state 57, 27    # langMongolian → smMongolian
+  state 58, 7   # langMongolianCyr → smCyrillic
+  state 59, 4   # langPashto → smArabic
+  state 60, 4   # langKurdish → smArabic
+  state 61, 4   # langKashmiri → smArabic
+  state 62, 4   # langSindhi → smArabic
+  state 63, 26    # langTibetan → smTibetan
+  state 64, 9   # langNepali → smDevanagari
+  state 65, 9   # langSanskrit → smDevanagari
+  state 66, 9   # langMarathi → smDevanagari
+  state 67, 13    # langBengali → smBengali
+  state 68, 13    # langAssamese → smBengali
+  state 69, 11    # langGujarati → smGujarati
+  state 70, 10    # langPunjabi → smGurmukhi
+  state 71, 12    # langOriya → smOriya
+  state 72, 17    # langMalayalam → smMalayalam
+  state 73, 16    # langKannada → smKannada
+  state 74, 14    # langTamil → smTamil
+  state 75, 15    # langTelugu → smTelugu
+  state 76, 18    # langSinhalese → smSinhalese
+  state 77, 19    # langBurmese → smBurmese
+  state 78, 20    # langKhmer → smKhmer
+  state 79, 22    # langLao → smLao
+  state 80, 30    # langVietnamese → smVietnamese
+  state 81, 0     # langIndonesian → smRoman
+  state 82, 0     # langTagalog → smRoman
+  state 83, 0     # langMalayRoman → smRoman
+  state 84, 4     # langMalayArabic → smArabic
+  state 85, 28    # langAmharic → smEthiopic
+  state 86, 28    # langTigrinya → smEthiopic
+  state 87, 28    # langOromo → smEthiopic
+  state 88, 0     # langSomali → smRoman
+  state 89, 0     # langSwahili → smRoman
+  state 90, 0     # langKinyarwanda → smRoman
+  state 91, 0     # langRundi → smRoman
+  state 92, 0     # langNyanja → smRoman
+  state 93, 0     # langMalagasy → smRoman
+  state 94, 0     # langEsperanto → smRoman
+  state 128, 0    # langWelsh → smRoman (modified)
+  state 129, 0    # langBasque → smRoman
+  state 130, 0    # langCatalan → smRoman
+  state 131, 0    # langLatin → smRoman
+  state 132, 0    # langQuechua → smRoman
+  state 133, 0    # langGuarani → smRoman
+  state 134, 0    # langAymara → smRoman
+  state 135, 7    # langTatar → smCyrillic
+  state 136, 4    # langUighur → smArabic
+  state 137, 26   # langDzongkha → smTibetan
+  state 138, 0    # langJavaneseRom → smRoman
+  state 139, 0    # langSundaneseRom → smRoman
+  state 140, 0    # langGalician → smRoman
+  state 141, 0    # langAfrikaans → smRoman
+  state 142, 0    # langBreton → smRoman (modified)
+  state 143, 28   # langInuktitut → smEthiopic (modified)
+  state 144, 0    # langScottishGaelic → smRoman (modified)
+  state 145, 0    # langManxGaelic → smRoman (modified)
+  state 146, 0    # langIrishGaelicScript → smRoman (modified)
+  state 147, 0    # langTongan → smRoman
+  state 148, 6    # langGreekAncient → smRoman
+  state 149, 0    # langGreenlandic → smRoman
+  state 150, 0    # langAzerbaijanRoman → smRoman
+  state 151, 0    # langNynorsk → smRoman
+
+state windows-language
+  state #x0436, <af>
+  state #x041C, <sq>
+  state #x0484, <gsw>
+  state #x045E, <am>
+  state #x1401, <ar-DZ>
+  state #x3C01, <ar-BH>
+  state #x0C01, <ar>
+  state #x0801, <ar-IQ>
+  state #x2C01, <ar-JO>
+  state #x3401, <ar-KW>
+  state #x3001, <ar-LB>
+  state #x1001, <ar-LY>
+  state #x1801, <ary>
+  state #x2001, <ar-OM>
+  state #x4001, <ar-QA>
+  state #x0401, <ar-SA>
+  state #x2801, <ar-SY>
+  state #x1C01, <aeb>
+  state #x3801, <ar-AE>
+  state #x2401, <ar-YE>
+  state #x042B, <hy>
+  state #x044D, <as>
+  state #x082C, <az-Cyrl>
+  state #x042C, <az>
+  state #x046D, <ba>
+  state #x042D, <eu>
+  state #x0423, <be>
+  state #x0845, <bn>
+  state #x0445, <bn-IN>
+  state #x201A, <bs-Cyrl>
+  state #x141A, <bs>
+  state #x047E, <br>
+  state #x0402, <bg>
+  state #x0403, <ca>
+  state #x0C04, <zh-HK>
+  state #x1404, <zh-MO>
+  state #x0804, <zh>
+  state #x1004, <zh-SG>
+  state #x0404, <zh-TW>
+  state #x0483, <co>
+  state #x041A, <hr>
+  state #x101A, <hr-BA>
+  state #x0405, <cs>
+  state #x0406, <da>
+  state #x048C, <prs>
+  state #x0465, <dv>
+  state #x0813, <nl-BE>
+  state #x0413, <nl>
+  state #x0C09, <en-AU>
+  state #x2809, <en-BZ>
+  state #x1009, <en-CA>
+  state #x2409, <en-029>
+  state #x4009, <en-IN>
+  state #x1809, <en-IE>
+  state #x2009, <en-JM>
+  state #x4409, <en-MY>
+  state #x1409, <en-NZ>
+  state #x3409, <en-PH>
+  state #x4809, <en-SG>
+  state #x1C09, <en-ZA>
+  state #x2C09, <en-TT>
+  state #x0809, <en-GB>
+  state #x0409, <en>
+  state #x3009, <en-ZW>
+  state #x0425, <et>
+  state #x0438, <fo>
+  state #x0464, <fil>
+  state #x040B, <fi>
+  state #x080C, <fr-BE>
+  state #x0C0C, <fr-CA>
+  state #x040C, <fr>
+  state #x140C, <fr-LU>
+  state #x180C, <fr-MC>
+  state #x100C, <fr-CH>
+  state #x0462, <fy>
+  state #x0456, <gl>
+  state #x0437, <ka>
+  state #x0C07, <de-AT>
+  state #x0407, <de>
+  state #x1407, <de-LI>
+  state #x1007, <de-LU>
+  state #x0807, <de-CH>
+  state #x0408, <el>
+  state #x046F, <kl>
+  state #x0447, <gu>
+  state #x0468, <ha>
+  state #x040D, <he>
+  state #x0439, <hi>
+  state #x040E, <hu>
+  state #x040F, <is>
+  state #x0470, <ig>
+  state #x0421, <id>
+  state #x045D, <iu>
+  state #x085D, <iu-Latn>
+  state #x083C, <ga>
+  state #x0434, <xh>
+  state #x0435, <zu>
+  state #x0410, <it>
+  state #x0810, <it-CH>
+  state #x0411, <ja>
+  state #x044B, <kn>
+  state #x043F, <kk>
+  state #x0453, <km>
+  state #x0486, <quc>
+  state #x0487, <rw>
+  state #x0441, <sw>
+  state #x0457, <kok>
+  state #x0412, <ko>
+  state #x0440, <ky>
+  state #x0454, <lo>
+  state #x0426, <lv>
+  state #x0427, <lt>
+  state #x082E, <dsb>
+  state #x046E, <lb>
+  state #x042F, <mk>
+  state #x083E, <ms-BN>
+  state #x043E, <ms>
+  state #x044C, <ml>
+  state #x043A, <mt>
+  state #x0481, <mi>
+  state #x047A, <arn>
+  state #x044E, <mr>
+  state #x047C, <moh>
+  state #x0450, <mn>
+  state #x0850, <mn-CN>
+  state #x0461, <ne>
+  state #x0414, <nb>
+  state #x0814, <nn>
+  state #x0482, <oc>
+  state #x0448, <or>
+  state #x0463, <ps>
+  state #x0415, <pl>
+  state #x0416, <pt>
+  state #x0816, <pt-PT>
+  state #x0446, <pa>
+  state #x046B, <qu-BO>
+  state #x086B, <qu-EC>
+  state #x0C6B, <qu>
+  state #x0418, <ro>
+  state #x0417, <rm>
+  state #x0419, <ru>
+  state #x243B, <smn>
+  state #x103B, <smj-NO>
+  state #x143B, <smj>
+  state #x0C3B, <se-FI>
+  state #x043B, <se>
+  state #x083B, <se-SE>
+  state #x203B, <sms>
+  state #x183B, <sma-NO>
+  state #x1C3B, <sms>
+  state #x044F, <sa>
+  state #x1C1A, <sr-Cyrl-BA>
+  state #x0C1A, <sr>
+  state #x181A, <sr-Latn-BA>
+  state #x081A, <sr-Latn>
+  state #x046C, <nso>
+  state #x0432, <tn>
+  state #x045B, <si>
+  state #x041B, <sk>
+  state #x0424, <sl>
+  state #x2C0A, <es-AR>
+  state #x400A, <es-BO>
+  state #x340A, <es-CL>
+  state #x240A, <es-CO>
+  state #x140A, <es-CR>
+  state #x1C0A, <es-DO>
+  state #x300A, <es-EC>
+  state #x440A, <es-SV>
+  state #x100A, <es-GT>
+  state #x480A, <es-HN>
+  state #x080A, <es-MX>
+  state #x4C0A, <es-NI>
+  state #x180A, <es-PA>
+  state #x3C0A, <es-PY>
+  state #x280A, <es-PE>
+  state #x500A, <es-PR>
+  state #x0C0A, <es>
+  state #x040A, <es>
+  state #x540A, <es-US>
+  state #x380A, <es-UY>
+  state #x200A, <es-VE>
+  state #x081D, <sv-FI>
+  state #x041D, <sv>
+  state #x045A, <syr>
+  state #x0428, <tg>
+  state #x085F, <tzm>
+  state #x0449, <ta>
+  state #x0444, <tt>
+  state #x044A, <te>
+  state #x041E, <th>
+  state #x0451, <bo>
+  state #x041F, <tr>
+  state #x0442, <tk>
+  state #x0480, <ug>
+  state #x0422, <uk>
+  state #x042E, <hsb>
+  state #x0420, <ur>
+  state #x0843, <uz-Cyrl>
+  state #x0443, <uz>
+  state #x042A, <vi>
+  state #x0452, <cy>
+  state #x0488, <wo>
+  state #x0485, <sah>
+  state #x0478, <ii>
+  state #x046A, <yo>
+
+force get-language-code
+  start platform-id
+  start language-id
+  start ltag
+
+  check first
+    check match
+      mount start, share platform-id
+      mount front, share 0
+      check match
+        mount start, share language-id
+        mount front, share #xffff
+        leave build, share <und>
+      check has
+        mount build, share ltag
+        leave build, share ltag[language-id]
+    check match
+      mount start, share platform-id
+      mount front, share 1
+      leave build, share mac-language[language-id]
+    check match
+      mount start, share platform-id
+      mount front, share 3
+      leave build, share windows-language[language-id]
+
+force get-encoding
+  start platformID
+  start encodingID
+  start languageID
+  check first
+    check match
+      mount start, share platform-id
+      mount front, share 0
+      leave build, share <utf16>
+    check match
+      mount start, share platform-id
+      mount front, share 1
+      cause or
+        chain build, share mac-language-encoding[language-id]
+        chain build, share mac-script-encoding[language-id]
+    check match
+      mount start, share platform-id
+      mount front, share 3
+      check or
+        check match
+          mount start, share encoding-id
+          mount front, share 1
+        check match
+          mount start, share encoding-id
+          mount front, share 10
+        leave build, share <utf16>
+
+weave name-table
+  cause get-language-code
+    mount platform-id, share platform-id
+    mount language-id, share language-id
+    mount ltag, share ltag
+    store language
+  cause get-encoding
+    mount platform-id, share platform-id
+    mount encoding-id, share encoding-id
+    mount language-id, share language-id
+    store encoding
+  check and
+    check has
+      mount build, share encoding
+    check has
+      mount build, share language
+    catch match
+      state text
+      cause add
+        mount start, share string-offset
+        mount front, share offset
+        store final-offset
+      check match
+        mount start, share encoding
+        mount front, share <utf16>
+        catch match
+          cause decode-utf16
+            mount data, share data
+            mount position, share final-offset
+            mount byte-length, share byte-length
+            store text
+        catch fault
+          cause decode-mac-string
+            mount data, share data
+            mount position, share final-offset
+            mount byte-length, share byte-length
+            mount encoding, share encoding
+            store text
+      check has
+        mount build, share text
+        store translations, share name[property]
+        check not-has
+          mount build, share translations
+          build object
+            store name[property]
+            store translations
+          store translations[language], share text

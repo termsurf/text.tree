@@ -1,0 +1,10 @@
+
+match rfc1123-date
+  match class, class short-weekday
+  match chord, share <,>
+  match class, class space
+  match class, class date1
+  match class, class space
+  match class, class time
+  match class, class space
+  match chord, share <GMT>

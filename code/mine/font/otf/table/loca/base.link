@@ -1,0 +1,23 @@
+
+weave loca-table
+  start data
+  start start
+  start num-glyphs
+  start short-version
+
+  check has
+    mount build, share short-version
+    catch match
+      match chain
+        mount front, share num-glyphs + 1
+        match class, class ushort
+          weave glyph-offset
+        cause divide
+          mount start, share glyph-offset
+          mount front, share 2
+          store glyph-offset
+    catch fault
+      match chain
+        mount front, share num-glyphs + 1
+        match class, class ulong
+          weave glyph-offset

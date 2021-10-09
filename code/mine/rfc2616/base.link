@@ -1,0 +1,53 @@
+
+match controls
+  match crown
+    match bound
+      match start, share 0
+      match front, share 31
+    match chord, share 127
+
+match linear-whitespace
+  match sieve, match class, class carriage-return-line-feed
+  match crest
+    mount start, share 1
+    match crown
+      mount class, class space
+      mount class, class horizontal-tab
+
+match text
+  match bound
+    mount start, share 0
+    mount front, share 255
+    match leave
+      match class, class controls
+
+match token
+  match crest
+    mount start, share 1
+    match class, class char
+      match leave
+        match crown
+          match class, class controls
+          match class, class separator-list
+
+match separator-list
+  match crown
+    match chord, share <(>
+    match chord, share <)>
+    match chord, share <<>
+    match chord, share <>>
+    match chord, share <@>
+    match chord, share <,>
+    match chord, share <;>
+    match chord, share <:>
+    match chord, share <\\>
+    match chord, share <\|>
+    match chord, share </>
+    match chord, share <[>
+    match chord, share <]>
+    match chord, share <?>
+    match chord, share <=>
+    match chord, share <\{>
+    match chord, share <\}>
+    match class, class sp
+    match class, class ht

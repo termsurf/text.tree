@@ -1,0 +1,65 @@
+
+match head-table
+  match class, class head-table-version
+  match class, class head-table-font-revision
+  match class, class head-table-checksum-adjustment
+  match class, class head-table-magic-number
+  match class, class head-table-flags
+  head.unitsPerEm = p.parseUShort();
+  match class, class head-table-units-per-em
+  head.created = p.parseLongDateTime();
+  match class, class head-table-created-at-time
+  head.modified = p.parseLongDateTime();
+  match class, class head-table-modified-at-time
+  head.xMin = p.parseShort();
+  match class, class head-table-x-min
+  head.yMin = p.parseShort();
+  match class, class head-table-y-min
+  head.xMax = p.parseShort();
+  match class, class head-table-x-max
+  head.yMax = p.parseShort();
+  match class, class head-table-y-max
+  head.macStyle = p.parseUShort();
+  match class, class head-table-mac-style
+  head.lowestRecPPEM = p.parseUShort();
+  match class, class head-table-lowest-rec-ppem
+  head.fontDirectionHint = p.parseShort();
+  match class, class head-table-font-direction-hint
+  head.indexToLocFormat = p.parseShort();
+  match class, class head-table-index-to-loc-format
+  head.glyphDataFormat = p.parseShort();
+  match class, class head-table-glyph-data-format
+
+match head-table-version
+  match class, class head-table-version-major
+  match class, class head-table-version-minor
+
+match head-table-version-major
+  match class, class count-2
+
+match head-table-version-minor
+  match class, class count-2
+
+match head-table-font-revision
+  match class, class decimal
+  match class, class fraction
+
+match decimal
+  match class, class count-2
+
+match fraction
+  match class, class count-2
+
+match head-table-checksum-adjustment
+  match count
+    mount count, share 4
+
+match head-table-magic-number
+  match write, share #h5F0F3CF5
+
+match head-table-flags
+  match class, class count-2
+
+match count-2
+  match count
+    mount count, share 2

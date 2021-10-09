@@ -1,0 +1,1579 @@
+
+match translation-unit
+  match class, class version-statement
+  match class, class extension-statement-list
+  match class, class external-declaration-list
+
+version-statement:
+    match crown
+    match class, class VERSION
+  match class, class INTCONSTANT
+  match class, class EOL
+    match class, class VERSION
+  match class, class INTCONSTANT
+  match class, class IDENTIFIER
+  match class, class EOL
+
+match pragma-statement
+  match crown
+    match class, class PRAGMA-DEBUG-ON
+  match class, class EOL
+    match class, class PRAGMA-DEBUG-OFF
+  match class, class EOL
+    match crown
+    match class, class PRAGMA-OPTIMIZE-ON
+  match class, class EOL
+    match class, class PRAGMA-OPTIMIZE-OFF
+  match class, class EOL
+    match class, class PRAGMA-INVARIANT-ALL
+  match class, class EOL
+
+extension-statement-list:
+    match class, class extension-statement-list
+  match class, class extension-statement
+
+match extension-statement
+  match class, class EXTENSION
+  match class, class extension-name=IDENTIFIER
+  match class, class COLON
+  match class, class extension-status=IDENTIFIER
+  match class, class EOL
+
+match external-declaration-list
+  match crown
+    match class, class single=external-declaration
+    match class, class prefix=external-declaration-list
+  match class, class lastDecl=external-declaration
+    match class, class prefix=external-declaration-list
+  match class, class lastExtension=extension-statement
+
+match variable-identifier
+  match class, class IDENTIFIER
+
+match primary-expression
+  match crown
+    match class, class variable-identifier
+    match class, class INTCONSTANT
+    match crown
+    match class, class UINTCONSTANT
+    match class, class FLOATCONSTANT
+    match crown
+    match class, class BOOLCONSTANT
+    match class, class LPAREN
+  match class, class expression
+  match class, class RPAREN
+
+match postfix-expression
+  match crown
+    match class, class primary-expression
+    match class, class postfix-expression
+  match class, class LBRACKET
+  match class, class integer-expression
+  match class, class RBRACKET
+    match crown
+    match class, class postfix-expression
+  match class, class DOT
+  match class, class method-call-generic
+    match class, class postfix-expression
+  match class, class DOT
+  match class, class IDENTIFIER
+    match crown
+    match class, class postfix-expression
+  match class, class INC-OP
+    match class, class postfix-expression
+  match class, class DEC-OP
+    match class, class function-call-generic
+
+match integer-expression
+  match class, class expression
+
+match function-call-generic
+  match crown
+    match class, class function-call-header-with-parameters
+  match class, class RPAREN
+    match class, class function-call-header-no-parameters
+  match class, class RPAREN
+
+match function-call-header-no-parameters
+  match crown
+    match class, class function-call-header
+  match class, class VOID-TOK
+    match class, class function-call-header
+
+match function-call-header-with-parameters
+  match crown
+    match class, class function-call-header
+  match class, class assignment-expression
+    match class, class function-call-header-with-parameters
+  match class, class COMMA
+  match class, class assignment-expression
+
+match function-call-header
+  match class, class function-identifier
+  match class, class array-specifier?
+  match class, class LPAREN
+  match class, class //
+  match class, class The
+  match class, class array-specifier
+  match class, class is
+  match class, class there
+  match class, class to
+  match class, class allow
+  match class, class for
+  match class, class vector
+  match class, class type
+  match class, class constructors,
+  match class, class e.g.
+  match class, class int[2](1,
+  match class, class 2)
+
+match function-identifier
+  match crown
+    match class, class builtin-type-specifier-nonarray
+  match class, class //
+  match class, class type
+  match class, class constructor
+    match class, class variable-identifier
+
+match method-call-generic
+  match crown
+    match class, class method-call-header-with-parameters
+  match class, class RPAREN
+    match class, class method-call-header-no-parameters
+  match class, class RPAREN
+
+match method-call-header-no-parameters
+  match crown
+    match class, class method-call-header
+  match class, class VOID-TOK
+    match class, class method-call-header
+
+match method-call-header-with-parameters
+  match crown
+    match class, class method-call-header
+  match class, class assignment-expression
+    match class, class method-call-header-with-parameters
+  match class, class COMMA
+  match class, class assignment-expression
+
+match method-call-header
+  match class, class variable-identifier
+  match class, class LPAREN
+
+match unary-expression
+  match crown
+    match class, class postfix-expression
+    match class, class INC-OP
+  match class, class unary-expression
+    match crown
+    match class, class DEC-OP
+  match class, class unary-expression
+    match class, class unary-operator
+  match class, class unary-expression
+
+match unary-operator
+  match crown
+    match class, class PLUS-OP
+    match class, class MINUS-OP
+    match crown
+    match class, class NOT-OP
+    match class, class BNEG-OP
+
+match multiplicative-expression
+  match class, class operands+=unary-expression
+  match class, class ((operators+=TIMES-OP
+  match class, class |
+  match class, class operators+=DIV-OP
+  match class, class |
+  match class, class operators+=MOD-OP)
+  match class, class operands+=unary-expression)*
+
+match additive-expression
+  match class, class operands+=multiplicative-expression
+  match class, class ((operators+=PLUS-OP
+  match class, class |
+  match class, class operators+=MINUS-OP)
+  match class, class operands+=multiplicative-expression)*
+
+match shift-expression
+  match class, class operands+=additive-expression
+  match class, class ((operators+=LEFT-OP
+  match class, class |
+  match class, class operators+=RIGHT-OP)
+  match class, class operands+=additive-expression)*
+
+match relational-expression
+  match class, class operands+=shift-expression
+  match class, class ((operators+=LT-OP
+  match class, class |
+  match class, class operators+=GT-OP
+  match class, class |
+  match class, class operators+=LE-OP
+  match class, class |
+  match class, class operators+=GE-OP)
+  match class, class operands+=shift-expression)*
+
+match equality-expression
+  match class, class operands+=relational-expression
+  match class, class ((operators+=EQ-OP
+  match class, class |
+  match class, class operators+=NE-OP)
+  match class, class operands+=relational-expression)*
+
+match and-expression
+  match class, class operands+=equality-expression
+  match class, class (operators+=BAND-OP
+  match class, class operands+=equality-expression)*
+
+match exclusive-or-expression
+  match class, class operands+=and-expression
+  match class, class (operators+=BXOR-OP
+  match class, class operands+=and-expression)*
+
+match inclusive-or-expression
+  match class, class operands+=exclusive-or-expression
+  match class, class (operators+=BOR-OP
+  match class, class operands+=exclusive-or-expression)*
+
+match logical-and-expression
+  match class, class operands+=inclusive-or-expression
+  match class, class (operators+=AND-OP
+  match class, class operands+=inclusive-or-expression)*
+
+match logical-xor-expression
+  match class, class operands+=logical-and-expression
+  match class, class (operators+=XOR-OP
+  match class, class operands+=logical-and-expression)*
+
+match logical-or-expression
+  match class, class operands+=logical-xor-expression
+  match class, class (operators+=OR-OP
+  match class, class operands+=logical-xor-expression)*
+
+match conditional-expression
+  match class, class logical-or-expression
+  match class, class (QUERY-OP
+  match class, class expression
+  match class, class COLON
+  match class, class assignment-expression)*
+
+match assignment-expression
+  match crown
+    match class, class conditional-expression
+    match class, class unary-expression
+  match class, class assignment-operator
+  match class, class assignment-expression
+
+match assignment-operator
+  match crown
+    match class, class ASSIGN-OP
+    match class, class MUL-ASSIGN
+
+    match class, class DIV-ASSIGN
+    match class, class MOD-ASSIGN
+
+    match class, class ADD-ASSIGN
+    match class, class SUB-ASSIGN
+
+    match class, class LEFT-ASSIGN
+    match class, class RIGHT-ASSIGN
+
+    match class, class AND-ASSIGN
+    match class, class XOR-ASSIGN
+    match class, class OR-ASSIGN
+
+match expression
+  match class, class operands+=assignment-expression
+  match class, class (operators+=COMMA
+  match class, class operands+=assignment-expression)*
+
+match constant-expression
+  match class, class conditional-expression
+
+match declaration
+  match crown
+    match class, class function-prototype
+  match class, class SEMICOLON
+    match class, class init-declarator-list
+  match class, class SEMICOLON
+    match crown
+    match class, class PRECISION
+  match class, class precision-qualifier
+  match class, class type-specifier
+  match class, class SEMICOLON
+    match class, class interface-block
+
+match function-prototype
+  match class, class function-declarator
+  match class, class RPAREN
+
+match function-declarator
+  match crown
+    match class, class function-header
+    match class, class function-header-with-parameters
+
+match function-header-with-parameters
+  match crown
+    match block
+      match class, class function-header
+      match class, class parameter-declaration
+    match block
+      match class, class function-header-with-parameters
+      match class, class COMMA
+      match class, class parameter-declaration
+
+match function-header
+  match class, class fully-specified-type
+  match class, class variable-identifier
+  match class, class LPAREN
+
+match parameter-declarator
+  match crown
+    match class, class type-specifier
+  match class, class IDENTIFIER
+    match class, class type-specifier
+  match class, class IDENTIFIER
+  match class, class array-specifier
+
+match parameter-declaration
+  match crown
+    match class, class parameter-qualifier
+  match class, class parameter-declarator
+    match class, class parameter-qualifier
+  match class, class parameter-type-specifier
+
+parameter-qualifier:
+   // empty
+    match crown
+    match class, class CONST-TOK
+  match class, class parameter-qualifier
+    match class, class PRECISE
+  match class, class parameter-qualifier
+    match crown
+    match class, class parameter-direction-qualifier
+  match class, class parameter-qualifier
+    match class, class precision-qualifier
+  match class, class parameter-qualifier
+
+match parameter-direction-qualifier
+  match crown
+    match class, class IN-TOK
+    match class, class OUT-TOK
+    match class, class INOUT-TOK
+
+match parameter-type-specifier
+  match class, class type-specifier
+
+match init-declarator-list
+  match crown
+    match class, class single-declaration
+    match class, class init-declarator-list
+  match class, class COMMA
+  match class, class IDENTIFIER
+    match crown
+    match class, class init-declarator-list
+  match class, class COMMA
+  match class, class IDENTIFIER
+  match class, class array-specifier
+    match block
+      match class, class init-declarator-list
+      match class, class COMMA
+      match class, class IDENTIFIER
+      match class, class array-specifier
+      match class, class ASSIGN-OP
+      match class, class initializer
+    match block
+      match class, class init-declarator-list
+      match class, class COMMA
+      match class, class IDENTIFIER
+      match class, class ASSIGN-OP
+      match class, class initializer
+
+   // Grammar Note: No 'enum', or 'typedef'.
+match single-declaration
+  match crown
+    match class, class fully-specified-type
+    match class, class fully-specified-type
+  match class, class IDENTIFIER
+    match crown
+    match class, class fully-specified-type
+  match class, class IDENTIFIER
+  match class, class array-specifier
+    match class, class fully-specified-type
+  match class, class IDENTIFIER
+  match class, class array-specifier
+  match class, class ASSIGN-OP
+  match class, class initializer
+    match crown
+    match class, class fully-specified-type
+  match class, class IDENTIFIER
+  match class, class ASSIGN-OP
+  match class, class initializer
+    match class, class INVARIANT
+  match class, class variable-identifier
+    match class, class PRECISE
+  match class, class variable-identifier
+
+match fully-specified-type
+  match crown
+    match class, class type-specifier
+    match class, class type-qualifier
+  match class, class type-specifier
+
+match layout-qualifier
+  match class, class LAYOUT-TOK
+  match class, class LPAREN
+  match class, class layout-qualifier-id-list
+  match class, class RPAREN
+
+match layout-qualifier-id-list
+  match crown
+    match class, class layout-qualifier-id
+    match class, class layout-qualifier-id-list
+  match class, class COMMA
+  match class, class layout-qualifier-id
+
+match integer-constant
+  match crown
+    match class, class INTCONSTANT
+    match class, class UINTCONSTANT
+
+match layout-qualifier-id
+  match crown
+    match class, class IDENTIFIER
+    match class, class IDENTIFIER
+  match class, class ASSIGN-OP
+  match class, class integer-constant
+    match class, class interface-block-layout-qualifier
+
+match interface-block-layout-qualifier
+  match crown
+    match class, class ROW-MAJOR
+    match class, class PACKED-TOK
+
+match interpolation-qualifier
+  match crown
+    match class, class SMOOTH
+    match class, class FLAT
+    match class, class NOPERSPECTIVE
+
+match type-qualifier
+  match crown
+    match crown
+    match class, class INVARIANT
+    match class, class PRECISE
+    match crown
+    match class, class auxiliary-storage-qualifier
+    match class, class storage-qualifier
+    match crown
+    match class, class interpolation-qualifier
+    match class, class layout-qualifier
+    match crown
+    match class, class precision-qualifier
+    match class, class PRECISE
+  match class, class type-qualifier
+    match crown
+    match class, class INVARIANT
+  match class, class type-qualifier
+    match class, class interpolation-qualifier
+  match class, class type-qualifier
+    match crown
+    match class, class layout-qualifier
+  match class, class type-qualifier
+    match class, class auxiliary-storage-qualifier
+  match class, class type-qualifier
+    match crown
+    match class, class storage-qualifier
+  match class, class type-qualifier
+    match class, class precision-qualifier
+  match class, class type-qualifier
+
+match auxiliary-storage-qualifier
+  match crown
+    match class, class CENTROID
+    match class, class SAMPLE
+
+match storage-qualifier
+  match crown
+    match class, class CONST-TOK
+    match class, class ATTRIBUTE
+    match crown
+    match class, class VARYING
+    match class, class IN-TOK
+    match crown
+    match class, class OUT-TOK
+    match class, class UNIFORM
+    match crown
+    match class, class COHERENT
+    match class, class VOLATILE
+    match crown
+    match class, class RESTRICT
+    match class, class READONLY
+    match crown
+    match class, class WRITEONLY
+    match class, class SHARED
+
+match array-specifier
+  match crown
+    match class, class LBRACKET
+  match class, class RBRACKET
+    match class, class LBRACKET
+  match class, class constant-expression
+  match class, class RBRACKET
+    match crown
+    match class, class array-specifier
+  match class, class LBRACKET
+  match class, class RBRACKET
+    match class, class array-specifier
+  match class, class LBRACKET
+  match class, class constant-expression
+  match class, class RBRACKET
+
+match type-specifier
+  match crown
+    match class, class type-specifier-nonarray
+    match class, class type-specifier-nonarray
+  match class, class array-specifier
+
+match type-specifier-nonarray
+  match crown
+    match class, class builtin-type-specifier-nonarray
+    match class, class struct-specifier
+    match class, class IDENTIFIER
+
+match builtin-type-specifier-nonarray
+  match crown
+    match class, class VOID-TOK
+    match class, class FLOAT-TOK
+    match crown
+    match class, class INT-TOK
+    match class, class UINT-TOK
+    match crown
+    match class, class BOOL-TOK
+    match class, class VEC2
+    match crown
+    match class, class VEC3
+    match class, class VEC4
+    match crown
+    match class, class BVEC2
+    match class, class BVEC3
+    match crown
+    match class, class BVEC4
+    match class, class IVEC2
+    match crown
+    match class, class IVEC3
+    match class, class IVEC4
+    match crown
+    match class, class UVEC2
+    match class, class UVEC3
+    match crown
+    match class, class UVEC4
+    match class, class MAT2X2
+    match crown
+    match class, class MAT2X3
+    match class, class MAT2X4
+    match crown
+    match class, class MAT3X2
+    match class, class MAT3X3
+    match crown
+    match class, class MAT3X4
+    match class, class MAT4X2
+    match crown
+    match class, class MAT4X3
+    match class, class MAT4X4
+    match crown
+    match class, class SAMPLER1D
+    match class, class SAMPLER2D
+    match crown
+    match class, class SAMPLER2DRECT
+    match class, class SAMPLER3D
+    match crown
+    match class, class SAMPLERCUBE
+    match class, class SAMPLEREXTERNALOES
+    match crown
+    match class, class SAMPLER1DSHADOW
+    match class, class SAMPLER2DSHADOW
+    match crown
+    match class, class SAMPLER2DRECTSHADOW
+    match class, class SAMPLERCUBESHADOW
+    match crown
+    match class, class SAMPLER1DARRAY
+    match class, class SAMPLER2DARRAY
+    match crown
+    match class, class SAMPLER1DARRAYSHADOW
+    match class, class SAMPLER2DARRAYSHADOW
+    match crown
+    match class, class SAMPLERBUFFER
+    match class, class SAMPLERCUBEARRAY
+    match crown
+    match class, class SAMPLERCUBEARRAYSHADOW
+    match class, class ISAMPLER1D
+    match crown
+    match class, class ISAMPLER2D
+    match class, class ISAMPLER2DRECT
+    match crown
+    match class, class ISAMPLER3D
+    match class, class ISAMPLERCUBE
+    match crown
+    match class, class ISAMPLER1DARRAY
+    match class, class ISAMPLER2DARRAY
+    match crown
+    match class, class ISAMPLERBUFFER
+    match class, class ISAMPLERCUBEARRAY
+    match crown
+    match class, class USAMPLER1D
+    match class, class USAMPLER2D
+    match crown
+    match class, class USAMPLER2DRECT
+    match class, class USAMPLER3D
+    match crown
+    match class, class USAMPLERCUBE
+    match class, class USAMPLER1DARRAY
+    match crown
+    match class, class USAMPLER2DARRAY
+    match class, class USAMPLERBUFFER
+    match crown
+    match class, class USAMPLERCUBEARRAY
+    match class, class SAMPLER2DMS
+    match crown
+    match class, class ISAMPLER2DMS
+    match class, class USAMPLER2DMS
+    match crown
+    match class, class SAMPLER2DMSARRAY
+    match class, class ISAMPLER2DMSARRAY
+    match crown
+    match class, class USAMPLER2DMSARRAY
+    match class, class IMAGE1D
+    match crown
+    match class, class IMAGE2D
+    match class, class IMAGE3D
+    match crown
+    match class, class IMAGE2DRECT
+    match class, class IMAGECUBE
+    match crown
+    match class, class IMAGEBUFFER
+    match class, class IMAGE1DARRAY
+    match crown
+    match class, class IMAGE2DARRAY
+    match class, class IMAGECUBEARRAY
+    match crown
+    match class, class IMAGE2DMS
+    match class, class IMAGE2DMSARRAY
+    match crown
+    match class, class IIMAGE1D
+    match class, class IIMAGE2D
+    match crown
+    match class, class IIMAGE3D
+    match class, class IIMAGE2DRECT
+    match crown
+    match class, class IIMAGECUBE
+    match class, class IIMAGEBUFFER
+    match crown
+    match class, class IIMAGE1DARRAY
+    match class, class IIMAGE2DARRAY
+    match crown
+    match class, class IIMAGECUBEARRAY
+    match class, class IIMAGE2DMS
+    match crown
+    match class, class IIMAGE2DMSARRAY
+    match class, class UIMAGE1D
+    match crown
+    match class, class UIMAGE2D
+    match class, class UIMAGE3D
+    match crown
+    match class, class UIMAGE2DRECT
+    match class, class UIMAGECUBE
+    match crown
+    match class, class UIMAGEBUFFER
+    match class, class UIMAGE1DARRAY
+    match crown
+    match class, class UIMAGE2DARRAY
+    match class, class UIMAGECUBEARRAY
+    match crown
+    match class, class UIMAGE2DMS
+    match class, class UIMAGE2DMSARRAY
+    match class, class ATOMIC-UINT
+
+match precision-qualifier
+  match crown
+    match class, class HIGHP
+    match class, class MEDIUMP
+    match class, class LOWP
+
+match struct-specifier
+  match class, class STRUCT
+  match class, class IDENTIFIER?
+  match class, class LBRACE
+  match class, class member-list
+  match class, class RBRACE
+
+match member-list
+  match crown
+    match class, class member-declaration
+    match class, class member-list
+  match class, class member-declaration
+
+match member-declaration
+  match class, class fully-specified-type
+  match class, class struct-declarator-list
+  match class, class SEMICOLON
+
+match struct-declarator-list
+  match crown
+    match class, class struct-declarator
+    match class, class struct-declarator-list
+  match class, class COMMA
+  match class, class struct-declarator
+
+match struct-declarator
+  match crown
+    match class, class IDENTIFIER
+    match class, class IDENTIFIER
+  match class, class array-specifier
+
+match initializer
+  match crown
+    match class, class assignment-expression
+    match class, class LBRACE
+  match class, class initializer-list
+  match class, class RBRACE
+    match class, class LBRACE
+  match class, class initializer-list
+  match class, class COMMA
+  match class, class RBRACE
+
+match initializer-list
+  match crown
+    match class, class initializer
+    match class, class initializer-list
+  match class, class COMMA
+  match class, class initializer
+
+match declaration-statement
+  match class, class declaration
+
+match statement
+  match crown
+    match class, class if-then-statement
+    match class, class if-then-else-statement
+    match crown
+    match class, class for-statement
+    match class, class while-statement
+    match class, class statement-no-trailing-substatement
+
+match statement-no-short-if
+  match crown
+    match class, class if-then-else-statement-no-short-if
+    match class, class for-statement-no-short-if
+    match crown
+    match class, class while-statement-no-short-if
+    match class, class statement-no-trailing-substatement
+
+match statement-no-trailing-substatement
+  match crown
+    match class, class block-statement
+    match class, class expression-statement
+    match crown
+    match class, class empty-statement
+    match class, class declaration-statement
+    match crown
+    match class, class switch-statement
+    match class, class do-statement
+    match class, class jump-statement
+
+match block-statement
+  match class, class LBRACE
+  match class, class statement-list?
+  match class, class RBRACE
+
+match statement-list
+  match class, class statement+
+
+match expression-statement
+  match class, class expression
+  match class, class SEMICOLON
+
+match empty-statement
+  match class, class SEMICOLON
+
+match if-then-statement
+  match class, class IF
+  match class, class LPAREN
+  match class, class expression
+  match class, class RPAREN
+  match class, class statement
+
+match if-then-else-statement
+  match class, class IF
+  match class, class LPAREN
+  match class, class expression
+  match class, class RPAREN
+  match class, class statement-no-short-if
+  match class, class ELSE
+  match class, class statement
+
+match if-then-else-statement-no-short-if
+  match class, class IF
+  match class, class LPAREN
+  match class, class expression
+  match class, class RPAREN
+  match class, class statement-no-short-if
+  match class, class ELSE
+  match class, class statement-no-short-if
+
+match condition
+  match crown
+    match class, class expression
+    match class, class fully-specified-type
+  match class, class IDENTIFIER
+  match class, class ASSIGN-OP
+  match class, class initializer
+
+match switch-statement
+  match class, class SWITCH
+  match class, class LPAREN
+  match class, class expression
+  match class, class RPAREN
+  match class, class switch-body
+
+match switch-body
+  match crown
+    match class, class LBRACE
+  match class, class RBRACE
+    match class, class LBRACE
+  match class, class case-statement-list
+  match class, class RBRACE
+
+match case-label
+  match crown
+    match class, class CASE
+  match class, class expression
+  match class, class COLON
+    match class, class DEFAULT
+  match class, class COLON
+
+match case-label-list
+  match crown
+    match class, class case-label
+    match class, class case-label-list
+  match class, class case-label
+
+match case-statement
+  match crown
+    match class, class case-label-list
+  match class, class statement
+    match class, class case-statement
+  match class, class statement
+
+match case-statement-list
+  match crown
+    match class, class case-statement
+    match class, class case-statement-list
+  match class, class case-statement
+
+match do-statement
+  match class, class DO
+  match class, class statement
+  match class, class WHILE
+  match class, class LPAREN
+  match class, class expression
+  match class, class RPAREN
+  match class, class SEMICOLON
+
+match for-statement
+  match class, class FOR
+  match class, class LPAREN
+  match class, class for-init-statement
+  match class, class condition?
+  match class, class SEMICOLON
+  match class, class expression?
+  match class, class RPAREN
+  match class, class statement
+
+match for-statement-no-short-if
+  match class, class FOR
+  match class, class LPAREN
+  match class, class for-init-statement
+  match class, class condition?
+  match class, class SEMICOLON
+  match class, class expression?
+  match class, class RPAREN
+  match class, class statement-no-short-if
+
+match while-statement
+  match class, class WHILE
+  match class, class LPAREN
+  match class, class condition
+  match class, class RPAREN
+  match class, class statement
+
+match while-statement-no-short-if
+  match class, class WHILE
+  match class, class LPAREN
+  match class, class condition
+  match class, class RPAREN
+  match class, class statement-no-short-if
+
+match for-init-statement
+  match crown
+    match class, class empty-statement
+    match class, class expression-statement
+    match class, class declaration-statement
+
+match jump-statement
+  match crown
+    match class, class CONTINUE
+  match class, class SEMICOLON
+    match class, class BREAK
+  match class, class SEMICOLON
+    match crown
+    match class, class RETURN
+  match class, class SEMICOLON
+    match class, class RETURN
+  match class, class expression
+  match class, class SEMICOLON
+    match class, class DISCARD
+  match class, class SEMICOLON
+
+match external-declaration
+  match crown
+    match class, class function-definition
+    match class, class declaration
+    match crown
+    match class, class pragma-statement
+    match class, class layout-defaults
+
+match function-definition
+  match class, class function-prototype
+  match class, class block-statement
+
+match interface-block
+  match crown
+    match class, class basic-interface-block
+    match class, class layout-qualifier
+  match class, class basic-interface-block
+
+match basic-interface-block
+  match class, class interface-qualifier+
+  match class, class IDENTIFIER
+  match class, class LBRACE
+  match class, class member-list
+  match class, class RBRACE
+  match class, class instance-name?
+  match class, class SEMICOLON
+
+match interface-qualifier
+  match crown
+    match class, class IN-TOK
+    match class, class OUT-TOK
+    match crown
+    match class, class UNIFORM
+    match class, class BUFFER
+    match crown
+    match class, class COHERENT
+    match class, class VOLATILE
+    match crown
+    match class, class RESTRICT
+    match class, class READONLY
+    match class, class WRITEONLY
+
+match instance-name
+  match class, class IDENTIFIER
+  match class, class array-specifier?
+
+match layout-defaults
+  match crown
+    match class, class layout-qualifier
+  match class, class UNIFORM
+  match class, class SEMICOLON
+    match class, class layout-qualifier
+  match class, class IN-TOK
+  match class, class SEMICOLON
+    match crown
+    match class, class layout-qualifier
+  match class, class OUT-TOK
+  match class, class SEMICOLON
+    match class, class layout-qualifier
+  match class, class BUFFER
+  match class, class SEMICOLON
+;
+
+PRAGMA-DEBUG-ON:      { ignoreNewLine = false; } [ \t]*'#'[ \t]*'pragma'[ \t]+'debug'[ \t]*'('[ \t]*'on'[ \t]*')' ;
+PRAGMA-DEBUG-OFF:     { ignoreNewLine = false; } [ \t]*'#'[ \t]*'pragma'[ \t]+'debug'[ \t]*'('[ \t]*'off'[ \t]*')'  PRAGMA-OPTIMIZE-ON:   { ignoreNewLine = false; } [ \t]*'#'[ \t]*'pragma'[ \t]+'optimize'[ \t]*'('[ \t]*'on'[ \t]*')'PRAGMA-OPTIMIZE-OFF:  { ignoreNewLine = false; } [ \t]*'#'[ \t]*'pragma'[ \t]+'optimize'[ \t]*'('[ \t]*'off'[ \t]*')'  ;
+PRAGMA-INVARIANT-ALL: { ignoreNewLine = false; } [ \t]*'#'[ \t]*'pragma'[ \t]+'invariant'[ \t]*'('[ \t]*'all'[ \t]*')' ;
+EXTENSION: { ignoreNewLine = false; } [ \t]*'#'[ \t]*'extension' ;
+match COLON
+  match chord, write <:>
+
+match UNIFORM
+  match chord, write <uniform>
+
+match BUFFER
+  match chord, write <buffer>
+
+match IN-TOK
+  match chord, write <in>
+
+match OUT-TOK
+  match chord, write <out>
+
+match INOUT-TOK
+  match chord, write <inout>
+
+match HIGHP
+  match chord, write <highp>
+
+match MEDIUMP
+  match chord, write <mediump>
+
+match LOWP
+  match chord, write <lowp>
+
+match PRECISION
+  match chord, write <precision>
+
+VERSION: { ignoreNewLine = false; } [ \t]*'#'[ \t]*'version' ;
+INTCONSTANT: DECIMAL-DIGITS | OCTAL-DIGITS | HEX-DIGITS;
+match CONST-TOK
+  match chord, write <const>
+
+match PRECISE
+  match chord, write <precise>
+
+match INVARIANT
+  match chord, write <invariant>
+
+match SMOOTH
+  match chord, write <smooth>
+
+match FLAT
+  match chord, write <flat>
+
+match NOPERSPECTIVE
+  match chord, write <noperspective>
+
+match CENTROID
+  match chord, write <centroid>
+
+match SAMPLE
+  match chord, write <sample>
+
+match ATTRIBUTE
+  match chord, write <attribute>
+
+match COHERENT
+  match chord, write <coherent>
+
+match VOLATILE
+  match chord, write <volatile>
+
+match RESTRICT
+  match chord, write <restrict>
+
+match VARYING
+  match chord, write <varying>
+
+match READONLY
+  match chord, write <readonly>
+
+match WRITEONLY
+  match chord, write <writeonly>
+
+match SHARED
+  match chord, write <shared>
+
+match LAYOUT-TOK
+  match chord, write <layout>
+
+UINTCONSTANT: (DECIMAL-DIGITS | OCTAL-DIGITS | HEX-DIGITS) 'u';
+match ROW-MAJOR
+  match chord, write <row-major>
+
+match PACKED-TOK
+  match chord, write <packed>
+
+FLOATCONSTANT: ((DIGIT+ ('.' DIGIT*)?) | ('.' DIGIT+)) (('e' | 'E') ('+' | '-')? DIGIT*)? 'f'?;
+BOOLCONSTANT: 'true' | 'false' ;
+match INC-OP
+  match chord, write <++>
+
+match DEC-OP
+  match chord, write <-->
+
+match VOID-TOK
+  match chord, write <void>
+
+match LEFT-OP
+  match chord, write <<<>
+
+match RIGHT-OP
+  match chord, write <>>>
+
+match LE-OP
+  match chord, write <<=>
+
+match GE-OP
+  match chord, write <>=>
+
+match EQ-OP
+  match chord, write <==>
+
+match NE-OP
+  match chord, write <!=>
+
+match AND-OP
+  match chord, write <&&>
+
+match XOR-OP
+  match chord, write <^^>
+
+match OR-OP
+  match chord, write <||>
+
+match MUL-ASSIGN
+  match chord, write <*=>
+
+match DIV-ASSIGN
+  match chord, write </=>
+
+match MOD-ASSIGN
+  match chord, write <%=>
+
+match ADD-ASSIGN
+  match chord, write <+=>
+
+match SUB-ASSIGN
+  match chord, write <-=>
+
+match LEFT-ASSIGN
+  match chord, write <<<=>
+
+match RIGHT-ASSIGN
+  match chord, write <>>=>
+
+match AND-ASSIGN
+  match chord, write <&=>
+
+match XOR-ASSIGN
+  match chord, write <^=>
+
+match OR-ASSIGN
+  match chord, write <|=>
+
+match FLOAT-TOK
+  match chord, write <float>
+
+match INT-TOK
+  match chord, write <int>
+
+match UINT-TOK
+  match chord, write <uint>
+
+match BOOL-TOK
+  match chord, write <bool>
+
+match SAMPLERCUBE
+  match chord, write <samplerCube>
+
+match SAMPLERCUBESHADOW
+  match chord, write <samplerCubeShadow>
+
+match SAMPLERBUFFER
+  match chord, write <samplerBuffer>
+
+match SAMPLERCUBEARRAY
+  match chord, write <samplerCubeArray>
+
+match SAMPLERCUBEARRAYSHADOW
+  match chord, write <samplerCubeArrayShadow>
+
+match ISAMPLERCUBE
+  match chord, write <isamplerCube>
+
+match ISAMPLERBUFFER
+  match chord, write <isamplerBuffer>
+
+match ISAMPLERCUBEARRAY
+  match chord, write <isamplerCubeArray>
+
+match USAMPLERCUBE
+  match chord, write <usamplerCube>
+
+match USAMPLERBUFFER
+  match chord, write <usamplerBuffer>
+
+match USAMPLERCUBEARRAY
+  match chord, write <usamplerCubeArray>
+
+match IMAGECUBE
+  match chord, write <imageCube>
+
+match IMAGEBUFFER
+  match chord, write <imageBuffer>
+
+match IMAGECUBEARRAY
+  match chord, write <imageCubeArray>
+
+match IIMAGECUBE
+  match chord, write <iimageCube>
+
+match IIMAGEBUFFER
+  match chord, write <iimageBuffer>
+
+match IIMAGECUBEARRAY
+  match chord, write <iimageCubeArray>
+
+match UIMAGECUBE
+  match chord, write <uimageCube>
+
+match UIMAGEBUFFER
+  match chord, write <uimageBuffer>
+
+match UIMAGECUBEARRAY
+  match chord, write <uimageCubeArray>
+
+match ATOMIC-UINT
+  match chord, write <atomic-uint>
+
+match STRUCT
+  match chord, write <struct>
+
+match IF
+  match chord, write <if>
+
+match ELSE
+  match chord, write <else>
+
+match SWITCH
+  match chord, write <switch>
+
+match CASE
+  match chord, write <case>
+
+match DEFAULT
+  match chord, write <default>
+
+match WHILE
+  match chord, write <while>
+
+match DO
+  match chord, write <do>
+
+match FOR
+  match chord, write <for>
+
+match CONTINUE
+  match chord, write <continue>
+
+match BREAK
+  match chord, write <break>
+
+match RETURN
+  match chord, write <return>
+
+match DISCARD
+  match chord, write <discard>
+
+match VEC2
+  match chord, write <vec2>
+
+match VEC3
+  match chord, write <vec3>
+
+match VEC4
+  match chord, write <vec4>
+
+match BVEC2
+  match chord, write <bvec2>
+
+match BVEC3
+  match chord, write <bvec3>
+
+match BVEC4
+  match chord, write <bvec4>
+
+match IVEC2
+  match chord, write <ivec2>
+
+match IVEC3
+  match chord, write <ivec3>
+
+match IVEC4
+  match chord, write <ivec4>
+
+match UVEC2
+  match chord, write <uvec2>
+
+match UVEC3
+  match chord, write <uvec3>
+
+match UVEC4
+  match chord, write <uvec4>
+
+MAT2X2: 'mat2' | 'mat2x2' ;
+match MAT2X3
+  match chord, write <mat2x3>
+
+match MAT2X4
+  match chord, write <mat2x4>
+
+match MAT3X2
+  match chord, write <mat3x2>
+
+MAT3X3: 'mat3' | 'mat3x3' ;
+match MAT3X4
+  match chord, write <mat3x4>
+
+match MAT4X2
+  match chord, write <mat4x2>
+
+match MAT4X3
+  match chord, write <mat4x3>
+
+MAT4X4: 'mat4' | 'mat4x4' ;
+match IMAGE1D
+  match chord, write <image1D>
+
+match IMAGE2D
+  match chord, write <image2D>
+
+match IMAGE3D
+  match chord, write <image3D>
+
+match UIMAGE1D
+  match chord, write <uimage1D>
+
+match UIMAGE2D
+  match chord, write <uimage2D>
+
+match UIMAGE3D
+  match chord, write <uimage3D>
+
+match IIMAGE1D
+  match chord, write <iimage1D>
+
+match IIMAGE2D
+  match chord, write <iimage2D>
+
+match IIMAGE3D
+  match chord, write <iimage3D>
+
+match SAMPLER1D
+  match chord, write <sampler1D>
+
+match SAMPLER2D
+  match chord, write <sampler2D>
+
+match SAMPLER3D
+  match chord, write <sampler3D>
+
+match SAMPLER2DRECT
+  match chord, write <sampler2DRect>
+
+match SAMPLEREXTERNALOES
+  match chord, write <samplerExternalOES>
+
+match SAMPLER1DSHADOW
+  match chord, write <sampler1DShadow>
+
+match SAMPLER2DSHADOW
+  match chord, write <sampler2DShadow>
+
+match SAMPLER2DRECTSHADOW
+  match chord, write <sampler2DRectShadow>
+
+match SAMPLER1DARRAY
+  match chord, write <sampler1DArray>
+
+match SAMPLER2DARRAY
+  match chord, write <sampler2DArray>
+
+match SAMPLER1DARRAYSHADOW
+  match chord, write <sampler1DArrayShadow>
+
+match SAMPLER2DARRAYSHADOW
+  match chord, write <sampler2DArrayShadow>
+
+match ISAMPLER1D
+  match chord, write <isampler1D>
+
+match ISAMPLER2D
+  match chord, write <isampler2D>
+
+match ISAMPLER2DRECT
+  match chord, write <isampler2DRect>
+
+match ISAMPLER3D
+  match chord, write <isampler3D>
+
+match ISAMPLER1DARRAY
+  match chord, write <isampler1DArray>
+
+match ISAMPLER2DARRAY
+  match chord, write <isampler2DArray>
+
+match USAMPLER1D
+  match chord, write <usampler1D>
+
+match USAMPLER2D
+  match chord, write <usampler2D>
+
+match USAMPLER2DRECT
+  match chord, write <usampler2DRect>
+
+match USAMPLER3D
+  match chord, write <usampler3D>
+
+match USAMPLER1DARRAY
+  match chord, write <usampler1DArray>
+
+match USAMPLER2DARRAY
+  match chord, write <usampler2DArray>
+
+match SAMPLER2DMS
+  match chord, write <sampler2DMS>
+
+match ISAMPLER2DMS
+  match chord, write <isampler2DMS>
+
+match USAMPLER2DMS
+  match chord, write <usampler2DMS>
+
+match SAMPLER2DMSARRAY
+  match chord, write <sampler2DMSArray>
+
+match ISAMPLER2DMSARRAY
+  match chord, write <isampler2DMSArray>
+
+match USAMPLER2DMSARRAY
+  match chord, write <usampler2DMSArray>
+
+match IMAGE2DRECT
+  match chord, write <image2DRect>
+
+match IMAGE1DARRAY
+  match chord, write <image1DArray>
+
+match IMAGE2DARRAY
+  match chord, write <image2DArray>
+
+match IMAGE2DMS
+  match chord, write <image2DMS>
+
+match IMAGE2DMSARRAY
+  match chord, write <image2DMSArray>
+
+match IIMAGE2DRECT
+  match chord, write <iimage2DRect>
+
+match IIMAGE1DARRAY
+  match chord, write <iimage1DArray>
+
+match IIMAGE2DARRAY
+  match chord, write <iimage2DArray>
+
+match IIMAGE2DMS
+  match chord, write <iimage2DMS>
+
+match IIMAGE2DMSARRAY
+  match chord, write <iimage2DMSArray>
+
+match UIMAGE2DRECT
+  match chord, write <uimage2DRect>
+
+match UIMAGE1DARRAY
+  match chord, write <uimage1DArray>
+
+match UIMAGE2DARRAY
+  match chord, write <uimage2DArray>
+
+match UIMAGE2DMS
+  match chord, write <uimage2DMS>
+
+match UIMAGE2DMSARRAY
+  match chord, write <uimage2DMSArray>
+
+
+match LPAREN
+  match chord, write <(>
+
+match RPAREN
+  match chord, write <)>
+
+match LBRACE
+  match chord, write <{>
+
+match RBRACE
+  match chord, write <}>
+
+match SEMICOLON
+  match chord, write <;>
+
+match LBRACKET
+  match chord, write <[>
+
+match RBRACKET
+  match chord, write <]>
+
+match COMMA
+  match chord, write <,>
+
+
+match DOT
+  match chord, write <.>
+
+match PLUS-OP
+  match chord, write <+>
+
+match MINUS-OP
+  match chord, write <->
+
+match NOT-OP
+  match chord, write <!>
+
+match BNEG-OP
+  match chord, write <~>
+
+match TIMES-OP
+  match chord, write <*>
+
+match DIV-OP
+  match chord, write </>
+
+match MOD-OP
+  match chord, write <%>
+
+match LT-OP
+  match chord, write <<>
+
+match GT-OP
+  match chord, write <>>
+
+match BAND-OP
+  match chord, write <&>
+
+match BOR-OP
+  match chord, write <|>
+
+match BXOR-OP
+  match chord, write <^>
+
+match QUERY-OP
+  match chord, write <?>
+
+match ASSIGN-OP
+  match chord, write <=>
+
+
+IDENTIFIER: ('a'..'z' | 'A'..'Z' | '-') (DIGIT | 'a'..'z' | 'A'..'Z' | '-')*;
+
+fragment DECIMAL-DIGITS: '0' | ('1'..'9' DIGIT*);
+fragment OCTAL-DIGITS: '0' '0'..'7'+;
+fragment HEX-DIGITS: '0x' (DIGIT | 'a'..'f' | 'A'..'F')+;
+fragment DIGIT  : '0'..'9';
+
+COMMENT: ('//' ~('\n'|'\r')* '\r'? '\n' |   '/*' (.)*? '*/') -> skip ;
+
+WS: [\t\r\u000C ]+ { skip(); } ;
+
+EOL: '\n' { if(ignoreNewLine) { skip(); } ignoreNewLine = true; } ;

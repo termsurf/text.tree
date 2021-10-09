@@ -1,0 +1,27 @@
+
+fetch ../number
+  catch match digit
+
+match hex
+  match crown
+    match bound
+      mount start, share <A>
+      mount front, share <F>
+    match bound
+      mount start, share <a>
+      mount front, share <f>
+    match class, class digit
+
+match lowercase-hex
+  match crown
+    match bound
+      mount start, share <a>
+      mount front, share <f>
+    match class, class digit
+
+match uppercase-hex
+  match crown
+    match bound
+      mount start, share <A>
+      mount front, share <F>
+    match class, class digit

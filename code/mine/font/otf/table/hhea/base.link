@@ -1,0 +1,55 @@
+
+match hhea-table
+  match class, class version
+  match class, class ascender
+  match class, class descender
+  match class, class line-gap
+  match class, class advance-width-max
+  match class, class min-left-side-bearing
+  match class, class min-right-side-bearing
+  match class, class x-max-extent
+  match class, class caret-slope-rise
+  match class, class caret-slope-run
+  match class, class caret-offset
+  match count, mount count, share 8
+  match class, class metric-data-format
+  match class, class number-of-h-metrics
+
+match version
+  match class, class version
+
+match ascender
+  match class, class short
+
+match descender
+  match class, class short
+
+match line-gap
+  match class, class short
+
+match advance-width-max
+  match class, class ushort
+
+match min-left-side-bearing
+  match class, class short
+
+match min-right-side-bearing
+  match class, class short
+
+match x-max-extent
+  match class, class short
+
+match caret-slope-rise
+  match class, class short
+
+match caret-slope-run
+  match class, class short
+
+match caret-offset
+  match class, class short
+
+match metric-data-format
+  match class, class short
+
+match number-of-h-metrics
+  match class, class ushort

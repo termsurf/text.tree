@@ -1,0 +1,71 @@
+
+trace instruction
+  trace maybe, trace field, field legacy-prefix
+  trace field, field opcode
+  trace maybe, trace field, field suffix
+
+trace suffix
+  trace field, field mod-memory-register-byte
+    store  mod-memory-register-byte
+  trace field, field scale-index-base-byte
+    match check
+      mount start, share mod-memory-register-byte/register
+      mount front, #b100
+  trace field, field displacement
+    match check
+      mount start, share mod/reg
+      mount front, #b100
+  trace field, field immediate
+    match check
+      mount start, share mod/reg
+      mount front, #b100
+
+trace scale-index-base-byte
+
+trace mod-memory-register-byte
+
+trace opcode
+  trace pick-first
+    trace field, field opcode-size-3
+    trace field, field opcode-size-2
+    trace field, field opcode-1
+
+trace opcode-size-2
+  trace field, field opcode-2
+  trace field, field opcode-1
+
+trace opcode-size-3
+  trace field, field opcode-2
+  trace field, field opcode-3
+  trace field, field opcode-1
+
+trace opcode-1
+  trace field, field state-8
+
+trace opcode-2
+  trace binary, #h0F
+
+trace opcode-3
+  trace binary, #h38
+  trace binary, #h3A
+  trace binary, #h7A
+  trace binary, #h7B
+
+trace legacy-prefix
+  trace maybe, trace field, field instruction-prefix
+  trace maybe, trace field, field address-size-prefix
+  trace maybe, trace field, field operand-size-prefix
+  trace maybe, trace field, field segment-override-prefix
+
+trace instruction-prefix
+  trace binary, #hF3
+  trace binary, #hF2
+  trace binary, #hF0
+
+trace address-size-prefix
+  trace binary, #h67
+
+trace operand-size-prefix
+  trace binary, #h66
+
+trace segment-override-prefix

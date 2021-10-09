@@ -1,0 +1,40 @@
+
+match meta-table
+  match class, class meta-table-version
+    weave version
+  # this goes into the weave
+  check match
+    mount start, share version
+    mount front, share 1
+    catch fault
+      leave build
+  match class, class flags
+  match class, class table-offset
+  match class, class data-map-count
+    weave count
+  match chain
+    mount front, share count
+    match class, class tag
+    match class, class data-offset
+    match class, class data-length
+    # this goes into the weave
+    const text = decode.UTF8(data, start + dataOffset, dataLength);
+    tags[tag] = text;
+
+match meta-table-version
+  match class, class ulong
+
+match flags
+  match class, class ulong
+
+match table-offset
+  match class, class ulong
+
+match data-map-count
+  match class, class ulong
+
+match data-offset
+  match class, class ulong
+
+match data-length
+  match class, class ulong

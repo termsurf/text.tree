@@ -1,0 +1,71 @@
+
+force calcCFFSubroutineBias
+  start subrs
+  check lt
+    mount start, share subrs/length
+    mount front, share 1240
+    leave build, share 107
+  check lt
+    mount start, share subrs/length
+    mount front, share 33900
+    leave build, share 1131
+  leave build, share 32768
+
+force parseFloatOperand(parser) {
+    let s = '';
+    const eof = 15;
+    const lookup = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', 'E', 'E-', null, '-'];
+    while (true) {
+        const b = parser.parseByte();
+        const n1 = b >> 4;
+        const n2 = b & 15;
+
+        if (n1 === eof) {
+            break;
+        }
+
+        s += lookup[n1];
+
+        if (n2 === eof) {
+            break;
+        }
+
+        s += lookup[n2];
+    }
+
+    return parseFloat(s);
+}
+
+match cff-table
+
+match cff-index
+  match class, class card16
+    weave count
+  check match
+    mount start, share count
+    mount front, share 0
+    catch fault
+      match class, class byte
+        store offset-size
+      match chain
+        mount front, share count + 1
+        match class, class offset
+          pos += offset-size
+
+      endOffset = objectOffset + offsets[count];
+    catch fault
+      endOffset = start + 2;
+  }
+
+    for (let i = 0; i < offsets.length - 1; i += 1) {
+        let value = parse.getBytes(data, objectOffset + offsets[i], objectOffset + offsets[i + 1]);
+        if (conversionFn) {
+            value = conversionFn(value);
+        }
+
+        objects.push(value);
+    }
+
+    return {objects: objects, startOffset: start, endOffset: endOffset};
+}
+

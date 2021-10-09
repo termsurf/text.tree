@@ -1,0 +1,1218 @@
+
+match document
+  match class, class prolog
+  match class, class element
+  match chain, class miscellaneous
+
+match prolog
+  match sieve
+    match class, class xml-declaration
+  match chain
+    match class, class miscellaneous
+  match sieve
+    match class, class document-type-declaration
+    match chain
+      match class, class miscellaneous
+
+match xml-declaration
+  match chunk, chunk <\<?xml >
+  match class, class version
+  match sieve
+    match class, class encoding-declaration
+  match sieve
+    match class, class sd-declaration
+  match sieve
+    match class, class space
+  match chunk, chunk <?\>>
+
+match version
+  match chunk, chunk <version>
+  match class, class equal
+  match crown
+    match version-number-single-quotes
+    match version-number-double-quotes
+
+match version-number-single-quotes
+  match chunk, chunk <'>
+  match class, class version-number
+  match chunk, chunk <'>
+
+match version-number-double-quotes
+  match chunk, chunk <">
+  match class, class version-number
+  match chunk, chunk <">
+
+match equal
+  match sieve, match class, class space
+  match chunk, chunk <=>
+  match sieve, match class, class space
+
+match version-number
+  match chunk, chunk <1.0>
+
+match miscellaneous
+  match crown
+    match class, class comment
+    match class, class processing-instruction
+    match class, class space
+
+match names
+  match class, class name
+  match chain
+    match chunk, share <20u>
+    match class, class name
+
+match name
+  match crown
+    match class, class letter
+    match shard, <_>
+    match shard, <:>
+  match chain, class name-character
+
+match character
+  match crown
+    match chunk, chunk #x9
+    match chunk, chunk #xA
+    match chunk, chunk #xD
+    match bound
+      mount start, chunk #x20
+      mount front, chunk #xD7FF
+    match bound
+      mount start, chunk #xE000
+      mount front, chunk #xFFFD
+    match bound
+      mount start, chunk #x10000
+      mount front, chunk #x10FFFF
+
+match space
+  match chain
+    mount start, share 1
+    match crown
+      match chunk, chunk #x20
+      match chunk, chunk #x9
+      match chunk, chunk #xD
+      match chunk, chunk #xA
+
+match name-character
+  match crown
+    match class, class letter
+    match class, class digit
+    match shard, <.>
+    match shard, <->
+    match shard, <_>
+    match shard, <:>
+    match class, class combining-character
+    match class, class Extender
+
+match name-token
+  match floor, 1
+    match class, class name-character
+
+match name-tokens
+  match class, class name-token (20u name-token)*
+
+match entity-value
+  match crown
+    match chunk
+      match shard, |"|
+      match chain
+        match crown
+          match sieve
+            match shard, |^%&"|
+          match class, class PEreference
+          match class, class reference
+      match shard, |"|
+    "'" ([^%&'] | PEreference | reference)* "'"
+
+match attribute-value
+  match crown
+    match class, class attribute-value-double-quoted
+    match class, class attribute-value-single-quoted
+
+match attribute-value-double-quoted
+  match chunk, chunk <">
+  match chain
+    match crown
+      match leave
+        match crown
+          match chunk, chunk <\<>
+          match chunk, chunk <&>
+          match chunk, chunk <">
+      match class, class reference
+  match chunk, chunk <">
+
+match attribute-value-single-quoted
+  match chunk, chunk <'>
+  match chain
+    match crown
+      match leave
+        match crown
+          match chunk, chunk <\<>
+          match chunk, chunk <&>
+          match chunk, chunk <'>
+      match class, class reference
+  match chunk, chunk <'>
+
+match reference
+  match crown
+    match class, class entity-reference
+    match class, class character-reference
+
+match entity-reference
+  match chunk, chunk <&>
+  match class, class name
+  match chunk, chunk <;>
+
+match character-reference
+  match crown
+    match block
+      match chunk, chunk <&#>
+      match chain
+        mount start, share 1
+        match class, class digit
+      match chunk, chunk <;>
+    match block
+      match chunk, chunk <&#x>
+      match chain
+        mount start, share 1
+        match class, class hex
+      match chunk, chunk <;>
+
+match system-literal
+  match crown
+    match class, class system-literal-double-quoted
+    match class, class system-literal-single-quoted
+
+match system-literal-double-quoted
+  match chunk, chunk <">
+  match chain
+    match leave
+      match chunk, chunk <">
+  match chunk, chunk <">
+
+match system-literal-single-quoted
+  match chunk, chunk <'>
+  match chain
+    match leave
+      match chunk, chunk <'>
+  match chunk, chunk <'>
+
+match pubid-literal
+  match class, class '"' Pubidcharacter* '"' | "'" (Pubidcharacter - "'")* "'"
+match Pubidcharacter
+  match class, class 20u | Du | Au | [a-zA-Z0-9]
+                 |  [-'()+,./:=?;!*#@$_%]
+
+match character-data
+  match chain
+    match leave
+      match chunk, chunk <\<>
+      match chunk, chunk <&>
+  match chunk, chunk <->
+  match block
+    match chain
+      match leave
+        match chunk, chunk <\<>
+        match chunk, chunk <&>
+    match chunk, chunk <]]\>>
+    match chain
+      match leave
+        match chunk, chunk <\<>
+        match chunk, chunk <&>
+
+match comment
+  match chunk, chunk <\<!-->
+    match chain
+      match crown
+        match class, class character
+          match leave
+            match chunk, chunk <->
+        match block
+          match chunk, chunk <->
+          match class, class character
+            match leave
+              match chunk, chunk <->
+  match chunk, chunk <--\>>
+
+match processing-instruction
+  match class, class '<?' processing-instruction-target (S (character* - (character* '?>' character*)))? '?>'
+
+match processing-instruction-target
+  match class, class name - (('X' | 'x') ('M' | 'm') ('L' | 'l'))
+
+match cd-section
+  match class, class cdata-start cdata cdata-end
+
+match cdata-start
+  match chunk, chunk <\<![CDATA[>
+
+match cdata
+  match class, class (character* - (character* ']]>' character*))
+
+match cdata-end
+  match class, class <]]\>>
+
+match document-type-declaration
+  match class, class '<!DOCTYPE' S name (S ExternalID)? S? ('[' intSubset ']' S?)? '>'
+
+match DeclSep
+  match class, class PEreference | S
+
+match intSubset
+  match class, class (markupdecl | DeclSep)*
+
+match markupdecl
+  match class, class elementdecl | AttlistDecl | EntityDecl | NotationDecl
+                 |  processing-instruction | comment
+
+match extSubset
+  match class, class TextDecl? extSubsetDecl
+
+match extSubsetDecl
+  match class, class ( markupdecl | conditionalSect | DeclSep)*
+
+match sd-declaration
+  match class, class S 'standalone' equal
+             (("'" ('yes' | 'no') "'") | ('"' ('yes' | 'no') '"'))
+
+match element
+  match crown
+    match class, class empty-element-tag
+    match block
+      match class, class start-element-tag
+      match class, class content
+      match class, class end-element-tag
+
+match start-element-tag
+  match chunk, chunk <\<>
+  match class, class name
+  match chain
+    match class, class space
+    match class, class attribute
+  match sieve
+    match class, class space
+  match chunk, chunk <\>>
+
+match attribute
+  match class, class attribute-name
+  match class, class equal
+  match class, class attribute-value
+
+match attribute-name
+  match class, class name
+
+match end-element-tag
+  match chunk, chunk <\</>
+  match class, class name
+  match sieve, match class, class space
+  match chunk, chunk <\>>
+
+match content
+  match sieve, match class, class character-data
+  match chain
+    match crown
+      match class, class element
+      match class, class reference
+      match class, class cd-section
+      match class, class processing-instruction
+      match class, class comment
+    match sieve, match class, class character-data
+
+match empty-element
+  match class, class '<' name (S attribute)* S? '/>'
+
+match elementdecl
+  match class, class '<!ELEMENT' S name S contentspec S? '>'
+match contentspec
+  match class, class 'EMPTY' | 'ANY' | Mixed | children
+match children
+  match class, class (choice | seq) ('?' | '*' | '+')?
+match cp
+  match class, class (name | choice | seq) ('?' | '*' | '+')?
+match choice
+  match class, class '(' S? cp ( S? '|' S? cp )+ S? ')'
+match seq
+  match class, class '(' S? cp ( S? ',' S? cp )* S? ')'
+match Mixed
+  match class, class '(' S? '#PCDATA' (S? '|' S? name)* S? ')*'
+               |  '(' S? '#PCDATA' S? ')'
+
+match AttlistDecl
+  match class, class '<!ATTLIST' S name AttDef* S? '>'
+match AttDef
+  match class, class S name S AttType S DefaultDecl
+match AttType
+  match class, class string-type | tokenized-type | enumerated-type
+match string-type
+  match class, class 'CDATA'
+match tokenized-type
+  match class, class 'ID' | 'IDREF' | 'IDREFS' | 'ENTITY'
+                    |  'ENTITIES' | 'NMTOKEN' | 'NMTOKENS'
+match enumerated-type
+  match class, class NotationType | Enumeration
+match NotationType
+  match class, class 'NOTATION' S '(' S? name (S? '|' S? name)* S? ')'
+match Enumeration
+  match class, class '(' S? name-token (S? '|' S? name-token)* S? ')'
+match DefaultDecl
+  match class, class '#REQUIRED' | '#IMPLIED' | (('#FIXED' S)? attribute-value)
+
+match conditionalSect
+  match class, class includeSect | ignoreSect
+match includeSect
+  match class, class '<![' S? 'INCLUDE' S? '[' extSubsetDecl ']]>'
+match ignoreSect
+  match class, class '<![' S? 'IGNORE' S? '[' ignoreSectContents* ']]>'
+match ignoreSectContents
+  match class, class Ignore ('<![' ignoreSectContents ']]>' Ignore)*
+match Ignore
+  match class, class character* - (character* ('<![' | ']]>') character*)
+
+match PEreference
+  match class, class '%' name ';'
+
+match EntityDecl
+  match class, class GEDecl | PEDecl
+match GEDecl
+  match class, class '<!ENTITY' S name S EntityDef S? '>'
+match PEDecl
+  match class, class '<!ENTITY' S '%' S name S PEDef S? '>'
+match EntityDef
+  match class, class entity-value | (ExternalID NDataDecl?)
+match PEDef
+  match class, class entity-value | ExternalID
+match ExternalID
+  match class, class 'SYSTEM' S system-literal
+                    |  'PUBLIC' S pubid-literal S system-literal
+match NDataDecl
+  match class, class S 'NDATA' S name
+
+match TextDecl
+  match class, class '<?xml' version? encoding-declaration S? '?>'
+match extParsedEnt
+  match class, class TextDecl? content
+match encoding-declaration
+  match class, class S 'encoding' equal ('"' Encname '"' | "'" Encname "'" )
+match Encname
+  match class, class [A-Za-z] ([A-Za-z0-9._] | '-')*
+match NotationDecl
+  match class, class '<!NOTATION' S name S (ExternalID | PublicID) S? '>'
+match PublicID
+  match class, class 'PUBLIC' S pubid-literal
+
+letter
+  match class, class base-character
+  match class, class ideographic
+
+match base-character
+  match crown
+    match bound
+      mount start, chunk #x41
+      mount front, chunk #x5A
+    match bound
+      mount start, chunk #x61
+      mount front, chunk #x7A
+    match bound
+      mount start, chunk #xC0
+      mount front, chunk #xD6
+    match bound
+      mount start, chunk #xD8
+      mount front, chunk #xF6
+    match bound
+      mount start, chunk #xF8
+      mount front, chunk #xFF
+    match bound
+      mount start, chunk #x100
+      mount front, chunk #x131
+    match bound
+      mount start, chunk #x134
+      mount front, chunk #x13E
+    match bound
+      mount start, chunk #x141
+      mount front, chunk #x148
+    match bound
+      mount start, chunk #x14A
+      mount front, chunk #x17E
+    match bound
+      mount start, chunk #x180
+      mount front, chunk #x1C3
+    match bound
+      mount start, chunk #x1CD
+      mount front, chunk #x1F0
+    match bound
+      mount start, chunk #x1F4
+      mount front, chunk #x1F5
+    match bound
+      mount start, chunk #x1FA
+      mount front, chunk #x217
+    match bound
+      mount start, chunk #x250
+      mount front, chunk #x2A8
+    match bound
+      mount start, chunk #x2BB
+      mount front, chunk #x2C1
+    match chunk, chunk #x386
+    match bound
+      mount start, chunk #x388
+      mount front, chunk #x38A
+    match chunk, chunk #x38C
+    match bound
+      mount start, chunk #x38E
+      mount front, chunk #x3A1
+    match bound
+      mount start, chunk #x3A3
+      mount front, chunk #x3CE
+    match bound
+      mount start, chunk #x3D0
+      mount front, chunk #x3D6
+    match chunk, chunk #x3DA
+    match chunk, chunk #x3DC
+    match chunk, chunk #x3DE
+    match chunk, chunk #x3E0
+    match bound
+      mount start, chunk #x3E2
+      mount front, chunk #x3F3
+    match bound
+      mount start, chunk #x401
+      mount front, chunk #x40C
+    match bound
+      mount start, chunk #x40E
+      mount front, chunk #x44F
+    match bound
+      mount start, chunk #x451
+      mount front, chunk #x45C
+    match bound
+      mount start, chunk #x45E
+      mount front, chunk #x481
+    match bound
+      mount start, chunk #x490
+      mount front, chunk #x4C4
+    match bound
+      mount start, chunk #x4C7
+      mount front, chunk #x4C8
+    match bound
+      mount start, chunk #x4CB
+      mount front, chunk #x4CC
+    match bound
+      mount start, chunk #x4D0
+      mount front, chunk #x4EB
+    match bound
+      mount start, chunk #x4EE
+      mount front, chunk #x4F5
+    match bound
+      mount start, chunk #x4F8
+      mount front, chunk #x4F9
+    match bound
+      mount start, chunk #x531
+      mount front, chunk #x556
+    match chunk, chunk #x559
+    match bound
+      mount start, chunk #x561
+      mount front, chunk #x586
+    match bound
+      mount start, chunk #x5D0
+      mount front, chunk #x5EA
+    match bound
+      mount start, chunk #x5F0
+      mount front, chunk #x5F2
+    match bound
+      mount start, chunk #x621
+      mount front, chunk #x63A
+    match bound
+      mount start, chunk #x641
+      mount front, chunk #x64A
+    match bound
+      mount start, chunk #x671
+      mount front, chunk #x6B7
+    match bound
+      mount start, chunk #x6BA
+      mount front, chunk #x6BE
+    match bound
+      mount start, chunk #x6C0
+      mount front, chunk #x6CE
+    match bound
+      mount start, chunk #x6D0
+      mount front, chunk #x6D3
+    match chunk, chunk #x6D5
+    match bound
+      mount start, chunk #x6E5
+      mount front, chunk #x6E6
+    match bound
+      mount start, chunk #x905
+      mount front, chunk #x939
+    match chunk, chunk #x93D
+    match bound
+      mount start, chunk #x958
+      mount front, chunk #x961
+    match bound
+      mount start, chunk #x985
+      mount front, chunk #x98C
+    match bound
+      mount start, chunk #x98F
+      mount front, chunk #x990
+    match bound
+      mount start, chunk #x993
+      mount front, chunk #x9A8
+    match bound
+      mount start, chunk #x9AA
+      mount front, chunk #x9B0
+    match chunk, chunk #x9B2
+    match bound
+      mount start, chunk #x9B6
+      mount front, chunk #x9B9
+    match bound
+      mount start, chunk #x9DC
+      mount front, chunk #x9DD
+    match bound
+      mount start, chunk #x9DF
+      mount front, chunk #x9E1
+    match bound
+      mount start, chunk #x9F0
+      mount front, chunk #x9F1
+    match bound
+      mount start, chunk #xA05
+      mount front, chunk #xA0A
+    match bound
+      mount start, chunk #xA0F
+      mount front, chunk #xA10
+    match bound
+      mount start, chunk #xA13
+      mount front, chunk #xA28
+    match bound
+      mount start, chunk #xA2A
+      mount front, chunk #xA30
+    match bound
+      mount start, chunk #xA32
+      mount front, chunk #xA33
+    match bound
+      mount start, chunk #xA35
+      mount front, chunk #xA36
+    match bound
+      mount start, chunk #xA38
+      mount front, chunk #xA39
+    match bound
+      mount start, chunk #xA59
+      mount front, chunk #xA5C
+    match chunk, chunk #xA5E
+    match bound
+      mount start, chunk #xA72
+      mount front, chunk #xA74
+    match bound
+      mount start, chunk #xA85
+      mount front, chunk #xA8B
+    match chunk, chunk #xA8D
+    match bound
+      mount start, chunk #xA8F
+      mount front, chunk #xA91
+    match bound
+      mount start, chunk #xA93
+      mount front, chunk #xAA8
+    match bound
+      mount start, chunk #xAAA
+      mount front, chunk #xAB0
+    match bound
+      mount start, chunk #xAB2
+      mount front, chunk #xAB3
+    match bound
+      mount start, chunk #xAB5
+      mount front, chunk #xAB9
+    match chunk, chunk #xABD
+    match chunk, chunk #xAE0
+    match bound
+      mount start, chunk #xB05
+      mount front, chunk #xB0C
+    match bound
+      mount start, chunk #xB0F
+      mount front, chunk #xB10
+    match bound
+      mount start, chunk #xB13
+      mount front, chunk #xB28
+    match bound
+      mount start, chunk #xB2A
+      mount front, chunk #xB30
+    match bound
+      mount start, chunk #xB32
+      mount front, chunk #xB33
+    match bound
+      mount start, chunk #xB36
+      mount front, chunk #xB39
+    match chunk, chunk #xB3D
+    match bound
+      mount start, chunk #xB5C
+      mount front, chunk #xB5D
+    match bound
+      mount start, chunk #xB5F
+      mount front, chunk #xB61
+    match bound
+      mount start, chunk #xB85
+      mount front, chunk #xB8A
+    match bound
+      mount start, chunk #xB8E
+      mount front, chunk #xB90
+    match bound
+      mount start, chunk #xB92
+      mount front, chunk #xB95
+    match bound
+      mount start, chunk #xB99
+      mount front, chunk #xB9A
+    match chunk, chunk #xB9C
+    match bound
+      mount start, chunk #xB9E
+      mount front, chunk #xB9F
+    match bound
+      mount start, chunk #xBA3
+      mount front, chunk #xBA4
+    match bound
+      mount start, chunk #xBA8
+      mount front, chunk #xBAA
+    match bound
+      mount start, chunk #xBAE
+      mount front, chunk #xBB5
+    match bound
+      mount start, chunk #xBB7
+      mount front, chunk #xBB9
+    match bound
+      mount start, chunk #xC05
+      mount front, chunk #xC0C
+    match bound
+      mount start, chunk #xC0E
+      mount front, chunk #xC10
+    match bound
+      mount start, chunk #xC12
+      mount front, chunk #xC28
+    match bound
+      mount start, chunk #xC2A
+      mount front, chunk #xC33
+    match bound
+      mount start, chunk #xC35
+      mount front, chunk #xC39
+    match bound
+      mount start, chunk #xC60
+      mount front, chunk #xC61
+    match bound
+      mount start, chunk #xC85
+      mount front, chunk #xC8C
+    match bound
+      mount start, chunk #xC8E
+      mount front, chunk #xC90
+    match bound
+      mount start, chunk #xC92
+      mount front, chunk #xCA8
+    match bound
+      mount start, chunk #xCAA
+      mount front, chunk #xCB3
+    match bound
+      mount start, chunk #xCB5
+      mount front, chunk #xCB9
+    match chunk, chunk #xCDE
+    match bound
+      mount start, chunk #xCE0
+      mount front, chunk #xCE1
+    match bound
+      mount start, chunk #xD05
+      mount front, chunk #xD0C
+    match bound
+      mount start, chunk #xD0E
+      mount front, chunk #xD10
+    match bound
+      mount start, chunk #xD12
+      mount front, chunk #xD28
+    match bound
+      mount start, chunk #xD2A
+      mount front, chunk #xD39
+    match bound
+      mount start, chunk #xD60
+      mount front, chunk #xD61
+    match bound
+      mount start, chunk #xE01
+      mount front, chunk #xE2E
+    match chunk, chunk #xE30
+    match bound
+      mount start, chunk #xE32
+      mount front, chunk #xE33
+    match bound
+      mount start, chunk #xE40
+      mount front, chunk #xE45
+    match bound
+      mount start, chunk #xE81
+      mount front, chunk #xE82
+    match chunk, chunk #xE84
+    match bound
+      mount start, chunk #xE87
+      mount front, chunk #xE88
+    match chunk, chunk #xE8A
+  match chunk, chunk #xE8D
+    match bound
+      mount start, chunk #xE94
+      mount front, chunk #xE97
+    match bound
+      mount start, chunk #xE99
+      mount front, chunk #xE9F
+    match bound
+      mount start, chunk #xEA1
+      mount front, chunk #xEA3
+    match chunk, chunk #xEA5
+    match chunk, chunk #xEA7
+    match bound
+      mount start, chunk #xEAA
+      mount front, chunk #xEAB
+    match bound
+      mount start, chunk #xEAD
+      mount front, chunk #xEAE
+    match chunk, chunk #xEB0
+  match bound
+      mount start, chunk #xEB2
+      mount front, chunk #xEB3
+    match chunk, chunk #xEBD
+    match bound
+      mount start, chunk #xEC0
+      mount front, chunk #xEC4
+    match bound
+      mount start, chunk #xF40
+      mount front, chunk #xF47
+    match bound
+      mount start, chunk #xF49
+      mount front, chunk #xF69
+    match bound
+      mount start, chunk #x10A0
+      mount front, chunk #x10C5
+    match bound
+      mount start, chunk #x10D0
+      mount front, chunk #x10F6
+    match chunk, chunk #x1100
+  match bound
+      mount start, chunk #x1102
+      mount front, chunk #x1103
+    match bound
+      mount start, chunk #x1105
+      mount front, chunk #x1107
+    match chunk, chunk #x1109
+    match bound
+      mount start, chunk #x110B
+      mount front, chunk #x110C
+    match bound
+      mount start, chunk #x110E
+      mount front, chunk #x1112
+    match chunk, chunk #x113C
+    match chunk, chunk #x113E
+    match chunk, chunk #x1140
+    match chunk, chunk #x114C
+    match chunk, chunk #x114E
+  match chunk, chunk #x1150
+    match bound
+      mount start, chunk #x1154
+      mount front, chunk #x1155
+    match chunk, chunk #x1159
+    match bound
+      mount start, chunk #x115F
+      mount front, chunk #x1161
+    match chunk, chunk #x1163
+  match chunk, chunk #x1165
+    match chunk, chunk #x1167
+    match chunk, chunk #x1169
+    match bound
+      mount start, chunk #x116D
+      mount front, chunk #x116E
+    match bound
+      mount start, chunk #x1172
+      mount front, chunk #x1173
+    match chunk, chunk #x1175
+    match chunk, chunk #x119E
+    match chunk, chunk #x11A8
+    match chunk, chunk #x11AB
+    match bound
+      mount start, chunk #x11AE
+      mount front, chunk #x11AF
+    match bound
+      mount start, chunk #x11B7
+      mount front, chunk #x11B8
+    match chunk, chunk #x11BA
+    match bound
+      mount start, chunk #x11BC
+      mount front, chunk #x11C2
+    match chunk, chunk #x11EB
+    match chunk, chunk #x11F0
+    match chunk, chunk #x11F9
+    match bound
+      mount start, chunk #x1E00
+      mount front, chunk #x1E9B
+    match bound
+      mount start, chunk #x1EA0
+      mount front, chunk #x1EF9
+    match bound
+      mount start, chunk #x1F00
+      mount front, chunk #x1F15
+    match bound
+      mount start, chunk #x1F18
+      mount front, chunk #x1F1D
+    match bound
+      mount start, chunk #x1F20
+      mount front, chunk #x1F45
+    match bound
+      mount start, chunk #x1F48
+      mount front, chunk #x1F4D
+    match bound
+      mount start, chunk #x1F50
+      mount front, chunk #x1F57
+    match chunk, chunk #x1F59
+    match chunk, chunk #x1F5B
+    match chunk, chunk #x1F5D
+    match bound
+      mount start, chunk #x1F5F
+      mount front, chunk #x1F7D
+    match bound
+      mount start, chunk #x1F80
+      mount front, chunk #x1FB4
+    match bound
+      mount start, chunk #x1FB6
+      mount front, chunk #x1FBC
+    match chunk, chunk #x1FBE
+    match bound
+      mount start, chunk #x1FC2
+      mount front, chunk #x1FC4
+    match bound
+      mount start, chunk #x1FC6
+      mount front, chunk #x1FCC
+    match bound
+      mount start, chunk #x1FD0
+      mount front, chunk #x1FD3
+    match bound
+      mount start, chunk #x1FD6
+      mount front, chunk #x1FDB
+    match bound
+      mount start, chunk #x1FE0
+      mount front, chunk #x1FEC
+    match bound
+      mount start, chunk #x1FF2
+      mount front, chunk #x1FF4
+    match bound
+      mount start, chunk #x1FF6
+      mount front, chunk #x1FFC
+    match chunk, chunk #x2126
+  match bound
+      mount start, chunk #x212A
+      mount front, chunk #x212B
+    match chunk, chunk #x212E
+    match bound
+      mount start, chunk #x2180
+      mount front, chunk #x2182
+    match bound
+      mount start, chunk #x3041
+      mount front, chunk #x3094
+    match bound
+      mount start, chunk #x30A1
+      mount front, chunk #x30FA
+    match bound
+      mount start, chunk #x3105
+      mount front, chunk #x312C
+    match bound
+      mount start, chunk #xAC00
+      mount front, chunk #xD7A3
+
+match ideographic
+  match crown
+    match bound
+      mount start, chunk #x4E00
+      mount front, chunk #x9FA5
+    mount chunk, chunk #x3007
+    match bound
+      mount start, chunk #x3021
+      mount front, chunk #x3029
+
+match combining-character
+  match crown
+    match bound
+      mount start, chunk #x300
+      mount front, chunk #x345
+    match bound
+      mount start, chunk #x360
+      mount front, chunk #x361
+    match bound
+      mount start, chunk #x483
+      mount front, chunk #x486
+    match bound
+      mount start, chunk #x591
+      mount front, chunk #x5A1
+    match bound
+      mount start, chunk #x5A3
+      mount front, chunk #x5B9
+    match bound
+      mount start, chunk #x5BB
+      mount front, chunk #x5BD
+    match chunk, chunk #x5BF
+    match bound
+      mount start, chunk #x5C1
+      mount front, chunk #x5C2
+    match chunk, chunk #x5C4
+    match bound
+      mount start, chunk #x64B
+      mount front, chunk #x652
+    match chunk, chunk #x670
+    match bound
+      mount start, chunk #x6D6
+      mount front, chunk #x6DC
+    match bound
+      mount start, chunk #x6DD
+      mount front, chunk #x6DF
+    match bound
+      mount start, chunk #x6E0
+      mount front, chunk #x6E4
+    match bound
+      mount start, chunk #x6E7
+      mount front, chunk #x6E8
+    match bound
+      mount start, chunk #x6EA
+      mount front, chunk #x6ED
+    match bound
+      mount start, chunk #x901
+      mount front, chunk #x903
+    match chunk, chunk #x93C
+    match bound
+      mount start, chunk #x93E
+      mount front, chunk #x94C
+    match chunk, chunk #x94D
+    match bound
+      mount start, chunk #x951
+      mount front, chunk #x954
+    match bound
+      mount start, chunk #x962
+      mount front, chunk #x963
+    match bound
+      mount start, chunk #x981
+      mount front, chunk #x983
+    match chunk, chunk #x9BC
+    match chunk, chunk #x9BE
+    match chunk, chunk #x9BF
+    match bound
+      mount start, chunk #x9C0
+      mount front, chunk #x9C4
+    match bound
+      mount start, chunk #x9C7
+      mount front, chunk #x9C8
+    match bound
+      mount start, chunk #x9CB
+      mount front, chunk #x9CD
+    match chunk, chunk #x9D7
+    match bound
+      mount start, chunk #x9E2
+      mount front, chunk #x9E3
+    match chunk, chunk #xA02
+    match chunk, chunk #xA3C
+    match chunk, chunk #xA3E
+    match chunk, chunk #xA3F
+    match bound
+      mount start, chunk #xA40
+      mount front, chunk #xA42
+    match bound
+      mount start, chunk #xA47
+      mount front, chunk #xA48
+    match bound
+      mount start, chunk #xA4B
+      mount front, chunk #xA4D
+    match bound
+      mount start, chunk #xA70
+      mount front, chunk #xA71
+    match bound
+      mount start, chunk #xA81
+      mount front, chunk #xA83
+    match chunk, chunk #xABC
+    match bound
+      mount start, chunk #xABE
+      mount front, chunk #xAC5
+    match bound
+      mount start, chunk #xAC7
+      mount front, chunk #xAC9
+    match bound
+      mount start, chunk #xACB
+      mount front, chunk #xACD
+    match bound
+      mount start, chunk #xB01
+      mount front, chunk #xB03
+    match chunk, chunk #xB3C
+    match bound
+      mount start, chunk #xB3E
+      mount front, chunk #xB43
+    match bound
+      mount start, chunk #xB47
+      mount front, chunk #xB48
+    match bound
+      mount start, chunk #xB4B
+      mount front, chunk #xB4D
+    match bound
+      mount start, chunk #xB56
+      mount front, chunk #xB57
+    match bound
+      mount start, chunk #xB82
+      mount front, chunk #xB83
+    match bound
+      mount start, chunk #xBBE
+      mount front, chunk #xBC2
+    match bound
+      mount start, chunk #xBC6
+      mount front, chunk #xBC8
+    match bound
+      mount start, chunk #xBCA
+      mount front, chunk #xBCD
+    match chunk, chunk #xBD7
+    match bound
+      mount start, chunk #xC01
+      mount front, chunk #xC03
+    match bound
+      mount start, chunk #xC3E
+      mount front, chunk #xC44
+    match bound
+      mount start, chunk #xC46
+      mount front, chunk #xC48
+    match bound
+      mount start, chunk #xC4A
+      mount front, chunk #xC4D
+    match bound
+      mount start, chunk #xC55
+      mount front, chunk #xC56
+    match bound
+      mount start, chunk #xC82
+      mount front, chunk #xC83
+    match bound
+      mount start, chunk #xCBE
+      mount front, chunk #xCC4
+    match bound
+      mount start, chunk #xCC6
+      mount front, chunk #xCC8
+    match bound
+      mount start, chunk #xCCA
+      mount front, chunk #xCCD
+    match bound
+      mount start, chunk #xCD5
+      mount front, chunk #xCD6
+    match bound
+      mount start, chunk #xD02
+      mount front, chunk #xD03
+    match bound
+      mount start, chunk #xD3E
+      mount front, chunk #xD43
+    match bound
+      mount start, chunk #xD46
+      mount front, chunk #xD48
+    match bound
+      mount start, chunk #xD4A
+      mount front, chunk #xD4D
+    match chunk, chunk #xD57
+    match chunk, chunk #xE31
+    match bound
+      mount start, chunk #xE34
+      mount front, chunk #xE3A
+    match bound
+      mount start, chunk #xE47
+      mount front, chunk #xE4E
+    match chunk, chunk #xEB1
+    match bound
+      mount start, chunk #xEB4
+      mount front, chunk #xEB9
+    match bound
+      mount start, chunk #xEBB
+      mount front, chunk #xEBC
+    match bound
+      mount start, chunk #xEC8
+      mount front, chunk #xECD
+    match bound
+      mount start, chunk #xF18
+      mount front, chunk #xF19
+    match chunk, chunk #xF35
+    match chunk, chunk #xF37
+    match chunk, chunk #xF39
+    match chunk, chunk #xF3E
+    match chunk, chunk #xF3F
+    match bound
+      mount start, chunk #xF71
+      mount front, chunk #xF84
+    match bound
+      mount start, chunk #xF86
+      mount front, chunk #xF8B
+    match bound
+      mount start, chunk #xF90
+      mount front, chunk #xF95
+    match chunk, chunk #xF97
+    match bound
+      mount start, chunk #xF99
+      mount front, chunk #xFAD
+    match bound
+      mount start, chunk #xFB1
+      mount front, chunk #xFB7
+    match chunk, chunk #xFB9
+    match bound
+      mount start, chunk #x20D0
+      mount front, chunk #x20DC
+    match chunk, chunk #x20E1
+    match bound
+      mount start, chunk #x302A
+      mount front, chunk #x302F
+    match chunk, chunk #x3099
+    match chunk, chunk #x309A
+
+match digit
+  match crown
+    match bound
+      mount start, chunk #x30
+      mount front, chunk #x39
+    match bound
+      mount start, chunk #x660
+      mount front, chunk #x669
+    match bound
+      mount start, chunk #x6F0
+      mount front, chunk #x6F9
+    match bound
+      mount start, chunk #x966
+      mount front, chunk #x96F
+    match bound
+      mount start, chunk #x9E6
+      mount front, chunk #x9EF
+    match bound
+      mount start, chunk #xA66
+      mount front, chunk #xA6F
+    match bound
+      mount start, chunk #xAE6
+      mount front, chunk #xAEF
+    match bound
+      mount start, chunk #xB66
+      mount front, chunk #xB6F
+    match bound
+      mount start, chunk #xBE7
+      mount front, chunk #xBEF
+    match bound
+      mount start, chunk #xC66
+      mount front, chunk #xC6F
+    match bound
+      mount start, chunk #xCE6
+      mount front, chunk #xCEF
+    match bound
+      mount start, chunk #xD66
+      mount front, chunk #xD6F
+    match bound
+      mount start, chunk #xE50
+      mount front, chunk #xE59
+    match bound
+      mount start, chunk #xED0
+      mount front, chunk #xED9
+    match bound
+      mount start, chunk #xF20
+      mount front, chunk #xF29
+
+match Extender
+  match crown
+    match chunk, chunk #xB7
+    match chunk, chunk #x2D0
+    match chunk, chunk #x2D1
+    match chunk, chunk #x387
+    match chunk, chunk #x640
+    match chunk, chunk #xE46
+    match chunk, chunk #xEC6
+    match chunk, chunk #x3005
+    match bound
+      mount start, chunk #x3031
+      mount front, chunk #x3035
+    match bound
+      mount start, chunk #x309D
+      mount front, chunk #x309E
+    match bound
+      mount start, chunk #x30FC
+      mount front, chunk #x30FE

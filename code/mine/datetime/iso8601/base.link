@@ -1,0 +1,207 @@
+
+match iso8601datetime
+  match class, class date
+  match shard, |T|
+  match class, class time
+
+match date
+  match crown
+    match class, class datespec-full
+    match class, class datespec-year
+    match class, class datespec-month
+    datespec-mday / datespec-week / datespec-wday / datespec-yday
+
+match date-century
+  match count, 2, class DIGIT
+
+match date-decade
+  match class, class DIGIT
+
+match date-subdecade
+  match class, class DIGIT
+
+match date-year
+  match class, class date-decade
+  match class, class date-subdecade
+
+match date-fullyear
+  match class, class date-century
+  match class, class date-year
+
+match date-month
+  match crown
+    match shard, <01>
+    match shard, <02>
+    match shard, <03>
+    match shard, <04>
+    match shard, <05>
+    match shard, <06>
+    match shard, <07>
+    match shard, <08>
+    match shard, <09>
+    match shard, <10>
+    match shard, <11>
+    match shard, <12>
+
+match date-wday
+  match slice, 1, 7
+
+match date-mday
+  match count, 2, class DIGIT
+
+match date-yday
+  match count, 3, class 3DIGIT
+
+match date-week
+  match count, 2, class 2DIGIT
+
+match datepart-fullyear
+  match sieve, class date-century
+  match class, class date-year
+  match sieve
+    match shard, |-|
+
+match datepart-ptyear
+  match shard, |-|
+  match sieve
+    match class, class date-subdecade
+    match sieve
+      match shard, |-|
+
+match datepart-wkyear
+  match crown
+    match class, class datepart-ptyear
+    match class, class datepart-fullyear
+
+match dateopt-century
+  match shard, |-|
+  match class, class date-century
+
+match dateopt-fullyear
+  match shard, |-|
+  match class, class datepart-fullyear
+
+match dateopt-year
+  match shard, |-|
+  match class, class date-year
+  match sieve
+    match shard, |-|
+
+match dateopt-month
+  match shard, |-|
+  match class, class date-month
+  match sieve
+    match shard, |-|
+
+match dateopt-week
+  match shard, |-|
+  match class, class date-week
+  match sieve
+    match shard, |-|
+
+match datespec-full
+  match class, class datepart-fullyear
+  match class, class date-month
+  match sieve
+    match shard, |-|
+  match class, class date-mday
+
+match datespec-year
+  match crown
+    match class, class date-century
+    match chunk
+      match class, class dateopt-century
+      match class, class date-year
+
+match datespec-month
+  match shard, |-|
+  match class, class dateopt-year
+  match class, class date-month
+  match sieve
+    match sieve
+      match shard, |-|
+    match class, class date-mday
+
+match datespec-mday
+  match shard, |--|
+  match class, class dateopt-month
+  match class, class date-mday
+
+match datespec-week
+  match class, class datepart-wkyear
+  match shard, |W|
+  match crown
+    match class, class date-week
+    match class, class dateopt-week date-wday
+
+match datespec-wday
+  match shard, |---|
+  match class, class date-wday
+
+match datespec-yday
+  match class, class dateopt-fullyear
+  match class, class date-yday
+
+match time-hour
+  match count, 2, class DIGIT
+
+match time-minute       = 2DIGIT ; 00-59
+match time-second       = 2DIGIT ; 00-58, 00-59, 00-60 based on
+                              ; leap-second rules
+match time-fraction     = (|,| / |.|) 1*DIGIT
+match time-numoffset    = (|+| / |-|) time-hour [[|:|] time-minute]
+match time-zone         = |Z| / time-numoffset
+
+match timeopt-hour      = |-| / (time-hour [|:|])
+match timeopt-minute    = |-| / (time-minute [|:|])
+
+match timespec-hour     = time-hour [[|:|] time-minute [[|:|] time-second]]
+match timespec-minute   = timeopt-hour time-minute [[":"] time-second]
+match timespec-second   = "-" timeopt-minute time-second
+match timespec-base     = timespec-hour / timespec-minute / timespec-second
+
+match time              = timespec-base [time-fraction] [time-zone]
+
+
+match dur-second        = 1*DIGIT "S"
+match dur-minute        = 1*DIGIT "M" [dur-second]
+match dur-hour          = 1*DIGIT "H" [dur-minute]
+match dur-time          = "T" (dur-hour / dur-minute / dur-second)
+match dur-day           = 1*DIGIT "D"
+match dur-week          = 1*DIGIT "W"
+match dur-month         = 1*DIGIT "M" [dur-day]
+match dur-year          = 1*DIGIT "Y" [dur-month]
+match dur-date          = (dur-day / dur-month / dur-year) [dur-time]
+
+match duration          = "P" (dur-date / dur-time / dur-week)
+
+
+match period-explicit   = iso-date-time "/" iso-date-time
+match period-start      = iso-date-time "/" duration
+match period-end        = duration "/" iso-date-time
+
+match period            = period-explicit / period-start / period-end
+
+match date-fullyear   = 4DIGIT
+match date-month      = 2DIGIT  ; 01-12
+match date-mday       = 2DIGIT  ; 01-28, 01-29, 01-30, 01-31 based on
+                             ; month/year
+match time-hour       = 2DIGIT  ; 00-23
+match time-minute     = 2DIGIT  ; 00-59
+match time-second     = 2DIGIT  ; 00-58, 00-59, 00-60 based on leap second
+                             ; rules
+match time-secfrac    = "." 1*DIGIT
+match time-numoffset  = ("+" / "-") time-hour ":" time-minute
+match time-offset     = "Z" / time-numoffset
+
+match partial-time    = time-hour ":" time-minute ":" time-second
+                     [time-secfrac]
+match full-date       = date-fullyear "-" date-month "-" date-mday
+match full-time       = partial-time time-offset
+
+match date-time       = full-date "T" full-time
+
+   int leap_year(int year)
+   {
+       return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+   }

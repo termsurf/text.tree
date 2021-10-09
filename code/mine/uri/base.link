@@ -1,0 +1,186 @@
+
+match uri
+  match class, class scheme
+  match chunk, chunk <:>
+  match crown
+    match class, class authority
+    match class, class absolute-path
+    match class, class relative-path
+  match class, class path
+  match sieve
+    match chunk, chunk <?>
+    match class, class query
+  match sieve
+    match chunk, chunk <#>
+    match class, class fragment
+
+match scheme
+  match class, class alpha
+  match chain
+    match crown
+      match class, class alpha
+      match class, class digit
+      match chunk, chunk <+>
+      match chunk, chunk <->
+      match chunk, chunk <.>
+
+match authority
+  match sieve
+    match class, class login
+    match chunk, chunk <@>
+  match class, class host
+  match sieve
+    match chunk, chunk <:>
+    match class, class port
+
+match host
+  match class, class ip
+  match class, class ipv4-address
+  match class, class reg-name
+
+match ip-literal
+  match chunk, chunk <[>
+  match sieve
+    match crown
+      match class, class ipv6-address
+      match class, class ipv-future
+  match chunk, chunk <]>
+
+match    abs_path
+  match class, class "/"  path-segment-list
+
+match path
+  match chunk, chunk </>
+  match sieve
+    match class, class segment
+    match chain
+      match chunk, chunk </>
+      match class, class segment
+
+match segment
+  match chain
+    match class, class pchar
+  match chain
+    match chunk, chunk <;>
+    match chain
+      match class, class pchar
+
+match pchar
+  match crown
+    match class, class unreserved-symbol
+    match class, class escaped
+    match chunk, chunk <:>
+    match chunk, chunk <@>
+    match chunk, chunk <&>
+    match chunk, chunk <=>
+    match chunk, chunk <+>
+    match chunk, chunk <$>
+    match chunk, chunk <,>
+
+match uri-reference
+  match crown
+    match class, class uri
+    match class, class relative-ref
+
+match absolute-uri
+  match class, class scheme
+  match chunk, chunk <:>
+  match class, class absolute-path
+
+match scheme
+  match class, class ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
+
+match login
+  match chain
+    match crown
+      match class, class unreserved-symbol
+      match class, class pct-encoded
+      match class, class sub-delimiters
+      match chunk, chunk <:>
+
+match host
+  match class, class IP-literal / IPv4address / reg-name
+
+match port
+  match chain
+    mount start, share 1
+    match class, class digit
+
+match IP-literal
+  match class, class "[" ( ipv6-address / ipv-future  ) "]"
+
+match ipv-future
+  match class, class "v" 1*HEXDIG "." 1*( unreserved-symbol / sub-delimiters / ":" )
+
+match ipv6-address
+  match class, class                            6( h16 ":" ) ls32
+                 /                       "::" 5( h16 ":" ) ls32
+                 / [               h16 ] "::" 4( h16 ":" ) ls32
+                 / [ *1( h16 ":" ) h16 ] "::" 3( h16 ":" ) ls32
+                 / [ *2( h16 ":" ) h16 ] "::" 2( h16 ":" ) ls32
+                 / [ *3( h16 ":" ) h16 ] "::"    h16 ":"   ls32
+                 / [ *4( h16 ":" ) h16 ] "::"              ls32
+                 / [ *5( h16 ":" ) h16 ] "::"              h16
+                 / [ *6( h16 ":" ) h16 ] "::"
+
+match h16
+  match class, class 1*4HEXDIG
+match ls32
+  match class, class ( h16 ":" h16 ) / IPv4address
+match IPv4address
+  match class, class dec-octet "." dec-octet "." dec-octet "." dec-octet
+
+match dec-octet
+  match class, class DIGIT                 ; 0-9
+                 / %x31-39 DIGIT         ; 10-99
+                 / "1" 2DIGIT            ; 100-199
+                 / "2" %x30-34 DIGIT     ; 200-249
+                 / "25" %x30-35          ; 250-255
+
+match name
+  match chain
+    match crown
+      match class, class unreserved-symbol
+      match class, class pct-encoded
+      match class, class sub-delimiters
+
+match query
+  match class, class *( pchar / "/" / "?" )
+
+match fragment
+  match chain
+    match crown
+      match class, class pchar
+      match chunk, chunk </>
+      match chunk, chunk <?>
+
+match pct-encoded
+  match class, class "%" HEXDIG HEXDIG
+
+match unreserved-symbol
+  match crown
+    match class, class alphabet
+    match class, class digit
+    match chunk, chunk <->
+    match chunk, chunk <.>
+    match chunk, chunk <_>
+    match chunk, chunk <~>
+
+match reserved
+  match class, class gen-delimiters / sub-delimiters
+match gen-delimiters
+  match class, class ":" / "/" / "?" / "#" / "[" / "]" / "@"
+
+match sub-delimiters
+  match crown
+    match chunk, chunk <!>
+    match chunk, chunk <$>
+    match chunk, chunk <&>
+    match chunk, chunk <'>
+    match chunk, chunk <(>
+    match chunk, chunk <)>
+    match chunk, chunk <*>
+    match chunk, chunk <+>
+    match chunk, chunk <,>
+    match chunk, chunk <;>
+    match chunk, chunk <=>

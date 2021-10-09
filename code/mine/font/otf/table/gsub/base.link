@@ -1,0 +1,39 @@
+
+# https://github.com/opentypejs/opentype.js/blob/88f7c1755ceec3326cdac4de53bc5ec89d38a615/src/parse.js#L519
+
+match gsub-table
+  match class, class gsub-table-version
+    weave version
+  check or
+    check match
+      mount start, share 1
+      mount front, share version
+    check match
+      mount start, share 1.1
+      mount front, share version
+    catch fault
+      leave build
+  check match
+    mount start, share 1
+    mount front, share version
+    match class, class script-list
+    match class, class feature-list
+    match class, class lookup-list
+  check match
+    mount start, share 1.1
+    mount front, share version
+    match class, class script-list
+    match class, class feature-list
+    match class, class lookup-list
+    match class, class feature-variation-list
+
+match script-list
+  match class, class pointer
+
+match pointer
+  match class, class struct-offset
+    weave struct-offset
+  check greater
+    mount start, share struct-offset
+    mount front, share 0
+    return new Parser(this.data, this.offset + structOffset).parseStruct(description)

@@ -1,0 +1,21 @@
+
+field pdf
+  state stack
+  state page, chain page
+  state catalog
+  state reference-id, field count
+    share 1
+
+field page
+  state id
+  state pattern
+  state annotation
+  state resource
+  state content
+
+field resource
+  state font, weave font
+  state opacity, weave opacity
+
+field content
+  state stack, chain string

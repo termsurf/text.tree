@@ -1,0 +1,58 @@
+
+match name-table
+  match class, class format
+  match class, class count
+    weave count
+  match class, class string-offset
+    mount offset, share match/slice
+  match chain
+    mount front, share count
+    match class, class platform-id
+    match class, class encoding-id
+    match class, class language-id
+    match class, class name-id
+    match class, class property
+    match class, class byte-length
+    match class, class offset
+  check match
+    mount start, share format
+    mount front, share 1
+    match class, class language-tag-count
+
+match format
+  match class, class ushort
+
+match count
+  match class, class ushort
+
+match string-offset
+  start offset
+
+  match class, class ushort
+    store value
+
+  cause add
+    mount start, share offset
+    mount value, share value
+    leave build, share build
+
+match platformID
+  match class, class UShort
+
+match encodingID
+  match class, class UShort
+
+match languageID
+  match class, class UShort
+
+match nameID
+  match class, class UShort
+
+match property
+  match class, class leNames
+
+match byteLength
+  match class, class UShort
+
+match offset
+  match class, class UShort

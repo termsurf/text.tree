@@ -1,0 +1,29 @@
+
+match gdef-table
+  match class, class version
+    weave version
+  match class, class class-definition
+  match class, class attach-list
+  match class, class lig-caret-list
+  match class, class mark-attach-class-definition
+  check gte
+    mount start, share version
+    mount front, share 1.2
+    match class, class mark-glyph-sets
+
+match version
+
+match classDef
+  match class, class p.parsePointer(Parser.classDef),
+
+match attachList
+  match class, class p.parsePointer(attachList),
+
+match ligCaretList
+  match class, class p.parsePointer(ligCaretList),
+
+match markAttachClassDef
+  match class, class p.parsePointer(Parser.classDef)
+
+match markGlyphSets
+  match class, class p.parsePointer(markGlyphSets)

@@ -1,0 +1,10 @@
+
+find digit
+  find line
+    find base, link 0
+    find head, link 9
+
+find non-zero-digit
+  find line
+    find base, link 1
+    find head, link 9

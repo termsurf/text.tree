@@ -1,0 +1,25 @@
+
+match weekday-text
+  match crown
+    match chord, share <Monday>
+    match chord, share <Tuesday>
+    match chord, share <Wednesday>
+    match chord, share <Thursday>
+    match chord, share <Friday>
+    match chord, share <Saturday>
+    match chord, share <Sunday>
+
+match month3-text
+  match crown
+    match chord, share <Jan>
+    match chord, share <Feb>
+    match chord, share <Mar>
+    match chord, share <Apr>
+    match chord, share <May>
+    match chord, share <Jun>
+    match chord, share <Jul>
+    match chord, share <Aug>
+    match chord, share <Sep>
+    match chord, share <Oct>
+    match chord, share <Nov>
+    match chord, share <Dec>

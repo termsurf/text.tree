@@ -1,0 +1,243 @@
+
+match xo
+  match sieve
+    match chain
+      match crown
+        match class, class indented-term
+          mount indent, write 0
+        match class, class line-break
+
+match indented-term
+  start indent, field count
+
+  match class, class indent
+    mount amount, share indent
+
+  match class, class inline-term
+
+  shift add
+    mount a, share indent
+    mount b, write 2
+    store nested-indent
+
+  match sieve
+    match chain
+      match class, class nested-input
+        mount indent, share nested-indent
+
+match inline-input
+  match crown
+    match class, class inline-parenthesized-input
+    match class, class inline-non-parenthesized-input
+
+match inline-non-parenthesized-input
+  match class, class space
+  match class, class inline-value
+  match sieve
+    match chain
+      match class, class comma
+      match class, class space
+      match class, class inline-value
+
+match inline-parenthesized-input
+  match class, class open-parenthesis
+  match class, class inline-value
+  match sieve
+    match chain
+      match class, class comma
+      match class, class space
+      match class, class inline-value
+  match class, class close-parenthesis
+
+match name
+  match class, class prefix-word
+  match sieve
+    match chain
+      match class, class dash
+      match class, class suffix-word
+
+match prefix-word
+  match class, class lowercase-ascii-letter
+  match chain, match class, class word-symbol
+
+match suffix-word
+  match chain
+    match class, class word-symbol
+
+match word-symbol
+  match crown
+    match class, class lowercase-ascii-letter
+    match class, class digit
+
+match inline-value
+  match crown
+    match class, class inline-term
+    match class, class inline-template
+    match class, class number
+    match class, class code
+    match class, class path
+    match class, class selector
+
+match inline-term
+  match class, class name
+  match sieve
+    match class, class inline-input
+
+match number
+  match crown
+    match class, class integer
+    match class, class decimal
+
+match integer
+  match chain
+    match class, class digit
+
+match integer
+  match class, class non-zero-digit
+  match sieve
+    match chain
+      match class, class digit
+
+match inline-template
+  match class, class opening-angle
+  match class, class template-line
+  match class, class closing-angle
+
+match opening-angle
+  match write, write <\<>
+
+match closing-angle
+  match write, write <\>>
+
+match template-line
+  match chain
+    match crown
+      match class, class inline-string
+      match class, class inline-code
+
+match inline-string
+  match chain
+    mount start, write 1
+    match crown
+      match class, class escaped-closing-angle
+      match class, class non-closing-angle
+
+match escaped-closing-angle
+  match class, class backslash
+  match class, class closing-angle
+
+match non-closing-angle
+  match shift
+    match class, class closing-angle
+
+match inline-code
+  match class, class colon
+  match crown
+    match class, class name
+    match class, class inline-parenthesized-input
+
+match nested-input
+  start indent, field count
+
+  match crown
+    match class, class nested-template
+      mount indent, share indent
+    match class, class indented-term
+      mount indent, share indent
+
+match nested-template
+  start indent, field count
+
+  shift add
+    mount a, share indent
+    mount b, write 2
+    store vertical-line-indent
+  shift add
+    mount a, share indent
+    mount b, write 4
+    store template-body-indent
+
+  match class, class vertical-line
+    mount indent, share vertical-line-indent
+  match class, class line-break
+  match class, class multiline-template-body
+    mount indent, share template-body-indent
+  match class, class line-break
+  match class, class vertical-line
+    mount indent, share vertical-line-indent
+
+match multiline-template-body
+  start indent, field count
+
+  match class, class indent
+    mount amount, share indent
+  match class, class template-line
+  match sieve
+    match chain
+      match class, class line-break
+      match class, class indent
+        mount amount, share indent
+      match class, class template-line
+
+match code
+  match write, write <#>
+  match class, class lowercase-ascii-letter
+  match chain
+    match class, class word-symbol
+
+match colon
+  match write, write <:>
+
+match line-break
+  match write, write #u000A
+
+match space
+  match write, write < >
+
+match comma
+  match write, write <,>
+
+match backslash
+  match write, write <\\>
+
+match open-parenthesis
+  match write, write <(>
+
+match close-parenthesis
+  match write, write <)>
+
+match digit
+  match check
+    start write
+    start count
+
+    check greater-or-equal-to
+      mount a, share write[count]
+      mount b, write 48
+    check less-or-equal-to
+      mount a, share block
+      mount b, write 57
+
+match lowercase-ascii-letter
+  match check
+    start write
+    start count
+
+    check greater-or-equal-to
+      mount a, share write[count]
+      mount b, write 97
+    check less-or-equal-to
+      mount a, share write[count]
+      mount b, write 122
+
+match non-zero-digit
+  match check
+    start write
+    start count
+
+    check greater-or-equal-to
+      mount a, share write[count]
+      mount b, write 49
+    check less-or-equal-to
+      mount a, share block
+      mount b, write 57

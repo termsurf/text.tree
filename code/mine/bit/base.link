@@ -1,0 +1,8 @@
+
+match octet
+  match count, 8, match block
+
+match char
+  match bound
+    mount start, share 0
+    mount front, share 127

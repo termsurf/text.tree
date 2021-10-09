@@ -1,0 +1,12 @@
+
+deck @drumwork/file
+  head <Content Grammars for Link Script>
+  make <information>
+  make <computation>
+  make <library>
+  host <Lance Pollard>
+  site <lp@elk.fm>
+  link ./link
+  hook ./hook
+  read ./read
+  term <Apache 2.0>

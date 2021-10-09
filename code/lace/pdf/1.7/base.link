@@ -1,0 +1,448 @@
+
+write pdf-1-7
+  start pdf
+
+  write class, class start
+  write cache, cache pdf
+    write class, class content
+      mount pdf, share pdf
+    write class, class end
+      mount pdf, share pdf
+  write flush, cache pdf
+
+write start
+  write class, class version
+  write class, class four
+
+write content
+  start pdf
+
+  drive pdf/page
+    write cache
+      mount cache, share pdf/page/stack
+      write class, class tree
+        mount tree, share block/tree
+    write class, class definition
+      mount reference, share block/dictionary
+    write class, class definition
+      mount reference, share block/resource
+    write class, class definition
+      mount reference, share block/content
+
+write tree
+  start tree
+
+  write class, class color-space-fill
+  write class, class color-fill
+  write class, class color-space-line
+  write class, class color-line
+  check crown
+    check match
+      mount start, share tree/class
+      mount start, share field text
+      write class, class text
+        mount tree, share tree
+    check match
+      mount start, share tree/class
+      mount start, share field block
+      write class, class block
+        mount tree, share tree
+
+write version
+  write chunk, share <%PDF->
+  write chunk, share <1.7>
+
+write four
+  write chunk, share <%#u00FF#u00FF#u00FF#u00FF>
+
+write definition
+  start reference, field reference
+
+  write chunk, share <{reference/id} {reference/generation} obj >
+  write class, class value
+    mount value, share reference/properties
+    mount indent, share <  >
+  write chunk, share <\n>
+  check reference/stream/count
+    write chunk, share <  >
+    write chunk, share <stream>
+    write chunk, share <\n    >
+    write chunk, share reference/stream
+    write chunk, share <\n  >
+    write chunk, share <endstream>
+    write chunk, share <\n>
+  write chunk, share <endobj>
+
+write reference
+  start reference
+  write chunk, share <{reference/id} {reference/generation} R>
+
+write text-start
+  write chunk, share <BT>
+
+write text-end
+  write chunk, share <ET>
+
+write text-position
+  start x
+  start y
+  write chunk, share <1 0 0 1 {x} {y} Tm>
+
+write font
+  start font
+  start size
+
+  write chunk, share </{font/id} {size} TF>
+
+write text-rendering-mode
+  start mode
+  write chunk, share <{mode} Tr>
+
+write text-character-spacing
+  start space
+  write chunk, share <{space} Tc>
+
+write text-word-spacing
+  start space
+  write chunk, share <{space} Tw>
+
+write render-text
+  start text
+  write chunk, share <[>
+  write chunk, share text
+  write chunk, share <] TJ>
+
+write text
+  mount tree
+
+  write class, class text-start
+  write class, class text-position
+    mount x, share tree/x
+    mount y, share tree/y
+  write class, class font
+    mount font, share tree/font-family
+    mount size, share tree/font-size
+  write class, class select-rendering-mode
+    mount fill, share tree/fill
+    mount line, share tree/line
+  write class, class add-character-spacing
+    mount spacing, share tree/character-spacing
+  write class, class render-text
+    mount chunks, share tree/text
+
+write block
+  start tree
+
+  check has
+    mount build, share tree/line/color
+    write class, class line-color
+      mount color, share tree/line/color
+  check has
+    mount build, share tree/fill/color
+    write class, class fill-color
+      mount color, share tree/fill/color
+
+write fill-opacity
+  start fill
+
+  check has
+    mount build, share fill/opacity/id
+    write class, class global-state
+      mount id, share fill/opacity/id
+
+write line-opacity
+  start line
+
+  check has
+    mount build, share line/opacity/id
+    write class, class global-state
+      mount id, share line/opacity/id
+
+write dictionary
+  start dictionary
+
+  write chunk, share <\<\<>
+  drive dictionary/term
+    write class, class property
+      mount property, share term/key
+    write chunk, share < >
+    write class, class value
+      mount value, share term/value
+    write chunk, share <\>>
+  write chunk, share <\>\>>
+
+write array
+  write chunk, share <[>
+  drive array
+    write class, class value
+      mount value, share block
+  write chunk, share <]>
+
+write datetime
+  start datetime
+
+  write chunk, share <(D:>
+  write stuff
+    mount stuff, share <0>
+    mount count, share 4
+    cause get-datetime-utc-full-year
+      mount datetime, share datetime
+      write chunk, share build
+  write stuff
+    mount stuff, share <0>
+    mount count, share 2
+    cause get-datetime-utc-month
+      mount datetime, share datetime
+      store month
+    cause add
+      mount start, share 1
+      mount front, share month
+      write chunk, share build
+  write stuff
+    mount stuff, share <0>
+    mount count, share 2
+    cause get-datetime-utc-date
+      write chunk, share build
+  write stuff
+    mount stuff, share <0>
+    mount count, share 2
+    cause get-datetime-utc-hours
+      write chunk, share build
+  write stuff
+    mount stuff, share <0>
+    mount count, share 2
+    cause get-datetime-utc-minutes
+      write chunk, share build
+  write stuff
+    mount stuff, share <0>
+    mount count, share 2
+    cause get-datetime-utc-seconds
+      write chunk, share build
+write chunk, share <Z)>
+
+write hex
+  start hex
+  write chunk, share <\<{hex}\>>
+
+write string
+  start string
+  write chunk, share <({string})>
+
+write property
+  start property
+  write chunk, share </{property}>
+
+write fill
+  write chunk, share <f>
+
+write line
+  write chunk, share <S>
+
+write clip
+  write chunk, share <W n>
+
+write color-space-fill
+  start space
+  write chunk, share </{space} cs>
+
+write color-fill
+  start color
+  check crown
+    check match
+      mount start, share color/class
+      mount front, share field rgb-color
+        write chunk, share <{color.red} {color.green} {color.blue} scn>
+    check match
+      mount start, share color/class
+      mount front, share field cmyk-color
+        write chunk, share <{color.c} {color.m} {color.y} {color.k} scn>
+
+write color-space-line
+  start space
+  write chunk, share </{space} CS>
+
+write color-line
+  start color
+  check crown
+    check match
+      mount start, share color/class
+      mount front, share field rgb-color
+        write chunk, share <{color.red} {color.green} {color.blue} SCN>
+    check match
+      mount start, share color/class
+      mount front, share field cmyk-color
+        write chunk, share <{color.c} {color.m} {color.y} {color.k} SCN>
+
+write opacity-label
+  start label
+  write chunk, share <{label} gs>
+
+write save
+  write chunk, share <q>
+
+write restore
+  write chunk, share <Q>
+
+write close-path
+  write chunk, share <h>
+
+write line-width
+  start width
+  write chunk, share <{width} w>
+
+write line-cap
+  start style
+  write chunk, share <{style} J>
+
+write line-join
+  start style
+  write chunk, share <{style} j>
+
+write miter-limit
+  start limit
+  write chunk, share <{limit} M>
+
+write dash
+  start length
+  start space
+  start phase
+
+  write chunk, share <[{length} {space}] {phase} d>
+
+write undash
+  write chunk, share <[] 0 d>
+
+write move-to
+  start x
+  start y
+  write chunk, share <{x} {y} m>
+
+write line-to
+  start x
+  start y
+  write chunk, share <{x} {y} l>
+
+write bezier-curve-to
+  start cp1x
+  start cp1y
+  start cp2x
+  start cp2y
+  start x
+  start y
+  write chunk, share <{cp1x} {cp1y} {cp2x} {cp2y} {x} {y} c>
+
+write bezier-curve-to
+  start cpx
+  start cpy
+  start x
+  start y
+  write chunk, share <{cpx} {cpy} {x} {y} v>
+
+write rectangle
+  start x
+  start y
+  start w
+  start h
+  write chunk, share <{x} {y} {w} {h} re>
+
+write matrix
+  start m11
+  start m12
+  start m21
+  start m22
+  start dx
+  start dy
+
+  write chunk, share <{m11} {m12} {m21} {m22} {dx} {dy} cm>
+
+write image-label
+  start label
+  write chunk, share <{label} Do>
+
+write comment
+  start text
+  write chunk, share <% {text}>
+
+write signed-integer
+  start integer
+  write chunk, share <+{integer}>
+
+write global-state
+  start id
+  write chunk, share </{id} gs>
+
+write end
+  start offset
+  start offset-list
+  start trailer
+  start pdf
+
+  drive pdf/reference
+    write class, class definition
+      mount reference, share block
+
+  write chunk, share <xref>
+  cause add
+    mount start, share 1
+    mount front, share offset-list/count
+    write chunk, share <0 {build}>
+  write chunk, share <0000000000 65535 f >
+  drive offset-list
+    write stuff
+      mount stuff, share <0>
+      mount count, share 10
+      write chunk, share <{block} 00000 n >
+  write chunk, share <trailer>
+  write class, class value
+    mount value, share trailer
+  write chunk, share <startxref>
+  write chunk, share <{xRefOffset}>
+  write chunk, share <%%EOF>
+
+# write object stream
+#   /Type ObjStm
+#   /N
+#   /First
+
+# field page-collection
+#   state kids
+
+# state chain
+#   state page, <Pages>
+# state state
+#   state type, <Type>
+#   state type, <Type>
+
+# write page-list
+#   2 0 obj <<
+#     /Type /Pages
+#     /Kids [
+#       4 0 R
+#       10 0 R
+#       24 0 R
+#     ]
+#     /Count 3
+#   >>
+#   endobj
+
+# write page
+#   4 0 obj <<
+#     /Type /Page
+#     /Parent 4 0 R
+#     /MediaBox [0 0 612 792]
+#     /Resources <<
+#       /Font <<
+#         /F3 7 0 R
+#         /F5 9 0 R
+#         /F7 11 0 R
+#       >>
+#       /ProcSet [/PDF]
+#     >>
+#     /Contents 12 0 R
+#     /Thumb 14 0 R
+#     /Annots [
+#       23 0 R
+#       24 0 R
+#     ]
+#   >>
+#   endobj

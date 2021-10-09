@@ -1,0 +1,30 @@
+
+match ltag-table
+  match class, class tableVersion
+  check match
+    mount start, share version
+    mount front, share 1
+    catch fault
+      leave build
+  match class, class flags
+  match class, class tag-count
+
+  match chain
+    mount front, share tag-count
+    match class, class relative-offset
+    match class, class length
+
+match tableVersion
+  match class, class ulong
+
+match flags
+  p.skip('uLong', 1);
+
+match tag-count
+  match class, class ulong
+
+match relative-offset
+  match class, class ushort
+
+match length
+  match class, class ushort

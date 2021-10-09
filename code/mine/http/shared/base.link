@@ -1,0 +1,410 @@
+
+fetch ../../datetime
+  fetch /rfc1123
+    catch match rfc1123-date
+  fetch /rfc850
+    catch match rfc850-date
+  fetch /asctime
+    catch match asctime-date
+fetch stack/content/state
+  fetch /number
+    catch match digit
+  fetch /hex
+    catch match hex
+  fetch /whitespace
+    catch match space
+    catch match carriage-return-line-feed
+  fetch /rfc2616
+    catch match controls
+    catch match char
+    catch match token
+
+match general-header
+  match crown
+    match class, class connection-header
+    match class, class date-header
+    match class, class pragma-header
+    match class, class trailer-header
+    match class, class transfer-encoding-header
+    match class, class upgrade-header
+    match class, class via-header
+    match class, class warning-header
+
+match entity-header
+  match crown
+    match class, class allow-header
+    match class, class content-encoding-header
+    match class, class content-language-header
+    match class, class content-length-header
+    match class, class content-location-header
+    match class, class content-md5-header
+    match class, class content-range-header
+    match class, class content-type-header
+    match class, class expires-header
+    match class, class last-modified-header
+    match class, class extension-header-header
+
+match method
+  match crown
+    match chunk, share <OPTIONS>
+    match chunk, share <GET>
+    match chunk, share <HEAD>
+    match chunk, share <POST>
+    match chunk, share <PUT>
+    match chunk, share <DELETE>
+    match chunk, share <TRACE>
+    match chunk, share <CONNECT>
+    match class, class extension-method
+
+match version
+  match chord, share <HTTP>
+  match chord, share </>
+  match class, class digit
+  match chord, share <.>
+  match class, class digit
+
+match http-date
+  match crown
+    match class, class rfc1123-date
+    match class, class rfc850-date
+    match class, class asctime-date
+
+match chunked-body
+  match chain, class chunk
+  match class, class last-chunk
+  match class, class trailer
+  match class, class carriage-return-line-feed
+
+match chunk
+  match class, class chunk-size
+    catch build
+      start build
+      cause convert-string-to-integer
+        mount string, share build
+        store chunk-size
+  match sieve, match class, class chunk-extension
+  match class, class carriage-return-line-feed
+  match class, class chunk-data
+    mount chunk-size, share chunk-size
+  match class, class carriage-return-line-feed
+
+match chunk-size
+  match class, class hex
+
+match last-chunk
+  match chunk, share <0>
+  match sieve
+    match class, class chunk-extension
+  match class, class carriage-return-line-feed
+
+match chunk-extension
+  match chain
+    match chunk, share <;>
+    match class, class chunk-ext-name
+    match sieve
+      match chunk, share <=>
+      match class, class chunk-ext-val
+
+match chunk-ext-name
+  match class, class token
+
+match chunk-ext-val
+  match crown
+    match class, class token
+    match class, class quoted-string
+
+match chunk-data
+  start chunk-size
+  match chain
+    mount count, share chunk-size
+    match class, class octet
+
+match quoted-string
+  match class, class double quote
+  match chain
+    match crown
+      match class, class any-text-except-double-quote
+      match class, class quoted-pair
+  match class, class double quote
+
+match text
+  match bound
+    mount start, share 0
+    mount front, share 255
+    match leave
+      match class, class controls
+
+match any-text-except-double-quote
+  match class, class text
+    match leave, class double quote
+
+match quoted-pair
+  match chunk, share <\\>
+  match class, class char
+
+match charset
+  match class, class token
+
+match connection-header
+  match chunk, share <connection>
+  match chunk, share <:>
+  match count, 1, class connection-token
+
+match connection-token
+  match class, class token
+
+match content-encoding-header
+  match chunk, share <content-encoding>
+  match chunk, share <:>
+  match count, 1, class content-coding
+
+match content-coding
+  match class, class token
+
+match transfer-coding
+  match crown
+    match chord, share <chunked>
+    match class, class transfer-extension
+
+match transfer-extension
+  match class, class token
+  match chain
+    match chord, share <;>
+    match class, class parameter
+
+match parameter
+  match class, class attribute
+  match chord, share <=>
+  match class, class value
+
+match attribute
+  match class, class token
+
+match value
+  match crown
+    match class, class token
+    match class, class quoted-string
+
+match via-header
+  match chunk, share <via:>
+  match crest
+    mount start, share 1
+    mount slate, share <, >
+    match block
+      match class, class received-protocol
+      mount class, class received-by
+      mount sieve
+        mount class, class comment
+
+match warning-header
+  match chunk, share <warning>
+  match chunk, share <:>
+  match count, 1, class warning-value
+
+match warning-value
+  match class, class warn-code
+  match class, class sp
+  match class, class warn-agent
+  match class, class sp
+  match class, class warn-text
+  match sieve
+    match class, class sp
+    match class, class warn-date
+
+match warn-code
+  match count, 3, class digit
+
+match warn-agent
+  match crown
+    match chunk
+      match class, class host
+      match sieve
+        match chunk, share <:>
+        match class, class port
+    match class, class pseudonym
+
+match warn-text
+  match class, class quoted-string
+
+match warn-date
+  match chunk, share <">
+  match class, class http-date
+  match chunk, share <">
+
+match date-header
+  match chunk, share <date>
+  match chunk, share <:>
+  match class, class http-date
+
+match message-body
+  match class, class entity-body # <entity-body>
+                     # | <entity-body encoded as per transfer-encoding>
+
+match entity-body
+  match chain, class octet
+
+match trailer-header
+  match chunk, share <trailer:>
+  match chain
+    mount start, share 1
+    match class, class field-name
+
+match generic-message
+  match class, class start-line
+  match chain
+    match class, class message-header
+    match class, class carriage-return-line-feed
+  match class, class carriage-return-line-feed
+  match sieve
+    match class, class message-body
+
+match start-line
+  match crown
+    match class, class request-line
+    match class, class status-line
+
+match content-md5-header
+  match chunk, share <content-md5>
+  match chunk, share <:>
+  match class, class md5-digest
+
+match md5-digest
+  match count
+    mount scale, serve 32
+    mount class, class hex
+
+match content-range-header
+  match chunk, share <content-range>
+  match chunk, share <:>
+  match class, class content-range-spec
+
+match content-range-spec
+  match class, class byte-content-range-spec
+
+match byte-content-range-spec
+  match class, class bytes-unit
+  match class, class sp
+  match class, class byte-range-resp-spec
+  match chunk, share </>
+  match crown
+    match class, class instance-length
+    match chunk, share <*>
+
+match byte-range-resp-spec
+  match crown
+    match chunk
+      match class, class first-byte-position
+      match chunk, share <->
+      match class, class last-byte-position
+    match chunk, share <*>
+
+match expires-header
+  match chunk, share <expires:>
+    sense false
+  match class, class http-date
+
+match content-type-header
+  match chunk, share <content-type:>
+    sense false
+  match class, class media-type
+
+match media-type
+  match class, class type
+  match chunk, share </>
+  match class, class subtype
+  match chain
+    match chunk, share <;>
+    match class, class parameter
+
+match last-modified-header
+  match chunk, share <last-modified:>
+    sense false
+  match class, class http-date
+
+match content-language-header
+  match chunk, share <content-language>
+  match chunk, share <:>
+  match chain
+    mount start, share 1
+    match class, class language-tag
+
+match content-length-header
+  match chunk, share <content-length>
+  match chunk, share <:>
+  match chain
+    mount start, share 1
+    match class, class digit
+
+match extension-header-header
+  match class, class message-header
+
+match message-header
+  match class, class field-name
+  match chunk, share <:>
+  match sieve
+    match class, class field-value
+
+match field-name
+  match class, class token
+
+match field-value
+  match chain
+    match crown
+      match class, class field-content
+      match class, class linear-whitespace
+
+match field-content
+
+match content-length-header
+  match chunk, share <content-length>
+  match chunk, share <:>
+  match count, 1, class digit
+
+match content-location-header
+  match chunk, share <content-location>
+  match chunk, share <:>
+  match crown
+    match class, class absolute-uri
+    match class, class relative-uri
+
+match pragma-header
+  match chunk, share <pragma:>
+  match crest
+    mount start, share 1
+    match class, class pragma-directive
+
+match pragma-directive
+  match crown
+    match chunk, share <no-cache>
+    match class, class extension-pragma
+
+match extension-pragma
+  match class, class token
+  match sieve
+    match chunk, share <=>
+    match crown
+      match class, class token
+      match class, class quoted-string
+
+match upgrade-header
+  match chunk, share <upgrade:>
+  match chain
+    mount start, share 1
+    mount slate, share <, >
+    match class, class product
+
+match product
+  match class, class token
+  match sieve
+    match chunk, share </>
+    match class, class product-version
+
+match product-version
+  match class, class token
+
+match transfer-encoding-header
+  match chunk, share <transfer-encoding:>
+  match chain
+    mount start, share 1
+    mount slate, share <, >
+    match class, class transfer-coding

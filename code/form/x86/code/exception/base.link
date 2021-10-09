@@ -1,0 +1,88 @@
+
+code #h00, type fault
+  name |#DE|
+  text |divide error|
+
+code #h01, type fault
+  name |#DB|
+  text |debug|
+
+code #h02
+  name |NMI|
+  text |non-maskable interrupt|
+
+code #h03, type trap
+  name |#BP|
+  text |breakpoint|
+
+code #h04, type trap
+  name |#OF|
+  text |overflow|
+
+code #h05, type fault
+  name |#BR|
+  text |boundary range exceeded|
+
+code #h06, type fault
+  name |#UD|
+  text |undefined opcode|
+
+code #h07, type fault
+  name |#NM|
+  text |device not available|
+
+code #h08, type abort
+  name |#DF|
+  text |double fault|
+
+code #h0a, type fault
+  name |#TS|
+  text |invalid TSS|
+
+code #h0b, type fault
+  name |#NP|
+  text |not present|
+
+code #h0c, type fault
+  name |#SS|
+  text |stack segment|
+
+code #h0d, type fault
+  name |#GP|
+  text |general protection|
+
+code #h0e, type fault
+  name |#PF|
+  text |page fault|
+
+code #h10, type fault
+  name |#MF|
+  text |math fault|
+
+code #h11, type fault
+  name |#AC|
+  text |alignment checking|
+
+code #h12, type abort
+  name |#MC|
+  text |machine check|
+
+code #h13, type fault
+  name |#XF|
+  text |extended math fault|
+
+code #h14, type fault
+  name |#VE|
+  text |virtualization exception|
+
+code #h15, type fault
+  name |#CP|
+  text |control protection exception|
+
+code #h1d, type fault
+  name |#VC|
+  text |VMM comm. exception|
+
+code #h1e, type fault
+  name |#SX|
+  text |security exception|

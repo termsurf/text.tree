@@ -1,0 +1,35 @@
+
+fetch ../shared
+  catch match month3-text
+  catch match weekday-text
+
+match rfc850-date
+  match class, class weekday
+  match chord, share <,>
+  match class, class space
+  match class, class date2
+  match class, class space
+  match class, class time
+  match class, class space
+  match chord, share <GMT>
+
+match date1
+  match class, class 2digit
+  match class, class space
+  match class, class month3-text
+  match class, class space
+  match class, class 4digit
+
+match date2
+  match class, class 2digit
+  match chord, share <->
+  match class, class month3-text
+  match chord, share <->
+  match class, class 2digit
+
+match time
+  match class, class 2digit
+  match chord, share <:>
+  match class, class 2digit
+  match chord, share <:>
+  match class, class 2digit

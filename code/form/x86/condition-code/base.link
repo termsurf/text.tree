@@ -1,0 +1,87 @@
+code 0000
+  name O
+  text |overflow|
+
+code 0001
+  name NO
+  text |no overflow|
+
+code 0010
+  name B
+  name NAE
+  name C
+  text |below (not above or equal, carry)|
+  side false
+
+code 0011
+  name NB
+  name AE
+  name NC
+  text |not below (above or equal, no carry)|
+  side false
+
+code 0100
+  name E
+  name Z
+  text |equal (zero)|
+  side false
+
+code 0101
+  name NE
+  name NZ
+  text |not equal (not zero)|
+  side false
+
+code 0110
+  name NA
+  name BE
+  text |not above (below or equal)|
+  side false
+
+code 0111
+  name A
+  name NBE
+  text |above (not below or equal)|
+  side false
+
+code 1000
+  name S
+  text |sign|
+
+code 1001
+  name NS
+  text |no sign|
+
+code 1010
+  name P
+  name PE
+  text |parity (parity even)|
+
+code 1011
+  name NP
+  name PO
+  text |no parity (parity odd)|
+
+code 1100
+  name L
+  name NGE
+  text |less than (not greater than or equal)|
+  side true
+
+code 1101
+  name NL
+  name GE
+  text |not less than (greater than or equal)|
+  side true
+
+code 1110
+  name NG
+  name LE
+  text |not greater than (less than or equal)|
+  side true
+
+code 1111
+  name G
+  name NLE
+  text |greater than (not less than or equal)|
+  side true
