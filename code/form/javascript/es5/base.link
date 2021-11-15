@@ -1,0 +1,291 @@
+
+// https://github.com/estree/estree/blob/master/es2015.md
+
+form identifier
+  form expression
+  form pattern
+  base name, form string
+
+interface Literal <: Expression {
+    type: "Literal";
+    value: string | boolean | null | number | RegExp;
+}
+interface RegExpLiteral <: Literal {
+  regex: {
+    pattern: string;
+    flags: string;
+  };
+}
+
+interface Program <: Node {
+    type: "Program";
+    body: [ Directive | Statement ];
+}
+
+interface Function <: Node {
+    id: Identifier | null;
+    params: [ Pattern ];
+    body: FunctionBody;
+}
+
+interface Statement <: Node { }
+
+interface ExpressionStatement <: Statement {
+    type: "ExpressionStatement";
+    expression: Expression;
+}
+
+interface Directive <: Node {
+    type: "ExpressionStatement";
+    expression: Literal;
+    directive: string;
+}
+
+interface BlockStatement <: Statement {
+    type: "BlockStatement";
+    body: [ Statement ];
+}
+
+interface FunctionBody <: BlockStatement {
+    body: [ Directive | Statement ];
+}
+
+interface EmptyStatement <: Statement {
+    type: "EmptyStatement";
+}
+
+interface DebuggerStatement <: Statement {
+    type: "DebuggerStatement";
+}
+
+interface WithStatement <: Statement {
+    type: "WithStatement";
+    object: Expression;
+    body: Statement;
+}
+
+interface ReturnStatement <: Statement {
+    type: "ReturnStatement";
+    argument: Expression | null;
+}
+
+interface LabeledStatement <: Statement {
+    type: "LabeledStatement";
+    label: Identifier;
+    body: Statement;
+}
+
+interface BreakStatement <: Statement {
+    type: "BreakStatement";
+    label: Identifier | null;
+}
+
+interface ContinueStatement <: Statement {
+    type: "ContinueStatement";
+    label: Identifier | null;
+}
+
+interface IfStatement <: Statement {
+    type: "IfStatement";
+    test: Expression;
+    consequent: Statement;
+    alternate: Statement | null;
+}
+
+interface SwitchStatement <: Statement {
+    type: "SwitchStatement";
+    discriminant: Expression;
+    cases: [ SwitchCase ];
+}
+
+interface SwitchCase <: Node {
+    type: "SwitchCase";
+    test: Expression | null;
+    consequent: [ Statement ];
+}
+
+interface ThrowStatement <: Statement {
+    type: "ThrowStatement";
+    argument: Expression;
+}
+
+interface TryStatement <: Statement {
+    type: "TryStatement";
+    block: BlockStatement;
+    handler: CatchClause | null;
+    finalizer: BlockStatement | null;
+}
+
+interface CatchClause <: Node {
+    type: "CatchClause";
+    param: Pattern;
+    body: BlockStatement;
+}
+
+interface WhileStatement <: Statement {
+    type: "WhileStatement";
+    test: Expression;
+    body: Statement;
+}
+
+interface DoWhileStatement <: Statement {
+    type: "DoWhileStatement";
+    body: Statement;
+    test: Expression;
+}
+
+interface ForStatement <: Statement {
+    type: "ForStatement";
+    init: VariableDeclaration | Expression | null;
+    test: Expression | null;
+    update: Expression | null;
+    body: Statement;
+}
+
+interface ForInStatement <: Statement {
+    type: "ForInStatement";
+    left: VariableDeclaration |  Pattern;
+    right: Expression;
+    body: Statement;
+}
+
+interface Declaration <: Statement { }
+
+interface FunctionDeclaration <: Function, Declaration {
+    type: "FunctionDeclaration";
+    id: Identifier;
+}
+
+interface VariableDeclaration <: Declaration {
+    type: "VariableDeclaration";
+    declarations: [ VariableDeclarator ];
+    kind: "var";
+}
+
+interface VariableDeclarator <: Node {
+    type: "VariableDeclarator";
+    id: Pattern;
+    init: Expression | null;
+}
+
+interface Expression <: Node { }
+
+interface ThisExpression <: Expression {
+    type: "ThisExpression";
+}
+
+interface ArrayExpression <: Expression {
+    type: "ArrayExpression";
+    elements: [ Expression | null ];
+}
+
+interface ObjectExpression <: Expression {
+    type: "ObjectExpression";
+    properties: [ Property ];
+}
+
+interface Property <: Node {
+    type: "Property";
+    key: Literal | Identifier;
+    value: Expression;
+    kind: "init" | "get" | "set";
+}
+
+interface FunctionExpression <: Function, Expression {
+    type: "FunctionExpression";
+}
+
+interface UnaryExpression <: Expression {
+    type: "UnaryExpression";
+    operator: UnaryOperator;
+    prefix: boolean;
+    argument: Expression;
+}
+
+enum UnaryOperator {
+    "-" | "+" | "!" | "~" | "typeof" | "void" | "delete"
+}
+
+interface UpdateExpression <: Expression {
+    type: "UpdateExpression";
+    operator: UpdateOperator;
+    argument: Expression;
+    prefix: boolean;
+}
+
+enum UpdateOperator {
+    "++" | "--"
+}
+
+interface BinaryExpression <: Expression {
+    type: "BinaryExpression";
+    operator: BinaryOperator;
+    left: Expression;
+    right: Expression;
+}
+
+enum BinaryOperator {
+    "==" | "!=" | "===" | "!=="
+         | "<" | "<=" | ">" | ">="
+         | "<<" | ">>" | ">>>"
+         | "+" | "-" | "*" | "/" | "%"
+         | "|" | "^" | "&" | "in"
+         | "instanceof"
+}
+
+interface AssignmentExpression <: Expression {
+    type: "AssignmentExpression";
+    operator: AssignmentOperator;
+    left: Pattern | Expression;
+    right: Expression;
+}
+
+enum AssignmentOperator {
+    "=" | "+=" | "-=" | "*=" | "/=" | "%="
+        | "<<=" | ">>=" | ">>>="
+        | "|=" | "^=" | "&="
+}
+
+interface LogicalExpression <: Expression {
+    type: "LogicalExpression";
+    operator: LogicalOperator;
+    left: Expression;
+    right: Expression;
+}
+
+enum LogicalOperator {
+    "||" | "&&"
+}
+
+interface MemberExpression <: Expression, Pattern {
+    type: "MemberExpression";
+    object: Expression;
+    property: Expression;
+    computed: boolean;
+}
+
+interface ConditionalExpression <: Expression {
+    type: "ConditionalExpression";
+    test: Expression;
+    alternate: Expression;
+    consequent: Expression;
+}
+
+interface CallExpression <: Expression {
+    type: "CallExpression";
+    callee: Expression;
+    arguments: [ Expression ];
+}
+
+interface NewExpression <: Expression {
+    type: "NewExpression";
+    callee: Expression;
+    arguments: [ Expression ];
+}
+
+interface SequenceExpression <: Expression {
+    type: "SequenceExpression";
+    expressions: [ Expression ];
+}
+
+interface Pattern <: Node { }

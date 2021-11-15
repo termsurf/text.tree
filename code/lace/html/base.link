@@ -1,42 +1,59 @@
 
-write document
-  field document
-  write chunk, write <\<!doctype html\>>
-  drive document/node
-    write class, class node
-      mount node, share block
+lace document
+  base tree
+  lace text, text <\<!doctype html\>>
+  lace form, form node
+    bind node, link tree
 
-write node
-  start node
+lace node
+  base node
 
-  write class, class node-start
-  write sieve, write class, class content
-  write class, class node-end
+  lace form, form node-base
+    bind node, link node
+  lace room, lace form, form content
+    bind node, link node
+  lace form, form node-head
+    bind node, link node
 
-write attribute-list
-  start node
+lace content
+  base node
 
-  drive node/attribute
-    write chunk, share block/name
-    write chunk, <=>
-    write chunk, <'>
-    write class, class attribute-value
-      mount value, share block/value
-    write chunk, <'>
+  walk node/head
+    test test-match
+      bind base, link seed/form
+      bind head, form flow
+      hook match
+        lace text, link seed/text
+      hook miss
+        lace form, form node
+          bind node, link seed
 
-write node-start
-  start node
+lace node-base
+  base node
 
-  write chunk, <\<>
-  write chunk, share node/name
-  write chunk, chord < >
-  write attribute-list, start node
-  write chunk, <\>>
+  lace text, text <\<>
+  lace text, link node/name
+  lace text, text < >
+  lace bind-list, base node
+  lace text, text <\>>
 
-write node-end
-  write chunk, <\</>
-  write chunk, share node/name
-  write chunk, <\>>
+lace bind-list
+  base node
 
-write attribute-value
+  walk node/bind
+    lace text, link seed/name
+    lace text, text <=>
+    lace text, text <'>
+    lace form, form bind-sift
+      bind sift, link seed/sift
+    lace text, text <'>
+
+lace node-head
+  base node
+
+  lace text, text <\</>
+  lace text, link node/name
+  lace text, text <\>>
+
+lace bind-sift
   shift escape-single-quotes

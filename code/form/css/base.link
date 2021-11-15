@@ -1,23 +1,23 @@
 
 form sheet
-  host rule, list rule
+  base rule, list rule
 form rule
-  host comment, list comment
+  base comment, list comment
 form selector
   form rule
-  host path, list text
-  host declaration, list declaration
+  base path, list text
+  base declaration, list declaration
 form path
-  host node, list text
-form pseudo selector
+  base node, list text
+form pseudo-selector
   form selector
 form comment
-  host text, form text
-form comment block
-form comment line
+  base text, form text
+form comment-block
+form comment-line
 form import
   form rule
-  host path
+  base path
 form media
   form rule
 form document
@@ -36,7 +36,7 @@ form page
   form rule
 form font
   form rule
-form host
+form base
   form rule
 form custom-media
   form rule
