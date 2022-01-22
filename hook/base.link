@@ -1,3 +1,0 @@
-
-hook /xo/:trace+
-  turn ../xo/:trace

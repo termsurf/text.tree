@@ -2,26 +2,36 @@
 mine whitespace
   mine list
     bind base, size 1
-    mine form, form line-break
-    mine form, form inline-space
-    mine form, form comment
-    mine form, form multiline-comment
+    mine case
+      mine form, form line-break
+      mine form, form inline-space
+      mine form, form comment
+      mine form, form multiline-comment
+      mine form. form line-tabulation
+      mine form. form null
+      mine form. form form-feed
 
-mine whitespace-item
-  U+0000, U+000B, or U+000C
+mine line-tabulation
+  mine text, text #u000b
+
+mine null
+  mine text, text #u0000
+
+mine form-feed
+  mine text, text #u000c
 
 mine line-break
-  U+000A
-
-mine line-break
-  U+000D
-
-mine line-break
-  U+000D followed by U+000A
+  mine case
+    mine text, text #u000A
+    mine text, text #u000D
+    mine line
+      mine text, text #u000D
+      mine text, text #u000A
 
 mine inline-spaces
-  inline-space inline-spaces opt
-
+  inline-space
+  mine miss
+    mine form, form inline-spaces
 mine inline-space
   U+0009 or U+0020
 
@@ -32,14 +42,17 @@ mine multiline-comment
   /* multiline-comment-text */
 
 mine comment-text
-  comment-text-item comment-text opt
+  comment-text-item
+  mine miss
+    mine form, form comment-text
 
 mine comment-text-item
   Any Unicode scalar value except U+000A or U+000D
 
 mine multiline-comment-text
-  multiline-comment-text-item multiline-comment-text opt
-
+  multiline-comment-text-item
+  mine miss
+    mine form, form multiline-comment-text
 mine multiline-comment-text-item
   multiline-comment
 
@@ -49,18 +62,22 @@ mine multiline-comment-text-item
 mine multiline-comment-text-item
   Any Unicode scalar value except /* or */
 
-GRAMMAR OF AN IDENTIFIER
-
 mine identifier
-  identifier-head identifier-characters opt
+  mine form, form identifier-head
+  mine miss
+    mine form, form identifier-characters
 
-mine identifier
-  ` identifier-head identifier-characters opt `
+mine identifier-2
+  mine text, text <`>
+  mine form, form identifier-head
+  mine miss
+    mine form, form identifier-characters
+  mine text, text <`>
 
-mine identifier
+mine identifier-3
   implicit-parameter-name
 
-mine identifier
+mine identifier-4
   property-wrapper-projection
 
 mine identifier-list
@@ -124,8 +141,9 @@ mine identifier-character
   identifier-head
 
 mine identifier-characters
-  identifier-character identifier-characters opt
-
+  identifier-character
+  mine miss
+    mine form, form identifier-characters
 mine implicit-parameter-name
   $ decimal-digits
 
@@ -161,8 +179,9 @@ mine integer-literal
   hexadecimal-literal
 
 mine binary-literal
-  0b binary-digit binary-literal-characters opt
-
+  0b binary-digit
+  mine miss
+    mine form, form binary-literal-characters
 mine binary-digit
   Digit 0 or 1
 
@@ -170,11 +189,13 @@ mine binary-literal-character
   binary-digit | _
 
 mine binary-literal-characters
-  binary-literal-character binary-literal-characters opt
-
+  binary-literal-character
+  mine miss
+    mine form, form binary-literal-characters
 mine octal-literal
-  0o octal-digit octal-literal-characters opt
-
+  0o octal-digit
+  mine miss
+    mine form, form octal-literal-characters
 mine octal-digit
   Digit 0 through 7
 
@@ -182,26 +203,31 @@ mine octal-literal-character
   octal-digit | _
 
 mine octal-literal-characters
-  octal-literal-character octal-literal-characters opt
-
+  octal-literal-character
+  mine miss
+    mine form, form octal-literal-characters
 mine decimal-literal
-  decimal-digit decimal-literal-characters opt
-
+  decimal-digit
+  mine miss
+    mine form, form decimal-literal-characters
 mine decimal-digit
   Digit 0 through 9
 
 mine decimal-digits
-  decimal-digit decimal-digits opt
-
+  decimal-digit
+  mine miss
+    mine form, form decimal-digits
 mine decimal-literal-character
   decimal-digit | _
 
 mine decimal-literal-characters
-  decimal-literal-character decimal-literal-characters opt
-
+  decimal-literal-character
+  mine miss
+    mine form, form decimal-literal-characters
 mine hexadecimal-literal
-  0x hexadecimal-digit hexadecimal-literal-characters opt
-
+  0x hexadecimal-digit
+  mine miss
+    mine form, form hexadecimal-literal-characters
 mine hexadecimal-digit
   Digit 0 through 9, a through f, or A through F
 
@@ -209,27 +235,39 @@ mine hexadecimal-literal-character
   hexadecimal-digit | _
 
 mine hexadecimal-literal-characters
-  hexadecimal-literal-character hexadecimal-literal-characters opt
-
+  hexadecimal-literal-character
+  mine miss
+    mine form, form hexadecimal-literal-characters
 GRAMMAR OF A FLOATING-POINT LITERAL
 
 mine floating-point-literal
-  decimal-literal decimal-fraction opt decimal-exponent opt
-
+  decimal-literal decimal-fraction opt
+  mine miss
+    mine form, form decimal-exponent
 mine floating-point-literal
-  hexadecimal-literal hexadecimal-fraction opt hexadecimal-exponent
+  hexadecimal-literal
+  mine miss
+    mine form, form hexadecimal-fraction
+  hexadecimal-exponent
 
 mine decimal-fraction
   . decimal-literal
 
 mine decimal-exponent
-  floating-point-e sign opt decimal-literal
+  floating-point-e
+  mine miss
+    mine form, form sign
+  decimal-literal
 
 mine hexadecimal-fraction
-  . hexadecimal-digit hexadecimal-literal-characters opt
-
+  . hexadecimal-digit
+  mine miss
+    mine form, form hexadecimal-literal-characters
 mine hexadecimal-exponent
-  floating-point-p sign opt decimal-literal
+  floating-point-p
+  mine miss
+    mine form, form sign
+  decimal-literal
 
 mine floating-point-e
   e | E
@@ -246,29 +284,45 @@ mine string-literal
   static-string-literal | interpolated-string-literal
 
 mine string-literal-opening-delimiter
-  extended-string-literal-delimiter opt "
+
+  mine miss
+    mine form, form extended-string-literal-delimiter
+  "
 
 mine string-literal-closing-delimiter
-  " extended-string-literal-delimiter opt
+  "
+  mine miss
+    mine form, form extended-string-literal-delimiter
+mine static-string-literal
+  string-literal-opening-delimiter
+  mine miss
+    mine form, form quoted-text
+  string-literal-closing-delimiter
 
 mine static-string-literal
-  string-literal-opening-delimiter quoted-text opt string-literal-closing-delimiter
-
-mine static-string-literal
-  multiline-string-literal-opening-delimiter multiline-quoted-text opt multiline-string-literal-closing-delimiter
+  multiline-string-literal-opening-delimiter
+  mine miss
+    mine form, form multiline-quoted-text
+  multiline-string-literal-closing-delimiter
 
 mine multiline-string-literal-opening-delimiter
-  extended-string-literal-delimiter opt """
+
+  mine miss
+    mine form, form extended-string-literal-delimiter
+  """
 
 mine multiline-string-literal-closing-delimiter
-  """ extended-string-literal-delimiter opt
-
+  """
+  mine miss
+    mine form, form extended-string-literal-delimiter
 mine extended-string-literal-delimiter
-  # extended-string-literal-delimiter opt
-
+  #
+  mine miss
+    mine form, form extended-string-literal-delimiter
 mine quoted-text
-  quoted-text-item quoted-text opt
-
+  quoted-text-item
+  mine miss
+    mine form, form quoted-text
 mine quoted-text-item
   escaped-character
 
@@ -276,8 +330,9 @@ mine quoted-text-item
   Any Unicode scalar value except ", \, U+000A, or U+000D
 
 mine multiline-quoted-text
-  multiline-quoted-text-item multiline-quoted-text opt
-
+  multiline-quoted-text-item
+  mine miss
+    mine form, form multiline-quoted-text
 mine multiline-quoted-text-item
   escaped-character
 
@@ -288,20 +343,28 @@ mine multiline-quoted-text-item
   escaped-newline
 
 mine interpolated-string-literal
-  string-literal-opening-delimiter interpolated-text opt string-literal-closing-delimiter
+  string-literal-opening-delimiter
+  mine miss
+    mine form, form interpolated-text
+  string-literal-closing-delimiter
 
 mine interpolated-string-literal
-  multiline-string-literal-opening-delimiter multiline-interpolated-text opt multiline-string-literal-closing-delimiter
+  multiline-string-literal-opening-delimiter
+  mine miss
+    mine form, form multiline-interpolated-text
+  multiline-string-literal-closing-delimiter
 
 mine interpolated-text
-  interpolated-text-item interpolated-text opt
-
+  interpolated-text-item
+  mine miss
+    mine form, form interpolated-text
 mine interpolated-text-item
   \( expression ) | quoted-text-item
 
 mine multiline-interpolated-text
-  multiline-interpolated-text-item multiline-interpolated-text opt
-
+  multiline-interpolated-text-item
+  mine miss
+    mine form, form multiline-interpolated-text
 mine multiline-interpolated-text-item
   \( expression ) | multiline-quoted-text-item
 
@@ -318,13 +381,17 @@ mine unicode-scalar-digits
   Between one and eight hexadecimal digits
 
 mine escaped-newline
-  escape-sequence inline-spaces opt line-break
+  escape-sequence
+  mine miss
+    mine form, form inline-spaces
+  line-break
 
 GRAMMAR OF OPERATORS
 
 mine operator
-  operator-head operator-characters opt
-
+  operator-head
+  mine miss
+    mine form, form operator-characters
 mine operator
   dot-operator-head dot-operator-characters
 
@@ -404,8 +471,9 @@ mine operator-character
   U+E0100–U+E01EF
 
 mine operator-characters
-  operator-character operator-characters opt
-
+  operator-character
+  mine miss
+    mine form, form operator-characters
 mine dot-operator-head
   .
 
@@ -413,8 +481,9 @@ mine dot-operator-character
   . | operator-character
 
 mine dot-operator-characters
-  dot-operator-character dot-operator-characters opt
-
+  dot-operator-character
+  mine miss
+    mine form, form dot-operator-characters
 mine binary-operator
   operator
 
@@ -469,12 +538,21 @@ mine type
 GRAMMAR OF A TYPE ANNOTATION
 
 mine type-annotation
-  : attributes opt inoutopt type
+  :
+  mine miss
+    mine form, form attributes
+  inoutopt type
 
 GRAMMAR OF A TYPE IDENTIFIER
 
 mine type-identifier
-  type-name generic-argument-clause opt | type-name generic-argument-clause opt . type-identifier
+  type-name
+  mine miss
+    mine form, form generic-argument-clause
+  | type-name
+  mine miss
+    mine form, form generic-argument-clause
+  . type-identifier
 
 mine type-name
   identifier
@@ -496,7 +574,10 @@ mine element-name
 GRAMMAR OF A FUNCTION TYPE
 
 mine function-type
-  attributes opt function-type-argument-clause throwsopt -> type
+
+  mine miss
+    mine form, form attributes
+  function-type-argument-clause throwsopt -> type
 
 mine function-type-argument-clause
   ( )
@@ -508,7 +589,10 @@ mine function-type-argument-list
   function-type-argument | function-type-argument , function-type-argument-list
 
 mine function-type-argument
-  attributes opt inoutopt type | argument-label type-annotation
+
+  mine miss
+    mine form, form attributes
+  inoutopt type | argument-label type-annotation
 
 mine argument-label
   identifier
@@ -573,15 +657,25 @@ Expressions
 GRAMMAR OF AN EXPRESSION
 
 mine expression
-  try-operator opt await-operator opt prefix-expression binary-expressions opt
 
+  mine miss
+    mine form, form try-operator
+
+  mine miss
+    mine form, form await-operator
+  prefix-expression
+  mine miss
+    mine form, form binary-expressions
 mine expression-list
   expression | expression , expression-list
 
 GRAMMAR OF A PREFIX EXPRESSION
 
 mine prefix-expression
-  prefix-operator opt postfix-expression
+
+  mine miss
+    mine form, form prefix-operator
+  postfix-expression
 
 mine prefix-expression
   in-out-expression
@@ -607,17 +701,24 @@ mine binary-expression
   binary-operator prefix-expression
 
 mine binary-expression
-  assignment-operator try-operator opt prefix-expression
+  assignment-operator
+  mine miss
+    mine form, form try-operator
+  prefix-expression
 
 mine binary-expression
-  conditional-operator try-operator opt prefix-expression
+  conditional-operator
+  mine miss
+    mine form, form try-operator
+  prefix-expression
 
 mine binary-expression
   type-casting-operator
 
 mine binary-expressions
-  binary-expression binary-expressions opt
-
+  binary-expression
+  mine miss
+    mine form, form binary-expressions
 GRAMMAR OF AN ASSIGNMENT OPERATOR
 
 mine assignment-operator
@@ -645,8 +746,9 @@ mine type-casting-operator
 GRAMMAR OF A PRIMARY EXPRESSION
 
 mine primary-expression
-  identifier generic-argument-clause opt
-
+  identifier
+  mine miss
+    mine form, form generic-argument-clause
 mine primary-expression
   literal-expression
 
@@ -695,7 +797,10 @@ mine literal-expression
   #line | #column | #function | #dsohandle
 
 mine array-literal
-  [ array-literal-items opt ]
+  [
+  mine miss
+    mine form, form array-literal-items
+  ]
 
 mine array-literal-items
   array-literal-item ,opt | array-literal-item , array-literal-items
@@ -752,10 +857,22 @@ mine superclass-initializer-expression
 GRAMMAR OF A CLOSURE EXPRESSION
 
 mine closure-expression
-  { closure-signature opt statements opt }
+  {
+  mine miss
+    mine form, form closure-signature
+
+  mine miss
+    mine form, form statements
+  }
 
 mine closure-signature
-  capture-list opt closure-parameter-clause throwsopt function-result opt in
+
+  mine miss
+    mine form, form capture-list
+  closure-parameter-clause throwsopt
+  mine miss
+    mine form, form function-result
+  in
 
 mine closure-signature
   capture-list in
@@ -767,8 +884,9 @@ mine closure-parameter-list
   closure-parameter | closure-parameter , closure-parameter-list
 
 mine closure-parameter
-  closure-parameter-name type-annotation opt
-
+  closure-parameter-name
+  mine miss
+    mine form, form type-annotation
 mine closure-parameter
   closure-parameter-name type-annotation ...
 
@@ -782,13 +900,22 @@ mine capture-list-items
   capture-list-item | capture-list-item , capture-list-items
 
 mine capture-list-item
-  capture-specifier opt identifier
+
+  mine miss
+    mine form, form capture-specifier
+  identifier
 
 mine capture-list-item
-  capture-specifier opt identifier = expression
+
+  mine miss
+    mine form, form capture-specifier
+  identifier = expression
 
 mine capture-list-item
-  capture-specifier opt self-expression
+
+  mine miss
+    mine form, form capture-specifier
+  self-expression
 
 mine capture-specifier
   weak | unowned | unowned(safe) | unowned(unsafe)
@@ -825,17 +952,24 @@ mine wildcard-expression
 GRAMMAR OF A KEY-PATH EXPRESSION
 
 mine key-path-expression
-  \ type opt . key-path-components
+  \
+  mine miss
+    mine form, form type
+  . key-path-components
 
 mine key-path-components
   key-path-component | key-path-component . key-path-components
 
 mine key-path-component
-  identifier key-path-postfixes opt | key-path-postfixes
+  identifier
+  mine miss
+    mine form, form key-path-postfixes
+  | key-path-postfixes
 
 mine key-path-postfixes
-  key-path-postfix key-path-postfixes opt
-
+  key-path-postfix
+  mine miss
+    mine form, form key-path-postfixes
 mine key-path-postfix
   ? | ! | self | [ function-call-argument-list ]
 
@@ -890,7 +1024,10 @@ mine function-call-expression
   postfix-expression function-call-argument-clause
 
 mine function-call-expression
-  postfix-expression function-call-argument-clause opt trailing-closures
+  postfix-expression
+  mine miss
+    mine form, form function-call-argument-clause
+  trailing-closures
 
 mine function-call-argument-clause
   ( ) | ( function-call-argument-list )
@@ -905,11 +1042,13 @@ mine function-call-argument
   operator | identifier : operator
 
 mine trailing-closures
-  closure-expression labeled-trailing-closures opt
-
+  closure-expression
+  mine miss
+    mine form, form labeled-trailing-closures
 mine labeled-trailing-closures
-  labeled-trailing-closure labeled-trailing-closures opt
-
+  labeled-trailing-closure
+  mine miss
+    mine form, form labeled-trailing-closures
 mine labeled-trailing-closure
   identifier : closure-expression
 
@@ -927,14 +1066,16 @@ mine explicit-member-expression
   postfix-expression . decimal-digits
 
 mine explicit-member-expression
-  postfix-expression . identifier generic-argument-clause opt
-
+  postfix-expression . identifier
+  mine miss
+    mine form, form generic-argument-clause
 mine explicit-member-expression
   postfix-expression . identifier ( argument-names )
 
 mine argument-names
-  argument-name argument-names opt
-
+  argument-name
+  mine miss
+    mine form, form argument-names
 mine argument-name
   identifier :
 
@@ -989,8 +1130,9 @@ mine statement
   compiler-control-statement
 
 mine statements
-  statement statements opt
-
+  statement
+  mine miss
+    mine form, form statements
 GRAMMAR OF A LOOP STATEMENT
 
 mine loop-statement
@@ -1005,7 +1147,10 @@ mine loop-statement
 GRAMMAR OF A FOR-IN STATEMENT
 
 mine for-in-statement
-  for caseopt pattern in expression where-clause opt code-block
+  for caseopt pattern in expression
+  mine miss
+    mine form, form where-clause
+  code-block
 
 GRAMMAR OF A WHILE STATEMENT
 
@@ -1043,8 +1188,9 @@ mine branch-statement
 GRAMMAR OF AN IF STATEMENT
 
 mine if-statement
-  if condition-list code-block else-clause opt
-
+  if condition-list code-block
+  mine miss
+    mine form, form else-clause
 mine else-clause
   else code-block | else if-statement
 
@@ -1056,11 +1202,15 @@ mine guard-statement
 GRAMMAR OF A SWITCH STATEMENT
 
 mine switch-statement
-  switch expression { switch-cases opt }
+  switch expression {
+  mine miss
+    mine form, form switch-cases
+  }
 
 mine switch-cases
-  switch-case switch-cases opt
-
+  switch-case
+  mine miss
+    mine form, form switch-cases
 mine switch-case
   case-label statements
 
@@ -1071,13 +1221,25 @@ mine switch-case
   conditional-switch-case
 
 mine case-label
-  attributes opt case case-item-list :
+
+  mine miss
+    mine form, form attributes
+  case case-item-list :
 
 mine case-item-list
-  pattern where-clause opt | pattern where-clause opt , case-item-list
+  pattern
+  mine miss
+    mine form, form where-clause
+  | pattern
+  mine miss
+    mine form, form where-clause
+  , case-item-list
 
 mine default-label
-  attributes opt default :
+
+  mine miss
+    mine form, form attributes
+  default :
 
 mine where-clause
   where where-expression
@@ -1086,20 +1248,30 @@ mine where-expression
   expression
 
 mine conditional-switch-case
-  switch-if-directive-clause switch-elseif-directive-clauses opt switch-else-directive-clause opt endif-directive
+  switch-if-directive-clause
+  mine miss
+    mine form, form switch-elseif-directive-clauses
+
+  mine miss
+    mine form, form switch-else-directive-clause
+  endif-directive
 
 mine switch-if-directive-clause
-  if-directive compilation-condition switch-cases opt
-
+  if-directive compilation-condition
+  mine miss
+    mine form, form switch-cases
 mine switch-elseif-directive-clauses
-  elseif-directive-clause switch-elseif-directive-clauses opt
-
+  elseif-directive-clause
+  mine miss
+    mine form, form switch-elseif-directive-clauses
 mine switch-elseif-directive-clause
-  elseif-directive compilation-condition switch-cases opt
-
+  elseif-directive compilation-condition
+  mine miss
+    mine form, form switch-cases
 mine switch-else-directive-clause
-  else-directive switch-cases opt
-
+  else-directive
+  mine miss
+    mine form, form switch-cases
 GRAMMAR OF A LABELED STATEMENT
 
 mine labeled-statement
@@ -1140,13 +1312,15 @@ mine control-transfer-statement
 GRAMMAR OF A BREAK STATEMENT
 
 mine break-statement
-  break label-name opt
-
+  break
+  mine miss
+    mine form, form label-name
 GRAMMAR OF A CONTINUE STATEMENT
 
 mine continue-statement
-  continue label-name opt
-
+  continue
+  mine miss
+    mine form, form label-name
 GRAMMAR OF A FALLTHROUGH STATEMENT
 
 mine fallthrough-statement
@@ -1155,8 +1329,9 @@ mine fallthrough-statement
 GRAMMAR OF A RETURN STATEMENT
 
 mine return-statement
-  return expression opt
-
+  return
+  mine miss
+    mine form, form expression
 GRAMMAR OF A THROW STATEMENT
 
 mine throw-statement
@@ -1170,20 +1345,26 @@ mine defer-statement
 GRAMMAR OF A DO STATEMENT
 
 mine do-statement
-  do code-block catch-clauses opt
-
+  do code-block
+  mine miss
+    mine form, form catch-clauses
 mine catch-clauses
-  catch-clause catch-clauses opt
-
+  catch-clause
+  mine miss
+    mine form, form catch-clauses
 mine catch-clause
-  catch catch-pattern-list opt code-block
+  catch
+  mine miss
+    mine form, form catch-pattern-list
+  code-block
 
 mine catch-pattern-list
   catch-pattern | catch-pattern , catch-pattern-list
 
 mine catch-pattern
-  pattern where-clause opt
-
+  pattern
+  mine miss
+    mine form, form where-clause
 GRAMMAR OF A COMPILER CONTROL STATEMENT
 
 mine compiler-control-statement
@@ -1198,20 +1379,30 @@ mine compiler-control-statement
 GRAMMAR OF A CONDITIONAL COMPILATION BLOCK
 
 mine conditional-compilation-block
-  if-directive-clause elseif-directive-clauses opt else-directive-clause opt endif-directive
+  if-directive-clause
+  mine miss
+    mine form, form elseif-directive-clauses
+
+  mine miss
+    mine form, form else-directive-clause
+  endif-directive
 
 mine if-directive-clause
-  if-directive compilation-condition statements opt
-
+  if-directive compilation-condition
+  mine miss
+    mine form, form statements
 mine elseif-directive-clauses
-  elseif-directive-clause elseif-directive-clauses opt
-
+  elseif-directive-clause
+  mine miss
+    mine form, form elseif-directive-clauses
 mine elseif-directive-clause
-  elseif-directive compilation-condition statements opt
-
+  elseif-directive compilation-condition
+  mine miss
+    mine form, form statements
 mine else-directive-clause
-  else-directive statements opt
-
+  else-directive
+  mine miss
+    mine form, form statements
 mine if-directive
   #if
 
@@ -1270,11 +1461,13 @@ mine architecture
   i386 | x86_64 | arm | arm64
 
 mine swift-version
-  decimal-digits swift-version-continuation opt
-
+  decimal-digits
+  mine miss
+    mine form, form swift-version-continuation
 mine swift-version-continuation
-  . decimal-digits swift-version-continuation opt
-
+  . decimal-digits
+  mine miss
+    mine form, form swift-version-continuation
 mine module-name
   identifier
 
@@ -1396,22 +1589,33 @@ mine declaration
   precedence-group-declaration
 
 mine declarations
-  declaration declarations opt
-
+  declaration
+  mine miss
+    mine form, form declarations
 GRAMMAR OF A TOP-LEVEL DECLARATION
 
 mine top-level-declaration
-  statements opt
 
+  mine miss
+    mine form, form statements
 GRAMMAR OF A CODE BLOCK
 
 mine code-block
-  { statements opt }
+  {
+  mine miss
+    mine form, form statements
+  }
 
 GRAMMAR OF AN IMPORT DECLARATION
 
 mine import-declaration
-  attributes opt import import-kind opt import-path
+
+  mine miss
+    mine form, form attributes
+  import
+  mine miss
+    mine form, form import-kind
+  import-path
 
 mine import-kind
   typealias | struct | class | enum | protocol | let | var | func
@@ -1425,14 +1629,21 @@ mine import-path-identifier
 GRAMMAR OF A CONSTANT DECLARATION
 
 mine constant-declaration
-  attributes opt declaration-modifiers opt let pattern-initializer-list
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form declaration-modifiers
+  let pattern-initializer-list
 
 mine pattern-initializer-list
   pattern-initializer | pattern-initializer , pattern-initializer-list
 
 mine pattern-initializer
-  pattern initializer opt
-
+  pattern
+  mine miss
+    mine form, form initializer
 mine initializer
   = expression
 
@@ -1454,10 +1665,19 @@ mine variable-declaration
   variable-declaration-head variable-name initializer willSet-didSet-block
 
 mine variable-declaration
-  variable-declaration-head variable-name type-annotation initializer opt willSet-didSet-block
+  variable-declaration-head variable-name type-annotation
+  mine miss
+    mine form, form initializer
+  willSet-didSet-block
 
 mine variable-declaration-head
-  attributes opt declaration-modifiers opt var
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form declaration-modifiers
+  var
 
 mine variable-name
   identifier
@@ -1466,48 +1686,108 @@ mine getter-setter-block
   code-block
 
 mine getter-setter-block
-  { getter-clause setter-clause opt }
+  { getter-clause
+  mine miss
+    mine form, form setter-clause
+  }
 
 mine getter-setter-block
   { setter-clause getter-clause }
 
 mine getter-clause
-  attributes opt mutation-modifier opt get code-block
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form mutation-modifier
+  get code-block
 
 mine setter-clause
-  attributes opt mutation-modifier opt set setter-name opt code-block
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form mutation-modifier
+  set
+  mine miss
+    mine form, form setter-name
+  code-block
 
 mine setter-name
   ( identifier )
 
 mine getter-setter-keyword-block
-  { getter-keyword-clause setter-keyword-clause opt }
+  { getter-keyword-clause
+  mine miss
+    mine form, form setter-keyword-clause
+  }
 
 mine getter-setter-keyword-block
   { setter-keyword-clause getter-keyword-clause }
 
 mine getter-keyword-clause
-  attributes opt mutation-modifier opt get
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form mutation-modifier
+  get
 
 mine setter-keyword-clause
-  attributes opt mutation-modifier opt set
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form mutation-modifier
+  set
 
 mine willSet-didSet-block
-  { willSet-clause didSet-clause opt }
+  { willSet-clause
+  mine miss
+    mine form, form didSet-clause
+  }
 
 mine willSet-didSet-block
-  { didSet-clause willSet-clause opt }
+  { didSet-clause
+  mine miss
+    mine form, form willSet-clause
+  }
 
 mine willSet-clause
-  attributes opt willSet setter-name opt code-block
+
+  mine miss
+    mine form, form attributes
+  willSet
+  mine miss
+    mine form, form setter-name
+  code-block
 
 mine didSet-clause
-  attributes opt didSet setter-name opt code-block
+
+  mine miss
+    mine form, form attributes
+  didSet
+  mine miss
+    mine form, form setter-name
+  code-block
 
 GRAMMAR OF A TYPE ALIAS DECLARATION
 
 mine typealias-declaration
-  attributes opt access-level-modifier opt typealias typealias-name generic-parameter-clause opt typealias-assignment
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form access-level-modifier
+  typealias typealias-name
+  mine miss
+    mine form, form generic-parameter-clause
+  typealias-assignment
 
 mine typealias-name
   identifier
@@ -1518,22 +1798,37 @@ mine typealias-assignment
 GRAMMAR OF A FUNCTION DECLARATION
 
 mine function-declaration
-  function-head function-name generic-parameter-clause opt function-signature generic-where-clause opt function-body opt
-
+  function-head function-name
+  mine miss
+    mine form, form generic-parameter-clause
+  function-signature generic-where-clause opt
+  mine miss
+    mine form, form function-body
 mine function-head
-  attributes opt declaration-modifiers opt func
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form declaration-modifiers
+  func
 
 mine function-name
   identifier | operator
 
 mine function-signature
-  parameter-clause asyncopt throwsopt function-result opt
-
+  parameter-clause asyncopt throwsopt
+  mine miss
+    mine form, form function-result
 mine function-signature
-  parameter-clause asyncopt rethrows function-result opt
-
+  parameter-clause asyncopt rethrows
+  mine miss
+    mine form, form function-result
 mine function-result
-  -> attributes opt type
+  ->
+  mine miss
+    mine form, form attributes
+  type
 
 mine function-body
   code-block
@@ -1545,13 +1840,23 @@ mine parameter-list
   parameter | parameter , parameter-list
 
 mine parameter
-  external-parameter-name opt local-parameter-name type-annotation default-argument-clause opt
+
+  mine miss
+    mine form, form external-parameter-name
+  local-parameter-name type-annotation
+  mine miss
+    mine form, form default-argument-clause
+mine parameter
+
+  mine miss
+    mine form, form external-parameter-name
+  local-parameter-name type-annotation
 
 mine parameter
-  external-parameter-name opt local-parameter-name type-annotation
 
-mine parameter
-  external-parameter-name opt local-parameter-name type-annotation ...
+  mine miss
+    mine form, form external-parameter-name
+  local-parameter-name type-annotation ...
 
 mine external-parameter-name
   identifier
@@ -1565,29 +1870,58 @@ mine default-argument-clause
 GRAMMAR OF AN ENUMERATION DECLARATION
 
 mine enum-declaration
-  attributes opt access-level-modifier opt union-style-enum
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form access-level-modifier
+  union-style-enum
 
 mine enum-declaration
-  attributes opt access-level-modifier opt raw-value-style-enum
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form access-level-modifier
+  raw-value-style-enum
 
 mine union-style-enum
-  indirectopt enum enum-name generic-parameter-clause opt type-inheritance-clause opt generic-where-clause opt { union-style-enum-members opt }
+  indirectopt enum enum-name
+  mine miss
+    mine form, form generic-parameter-clause
+
+  mine miss
+    mine form, form type-inheritance-clause
+
+  mine miss
+    mine form, form generic-where-clause
+  {
+  mine miss
+    mine form, form union-style-enum-members
+  }
 
 mine union-style-enum-members
-  union-style-enum-member union-style-enum-members opt
-
+  union-style-enum-member
+  mine miss
+    mine form, form union-style-enum-members
 mine union-style-enum-member
   declaration | union-style-enum-case-clause | compiler-control-statement
 
 mine union-style-enum-case-clause
-  attributes opt indirectopt case union-style-enum-case-list
+
+  mine miss
+    mine form, form attributes
+  indirectopt case union-style-enum-case-list
 
 mine union-style-enum-case-list
   union-style-enum-case | union-style-enum-case , union-style-enum-case-list
 
 mine union-style-enum-case
-  enum-case-name tuple-type opt
-
+  enum-case-name
+  mine miss
+    mine form, form tuple-type
 mine enum-name
   identifier
 
@@ -1595,23 +1929,34 @@ mine enum-case-name
   identifier
 
 mine raw-value-style-enum
-  enum enum-name generic-parameter-clause opt type-inheritance-clause generic-where-clause opt { raw-value-style-enum-members }
+  enum enum-name
+  mine miss
+    mine form, form generic-parameter-clause
+  type-inheritance-clause
+  mine miss
+    mine form, form generic-where-clause
+  { raw-value-style-enum-members }
 
 mine raw-value-style-enum-members
-  raw-value-style-enum-member raw-value-style-enum-members opt
-
+  raw-value-style-enum-member
+  mine miss
+    mine form, form raw-value-style-enum-members
 mine raw-value-style-enum-member
   declaration | raw-value-style-enum-case-clause | compiler-control-statement
 
 mine raw-value-style-enum-case-clause
-  attributes opt case raw-value-style-enum-case-list
+
+  mine miss
+    mine form, form attributes
+  case raw-value-style-enum-case-list
 
 mine raw-value-style-enum-case-list
   raw-value-style-enum-case | raw-value-style-enum-case , raw-value-style-enum-case-list
 
 mine raw-value-style-enum-case
-  enum-case-name raw-value-assignment opt
-
+  enum-case-name
+  mine miss
+    mine form, form raw-value-assignment
 mine raw-value-assignment
   = raw-value-literal
 
@@ -1621,71 +1966,159 @@ mine raw-value-literal
 GRAMMAR OF A STRUCTURE DECLARATION
 
 mine struct-declaration
-  attributes opt access-level-modifier opt struct struct-name generic-parameter-clause opt type-inheritance-clause opt generic-where-clause opt struct-body
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form access-level-modifier
+  struct struct-name
+  mine miss
+    mine form, form generic-parameter-clause
+
+  mine miss
+    mine form, form type-inheritance-clause
+
+  mine miss
+    mine form, form generic-where-clause
+  struct-body
 
 mine struct-name
   identifier
 
 mine struct-body
-  { struct-members opt }
+  {
+  mine miss
+    mine form, form struct-members
+  }
 
 mine struct-members
-  struct-member struct-members opt
-
+  struct-member
+  mine miss
+    mine form, form struct-members
 mine struct-member
   declaration | compiler-control-statement
 
 GRAMMAR OF A CLASS DECLARATION
 
 mine class-declaration
-  attributes opt access-level-modifier opt finalopt class class-name generic-parameter-clause opt type-inheritance-clause opt generic-where-clause opt class-body
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form access-level-modifier
+  finalopt class class-name
+  mine miss
+    mine form, form generic-parameter-clause
+
+  mine miss
+    mine form, form type-inheritance-clause
+
+  mine miss
+    mine form, form generic-where-clause
+  class-body
 
 mine class-declaration
-  attributes opt final access-level-modifier opt class class-name generic-parameter-clause opt type-inheritance-clause opt generic-where-clause opt class-body
+
+  mine miss
+    mine form, form attributes
+  final
+  mine miss
+    mine form, form access-level-modifier
+  class class-name
+  mine miss
+    mine form, form generic-parameter-clause
+
+  mine miss
+    mine form, form type-inheritance-clause
+
+  mine miss
+    mine form, form generic-where-clause
+  class-body
 
 mine class-name
   identifier
 
 mine class-body
-  { class-members opt }
+  {
+  mine miss
+    mine form, form class-members
+  }
 
 mine class-members
-  class-member class-members opt
-
+  class-member
+  mine miss
+    mine form, form class-members
 mine class-member
   declaration | compiler-control-statement
 
 GRAMMAR OF AN ACTOR DECLARATION
 
 mine actor-declaration
-  attributes opt access-level-modifier opt actor actor-name generic-parameter-clause opt type-inheritance-clause opt generic-where-clause opt actor-body
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form access-level-modifier
+  actor actor-name
+  mine miss
+    mine form, form generic-parameter-clause
+
+  mine miss
+    mine form, form type-inheritance-clause
+
+  mine miss
+    mine form, form generic-where-clause
+  actor-body
 
 mine actor-name
   identifier
 
 mine actor-body
-  { actor-members opt }
+  {
+  mine miss
+    mine form, form actor-members
+  }
 
 mine actor-members
-  actor-member actor-members opt
-
+  actor-member
+  mine miss
+    mine form, form actor-members
 mine actor-member
   declaration | compiler-control-statement
 
 GRAMMAR OF A PROTOCOL DECLARATION
 
 mine protocol-declaration
-  attributes opt access-level-modifier opt protocol protocol-name type-inheritance-clause opt generic-where-clause opt protocol-body
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form access-level-modifier
+  protocol protocol-name
+  mine miss
+    mine form, form type-inheritance-clause
+
+  mine miss
+    mine form, form generic-where-clause
+  protocol-body
 
 mine protocol-name
   identifier
 
 mine protocol-body
-  { protocol-members opt }
+  {
+  mine miss
+    mine form, form protocol-members
+  }
 
 mine protocol-members
-  protocol-member protocol-members opt
-
+  protocol-member
+  mine miss
+    mine form, form protocol-members
 mine protocol-member
   protocol-member-declaration | compiler-control-statement
 
@@ -1715,42 +2148,97 @@ mine protocol-property-declaration
 GRAMMAR OF A PROTOCOL METHOD DECLARATION
 
 mine protocol-method-declaration
-  function-head function-name generic-parameter-clause opt function-signature generic-where-clause opt
-
+  function-head function-name
+  mine miss
+    mine form, form generic-parameter-clause
+  function-signature
+  mine miss
+    mine form, form generic-where-clause
 GRAMMAR OF A PROTOCOL INITIALIZER DECLARATION
 
 mine protocol-initializer-declaration
-  initializer-head generic-parameter-clause opt parameter-clause throwsopt generic-where-clause opt
-
+  initializer-head
+  mine miss
+    mine form, form generic-parameter-clause
+  parameter-clause throwsopt
+  mine miss
+    mine form, form generic-where-clause
 mine protocol-initializer-declaration
-  initializer-head generic-parameter-clause opt parameter-clause rethrows generic-where-clause opt
-
+  initializer-head
+  mine miss
+    mine form, form generic-parameter-clause
+  parameter-clause rethrows
+  mine miss
+    mine form, form generic-where-clause
 GRAMMAR OF A PROTOCOL SUBSCRIPT DECLARATION
 
 mine protocol-subscript-declaration
-  subscript-head subscript-result generic-where-clause opt getter-setter-keyword-block
+  subscript-head subscript-result
+  mine miss
+    mine form, form generic-where-clause
+  getter-setter-keyword-block
 
 GRAMMAR OF A PROTOCOL ASSOCIATED TYPE DECLARATION
 
 mine protocol-associated-type-declaration
-  attributes opt access-level-modifier opt associatedtype typealias-name type-inheritance-clause opt typealias-assignment opt generic-where-clause opt
 
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form access-level-modifier
+  associatedtype typealias-name
+  mine miss
+    mine form, form type-inheritance-clause
+  typealias-assignment opt
+  mine miss
+    mine form, form generic-where-clause
 GRAMMAR OF AN INITIALIZER DECLARATION
 
 mine initializer-declaration
-  initializer-head generic-parameter-clause opt parameter-clause throwsopt generic-where-clause opt initializer-body
+  initializer-head
+  mine miss
+    mine form, form generic-parameter-clause
+  parameter-clause throwsopt
+  mine miss
+    mine form, form generic-where-clause
+  initializer-body
 
 mine initializer-declaration
-  initializer-head generic-parameter-clause opt parameter-clause rethrows generic-where-clause opt initializer-body
+  initializer-head
+  mine miss
+    mine form, form generic-parameter-clause
+  parameter-clause rethrows
+  mine miss
+    mine form, form generic-where-clause
+  initializer-body
 
 mine initializer-head
-  attributes opt declaration-modifiers opt init
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form declaration-modifiers
+  init
 
 mine initializer-head
-  attributes opt declaration-modifiers opt init ?
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form declaration-modifiers
+  init ?
 
 mine initializer-head
-  attributes opt declaration-modifiers opt init !
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form declaration-modifiers
+  init !
 
 mine initializer-body
   code-block
@@ -1758,38 +2246,78 @@ mine initializer-body
 GRAMMAR OF A DEINITIALIZER DECLARATION
 
 mine deinitializer-declaration
-  attributes opt deinit code-block
+
+  mine miss
+    mine form, form attributes
+  deinit code-block
 
 GRAMMAR OF AN EXTENSION DECLARATION
 
 mine extension-declaration
-  attributes opt access-level-modifier opt extension type-identifier type-inheritance-clause opt generic-where-clause opt extension-body
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form access-level-modifier
+  extension type-identifier
+  mine miss
+    mine form, form type-inheritance-clause
+
+  mine miss
+    mine form, form generic-where-clause
+  extension-body
 
 mine extension-body
-  { extension-members opt }
+  {
+  mine miss
+    mine form, form extension-members
+  }
 
 mine extension-members
-  extension-member extension-members opt
-
+  extension-member
+  mine miss
+    mine form, form extension-members
 mine extension-member
   declaration | compiler-control-statement
 
 GRAMMAR OF A SUBSCRIPT DECLARATION
 
 mine subscript-declaration
-  subscript-head subscript-result generic-where-clause opt code-block
+  subscript-head subscript-result
+  mine miss
+    mine form, form generic-where-clause
+  code-block
 
 mine subscript-declaration
-  subscript-head subscript-result generic-where-clause opt getter-setter-block
+  subscript-head subscript-result
+  mine miss
+    mine form, form generic-where-clause
+  getter-setter-block
 
 mine subscript-declaration
-  subscript-head subscript-result generic-where-clause opt getter-setter-keyword-block
+  subscript-head subscript-result
+  mine miss
+    mine form, form generic-where-clause
+  getter-setter-keyword-block
 
 mine subscript-head
-  attributes opt declaration-modifiers opt subscript generic-parameter-clause opt parameter-clause
+
+  mine miss
+    mine form, form attributes
+
+  mine miss
+    mine form, form declaration-modifiers
+  subscript
+  mine miss
+    mine form, form generic-parameter-clause
+  parameter-clause
 
 mine subscript-result
-  -> attributes opt type
+  ->
+  mine miss
+    mine form, form attributes
+  type
 
 GRAMMAR OF AN OPERATOR DECLARATION
 
@@ -1803,19 +2331,24 @@ mine postfix-operator-declaration
   postfix operator operator
 
 mine infix-operator-declaration
-  infix operator operator infix-operator-group opt
-
+  infix operator operator
+  mine miss
+    mine form, form infix-operator-group
 mine infix-operator-group
   : precedence-group-name
 
 GRAMMAR OF A PRECEDENCE GROUP DECLARATION
 
 mine precedence-group-declaration
-  precedencegroup precedence-group-name { precedence-group-attributes opt }
+  precedencegroup precedence-group-name {
+  mine miss
+    mine form, form precedence-group-attributes
+  }
 
 mine precedence-group-attributes
-  precedence-group-attribute precedence-group-attributes opt
-
+  precedence-group-attribute
+  mine miss
+    mine form, form precedence-group-attributes
 mine precedence-group-attribute
   precedence-group-relation
 
@@ -1864,8 +2397,9 @@ mine declaration-modifier
   actor-isolation-modifier
 
 mine declaration-modifiers
-  declaration-modifier declaration-modifiers opt
-
+  declaration-modifier
+  mine miss
+    mine form, form declaration-modifiers
 mine access-level-modifier
   private | private ( set )
 
@@ -1891,28 +2425,43 @@ Attributes
 GRAMMAR OF AN ATTRIBUTE
 
 mine attribute
-  @ attribute-name attribute-argument-clause opt
-
+  @ attribute-name
+  mine miss
+    mine form, form attribute-argument-clause
 mine attribute-name
   identifier
 
 mine attribute-argument-clause
-  ( balanced-tokens opt )
+  (
+  mine miss
+    mine form, form balanced-tokens
+  )
 
 mine attributes
-  attribute attributes opt
-
+  attribute
+  mine miss
+    mine form, form attributes
 mine balanced-tokens
-  balanced-token balanced-tokens opt
+  balanced-token
+  mine miss
+    mine form, form balanced-tokens
+mine balanced-token
+  (
+  mine miss
+    mine form, form balanced-tokens
+  )
 
 mine balanced-token
-  ( balanced-tokens opt )
+  [
+  mine miss
+    mine form, form balanced-tokens
+  ]
 
 mine balanced-token
-  [ balanced-tokens opt ]
-
-mine balanced-token
-  { balanced-tokens opt }
+  {
+  mine miss
+    mine form, form balanced-tokens
+  }
 
 mine balanced-token
   Any identifier, keyword, literal, or operator
@@ -1924,17 +2473,20 @@ Patterns
 GRAMMAR OF A PATTERN
 
 mine pattern
-  wildcard-pattern type-annotation opt
-
+  wildcard-pattern
+  mine miss
+    mine form, form type-annotation
 mine pattern
-  identifier-pattern type-annotation opt
-
+  identifier-pattern
+  mine miss
+    mine form, form type-annotation
 mine pattern
   value-binding-pattern
 
 mine pattern
-  tuple-pattern type-annotation opt
-
+  tuple-pattern
+  mine miss
+    mine form, form type-annotation
 mine pattern
   enum-case-pattern
 
@@ -1965,7 +2517,10 @@ mine value-binding-pattern
 GRAMMAR OF A TUPLE PATTERN
 
 mine tuple-pattern
-  ( tuple-pattern-element-list opt )
+  (
+  mine miss
+    mine form, form tuple-pattern-element-list
+  )
 
 mine tuple-pattern-element-list
   tuple-pattern-element | tuple-pattern-element , tuple-pattern-element-list
@@ -1976,8 +2531,12 @@ mine tuple-pattern-element
 GRAMMAR OF AN ENUMERATION CASE PATTERN
 
 mine enum-case-pattern
-  type-identifier opt . enum-case-name tuple-pattern opt
 
+  mine miss
+    mine form, form type-identifier
+  . enum-case-name
+  mine miss
+    mine form, form tuple-pattern
 GRAMMAR OF AN OPTIONAL PATTERN
 
 mine optional-pattern
@@ -2034,8 +2593,6 @@ mine conformance-requirement
 
 mine same-type-requirement
   type-identifier == type
-
-GRAMMAR OF A GENERIC ARGUMENT CLAUSE
 
 mine generic-argument-clause
   < generic-argument-list >

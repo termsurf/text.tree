@@ -1,7 +1,0 @@
-
-fetch @mountbuild/drive/theme
-  fetch /build
-    catch theme build
-
-link build
-  list ../xo/**/*.xo

@@ -1,11 +1,9 @@
 
-deck @drumwork/file
-  lead <Content Grammars for Link Script>
+deck @drumwork/text
+  lead <Link Text Content Grammars>
   make <information>
   make <computation>
   make <library>
-  face <Lance Pollard>, cite <lp@elk.fm>
-  link ./link
-  hook ./hook
-  read ./read
+  cite <Lance Pollard>, home <lp@elk.fm>
+  read book
   term <Apache 2.0>
