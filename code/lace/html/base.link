@@ -1,12 +1,12 @@
 
 lace document
-  link tree
+  take tree
   lace text, text <\<!doctype html\>>
   lace form, form node
     bind node, loan tree
 
 lace node
-  link node
+  take node
 
   lace form, form node-base
     bind node, loan node
@@ -16,7 +16,7 @@ lace node
     bind node, loan node
 
 lace content
-  link node
+  take node
 
   walk node/head
     test test-match
@@ -29,7 +29,7 @@ lace content
           bind node, loan seed
 
 lace node-base
-  link node
+  take node
 
   lace text, text <\<>
   lace text, loan node/name
@@ -39,7 +39,7 @@ lace node-base
   lace text, text <\>>
 
 lace bind-list
-  link node
+  take node
 
   walk node/bind
     lace text, loan seed/name
@@ -50,7 +50,7 @@ lace bind-list
     lace text, text <'>
 
 lace node-head
-  link node
+  take node
 
   lace text, text <\</>
   lace text, loan node/name
