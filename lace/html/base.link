@@ -1,0 +1,59 @@
+
+lace document
+  link tree
+  lace text, text <\<!doctype html\>>
+  lace form, form node
+    bind node, loan tree
+
+lace node
+  link node
+
+  lace form, form node-base
+    bind node, loan node
+  lace form, form content
+    bind node, loan node
+  lace form, form node-head
+    bind node, loan node
+
+lace content
+  link node
+
+  walk node/head
+    test test-match
+      bind base, loan seed/form
+      bind head, loan form flow
+      hook rise
+        lace text, loan seed/text
+      hook fall
+        lace form, form node
+          bind node, loan seed
+
+lace node-base
+  link node
+
+  lace text, text <\<>
+  lace text, loan node/name
+  lace text, text < >
+  lace form, form bind-list
+    bind node, loan node
+  lace text, text <\>>
+
+lace bind-list
+  link node
+
+  walk node/bind
+    lace text, loan seed/name
+    lace text, text <=>
+    lace text, text <'>
+    lace form, form bind-bond
+      bind bond, loan seed/bond
+    lace text, text <'>
+
+lace node-head
+  link node
+
+  lace text, text <\</>
+  lace text, loan node/name
+  lace text, text <\>>
+
+lace bind-bond

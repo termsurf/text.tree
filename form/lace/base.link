@@ -1,0 +1,35 @@
+
+load @drumwork/seed/code/form/bind
+  take form bind
+
+load @drumwork/seed/code/form/link
+  take form link
+
+load @drumwork/seed/code/form/test
+  take form test
+
+load @drumwork/seed/code/form/walk
+  take form walk
+
+wear lace-flow
+  wear flow
+
+form lace
+  link head, list link
+  link link, list link
+  link flow, list lace-flow
+
+form lace-form
+  wear lace-flow
+
+  link form, form lace
+  link bind, list bind
+
+form lace-text
+  wear lace-flow
+
+form test
+  wear lace-flow
+
+form walk
+  wear lace-flow

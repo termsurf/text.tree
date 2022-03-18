@@ -4,7 +4,7 @@ match csv
 
   match class, class header
     mount separator, share separator
-  match chain
+  match vfc
     match class, class row
       mount separator, share separator
 
