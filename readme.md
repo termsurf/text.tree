@@ -7,7 +7,11 @@
 <br/>
 <br/>
 
-<h3 align='center'>file</h3>
+<p align='center'>
+  <img src='https://github.com/drumworkteam/fish/blob/make/view/view.svg?raw=true' height='256'>
+</p>
+
+<h3 align='center'>fish</h3>
 <p align='center'>
   Link Text Content Grammars
 </p>
@@ -17,6 +21,8 @@
 <br/>
 
 ### Welcome
+
+The `fish` library is a collection of text and binary parsers and generators. They are in the form of grammars, for parsing and generating the appropriate input and output across many content types.
 
 ### License
 
