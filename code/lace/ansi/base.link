@@ -1,239 +1,339 @@
 
-http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
+# https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+# https://invisible-island.net/xterm/ctlseqs/ctlseqs.html
 
-http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
+host terminal-bell, code #h07
+host backspace, code #h08
+host horizontal-tab, code #h09
+host linefeed-newline, code #h0A
+host vertical-tab, code #h0B
+host form-feed, code #h0C
+host carriage-return, code #h0D
+host escape, code #h1B
+host delete, code #h7F
 
-state clear, 0
-state bold, 1
-state faint, 2
-state standout, 3
-state ridge, 4
-state blink, 5
-state opposite, 7
-state hidden, 8
+task move-cursor-to-home-position
+  note <Moves cursor to home position (0, 0).>
+  lace text, text <{escape}[H>
 
-lace ansi
-  start sheet, field sheet
+task move-cursor-to-line-and-column
+  note <Moves cursor to line #, column #.>
+  take line, like unsigned-integer-8
+  take column, like unsigned-integer-8
+  lace text, text <{escape}[{line};{column}H>
 
-  lace chunk, share <\x1b[>
-  lace class, class sheet
-    start sheet, share sheet
-  lace chunk, share <m>
+task move-cursor-up
+  note <Moves cursor up # lines>
+  take number, like unsigned-integer-8
+  lace text, text <{escape}[{number}A>
 
-## Font attributes ##
-# off
-off = '<\x1b[>0m' # off
-default = '<\x1b[>39m' # default foreground
-DEFAULT = '<\x1b[>49m' # default background
-#
-bd = '<\x1b[>1m' # bold
-ft = '<\x1b[>2m' # faint
-st = '<\x1b[>3m' # standout
-ul = '<\x1b[>4m' # underlined
-bk = '<\x1b[>5m' # blink
-rv = '<\x1b[>7m' # reverse
-hd = '<\x1b[>8m' # hidden
-nost = '<\x1b[>23m' # no standout
-noul = '<\x1b[>24m' # no underlined
-nobk = '<\x1b[>25m' # no blink
-norv = '<\x1b[>27m' # no reverse
-# colors
-prime black, 30
-prime BLACK, 40
-prime red, 31
-prime RED, 41
-prime green, 32
-prime GREEN, 42
-prime yellow, 33
-prime YELLOW, 43
-prime blue, 34
-prime BLUE, 44
-prime magenta, 35
-prime MAGENTA, 45
-prime cyan, 36
-prime CYAN, 46
-prime white, 37
-prime WHITE, 47
-# light colors
-prime dgray, 90
-prime DGRAY, 100
-prime lred, 91
-prime LRED, 101
-prime lgreen, 92
-prime LGREEN, 102
-prime lyellow, 93
-prime LYELLOW, 103
-prime lblue, 94
-prime LBLUE, 104
-prime lmagenta, 95
-prime LMAGENTA, 105
-prime lcyan, 96
-prime LCYAN, 106
-prime lgray, 97
-prime LGRAY, 107
+task move-cursor-down
+  note <Moves cursor down # lines.>
+  take number, like unsigned-integer-8
+  lace text, text <{escape}[{number}B>
 
-Black: \u001b[30m
-Red: \u001b[31m
-Green: \u001b[32m
-Yellow: \u001b[33m
-Blue: \u001b[34m
-Magenta: \u001b[35m
-Cyan: \u001b[36m
-White: \u001b[37m
-Reset: \u001b[0m
+task move-cursor-right
+  note <Moves cursor right # columns.>
+  take number, like unsigned-integer-8
+  lace text, text <{escape}[{number}C>
 
-Bright Black: \u001b[30;1m
-Bright Red: \u001b[31;1m
-Bright Green: \u001b[32;1m
-Bright Yellow: \u001b[33;1m
-Bright Blue: \u001b[34;1m
-Bright Magenta: \u001b[35;1m
-Bright Cyan: \u001b[36;1m
-Bright White: \u001b[37;1m
-Reset: \u001b[0m
+task move-cursor-left
+  note <Moves cursor left # columns.>
+  take number, like unsigned-integer-8
+  lace text, text <{escape}[{number}D>
 
-Background Black: \u001b[40m
-Background Red: \u001b[41m
-Background Green: \u001b[42m
-Background Yellow: \u001b[43m
-Background Blue: \u001b[44m
-Background Magenta: \u001b[45m
-Background Cyan: \u001b[46m
-Background White: \u001b[47m
+task move-cursor-to-beginning-of-next-line
+  note <Moves cursor to beginning of next line, # lines down.>
+  take number, like unsigned-integer-8
+  lace text, text <{escape}[{number}E>
 
-Background Bright Black: \u001b[40;1m
-Background Bright Red: \u001b[41;1m
-Background Bright Green: \u001b[42;1m
-Background Bright Yellow: \u001b[43;1m
-Background Bright Blue: \u001b[44;1m
-Background Bright Magenta: \u001b[45;1m
-Background Bright Cyan: \u001b[46;1m
-Background Bright White: \u001b[47;1m
+task move-cursor-to-beginning-of-previous-line
+  note <Moves cursor to beginning of previous line, # lines up.>
+  take number, like unsigned-integer-8
+  lace text, text <{escape}[{number}F>
 
-Bold: \u001b[1m
-Underline: \u001b[4m
-Reversed: \u001b[7m
+task move-cursor-to-column
+  note <Moves cursor to column #.>
+  take number, like unsigned-integer-8
+  lace text, text <{escape}[{number}G>
 
-write count
-  start climb-count
-  start cross-count
+task request-cursor-position
+  note <Request cursor position.>
+  lace text, text <{escape}[6n>
 
-  write chunk, share <\x1b[>
-  write chunk, share climb-count
-  write chunk, share <;>
-  write chunk, share cross-count
-  write chunk, share <H>
+task move-cursor-up-one-line-with-scrolling
+  note <Moves cursor one line up, scrolling if needed.>
+  lace text, text <{escape}[M>
 
-write move-mouse-up
-  start count, field count
-    mount floor, write 0
-  write chunk, share <\x1b[>
-  write chunk, share count
-  write chunk, share <A>
+task save-cursor-position
+  note <Save cursor position.>
+  lace text, text <{escape}[7>
 
-write move-mouse-down
-  start count, field count
-    mount floor, write 0
-  write chunk, share <\x1b[>
-  write chunk, share count
-  write chunk, share <B>
+task restore-cursor-position
+  note <Restores the cursor to the last saved position.>
+  lace text, text <{escape}[8>
 
-write move-mouse-forward
-  start count, field count
-    mount floor, write 0
-  write chunk, share <\x1b[>
-  write chunk, share count
-  write chunk, share <C>
+task erase-in-display
+  note <Erase in display (same as ESC[0J).>
+  lace text, text <{escape}[J>
 
-write move-mouse-backward
-  start count, field count
-    mount floor, write 0
-  write chunk, share <\x1b[>
-  write chunk, share count
-  write chunk, share <D>
+task erase-from-cursor-until-end-of-scren
+  note <Erase from cursor until end of screen.>
+  lace text, text <{escape}[0J>
 
-write move-mouse-bottom
-  start count, field count
-    mount floor, write 0
-  write chunk, share <\x1b[>
-  write chunk, share count
-  write chunk, share <E>
+task erase-from-cursor-to-beginning-of-scren
+  note <Erase from cursor to beginning of screen.>
+  lace text, text <{escape}[1J>
 
-write move-mouse-top
-  start count, field count
-    mount floor, write 0
-  write chunk, share <\x1b[>
-  write chunk, share count
-  write chunk, share <F>
+task erase-screen
+  note <Erase entire screen.>
+  lace text, text <{escape}[2J>
 
-write move-mouse-end-of-line
-  start count, field count
-    mount floor, write 0
-  write chunk, share <\x1b[>
-  write chunk, share count
-  write chunk, share <G>
+task erase-saved-lines
+  note <Erase saved lines.>
+  lace text, text <{escape}[3J>
 
-write count
-  start cross, field count
-    mount floor, write 0
-  start climb, field count
-    mount floor, write 0
-  write chunk, share <\x1b[>
-  write chunk, share climb
-  write chunk, share <;>
-  write chunk, share cross
-  write chunk, share <G>
+task erase-in-line
+  note <Erase in line (same as ESC[0K).>
+  lace text, text <{escape}[K>
 
-write clear screen
-  write chunk, share <\x1b[2J>
+task erase-from-cursor-to-end-of-line
+  note <Erase from cursor to end of line.>
+  lace text, text <{escape}[0K>
 
-write clear screen mount floor, write
-  write chunk, share <\x1b[0J>
+task erase-from-start-of-line-to-cursor
+  note <Erase start of line to the cursor.>
+  lace text, text <{escape}[1K>
 
-write clear screen crest
-  write chunk, share <\x1b[1J>
+task erase-line
+  note <Erase the entire line.>
+  lace text, text <{escape}[2K>
 
-write clear line end
-  write chunk, share <\x1b[0K>
+task reset-all-modes
+  note <Reset all modes (styles and colors).>
+  lace text, text <{escape}[0m>
 
-write clear line start
-  write chunk, share <\x1b[1K>
+task set-bold-mode
+  lace text, text <{escape}[1m>
 
-write clear line
-  write chunk, share <\x1b[2K>
+task reset-bold-mode
+  lace text, text <{escape}[22m>
 
-write sheet-paint-256
-  start count, field count
-    mount floor, write 0
-    mount crest, write 255
-  write chunk, share <\x1b[48;5;>
-  write chunk, share count
-  write chunk, share <m>
+task set-dim-mode
+  lace text, text <{escape}[2m>
 
-write print-paint-256
-  start count, field count
-    mount floor, write 0
-    mount crest, write 255
-  write chunk, share <\x1b[38;5;>
-  write chunk, share count
-  write chunk, share <m>
+task reset-dim-mode
+  lace text, text <{escape}[22m>
 
-write sheet-paint
-  start paint, class paint shade
-  write chunk, share <\x1b[>48;2;
-  write chunk, share paint/rouge
-  write chunk, share <;>
-  write chunk, share paint/green
-  write chunk, share <;>
-  write chunk, share paint/steel
-  write chunk, share <m>
+task set-faint-mode
+  lace text, text <{escape}[2m>
 
-write paint
-  start paint, class paint-shade
-  write chunk, share <\x1b[>38;2;
-  write chunk, share paint/rouge
-  write chunk, share chunk <;>
-  write chunk, share paint/green
-  write chunk, share <;>
-  write chunk, share paint/steel
-  write chunk, share <m>
+task reset-faint-mode
+  lace text, text <{escape}[22m>
+
+task set-italic-mode
+  lace text, text <{escape}[3m>
+
+task reset-italic-mode
+  lace text, text <{escape}[23m>
+
+task set-underline-mode
+  lace text, text <{escape}[4m>
+
+task reset-underline-mode
+  lace text, text <{escape}[24m>
+
+task set-blinking-mode
+  lace text, text <{escape}[5m>
+
+task reset-blinking-mode
+  lace text, text <{escape}[25m>
+
+task set-inverse-mode
+  lace text, text <{escape}[7m>
+
+task reset-inverse-mode
+  lace text, text <{escape}[27m>
+
+task set-hidden-mode
+  lace text, text <{escape}[8m>
+
+task reset-hidden-mode
+  lace text, text <{escape}[28m>
+
+task set-strike-through-mode
+  lace text, text <{escape}[9m>
+
+task reset-strike-through-mode
+  lace text, text <{escape}[29m>
+
+task set-black-foreground
+  lace text, text <{escape}[30m>
+
+task set-black-background
+  lace text, text <{escape}[40m>
+
+task set-red-foreground
+  lace text, text <{escape}[31m>
+
+task set-red-background
+  lace text, text <{escape}[41m>
+
+task set-green-foreground
+  lace text, text <{escape}[32m>
+
+task set-green-background
+  lace text, text <{escape}[42m>
+
+task set-yellow-foreground
+  lace text, text <{escape}[33m>
+
+task set-yellow-background
+  lace text, text <{escape}[43m>
+
+task set-blue-foreground
+  lace text, text <{escape}[34m>
+
+task set-blue-background
+  lace text, text <{escape}[44m>
+
+task set-magenta-foreground
+  lace text, text <{escape}[35m>
+
+task set-magenta-background
+  lace text, text <{escape}[45m>
+
+task set-cyan-foreground
+  lace text, text <{escape}[36m>
+
+task set-cyan-background
+  lace text, text <{escape}[46m>
+
+task set-white-foreground
+  lace text, text <{escape}[37m>
+
+task set-white-background
+  lace text, text <{escape}[47m>
+
+task set-default-foreground
+  lace text, text <{escape}[39m>
+
+task set-default-background
+  lace text, text <{escape}[49m>
+
+task reset-color-foreground
+  lace text, text <{escape}[0m>
+
+task reset-color-background
+  lace text, text <{escape}[0m>
+
+task set-bright-black-foreground
+  lace text, text <{escape}[90m>
+
+task set-bright-black-background
+  lace text, text <{escape}[100m>
+
+task set-bright-red-foreground
+  lace text, text <{escape}[91m>
+
+task set-bright-red-background
+  lace text, text <{escape}[101m>
+
+task set-bright-green-foreground
+  lace text, text <{escape}[92m>
+
+task set-bright-green-background
+  lace text, text <{escape}[102m>
+
+task set-bright-yellow-foreground
+  lace text, text <{escape}[93m>
+
+task set-bright-yellow-background
+  lace text, text <{escape}[103m>
+
+task set-bright-blue-foreground
+  lace text, text <{escape}[94m>
+
+task set-bright-blue-background
+  lace text, text <{escape}[104m>
+
+task set-bright-magenta-foreground
+  lace text, text <{escape}[95m>
+
+task set-bright-magenta-background
+  lace text, text <{escape}[105m>
+
+task set-bright-cyan-foreground
+  lace text, text <{escape}[96m>
+
+task set-bright-cyan-background
+  lace text, text <{escape}[106m>
+
+task set-bright-white-foreground
+  lace text, text <{escape}[97m>
+
+task set-bright-white-background
+  lace text, text <{escape}[107m>
+
+task set-color-foreground-256
+  take number, like unsigned-integer-8
+  lace text, text <{escape}[38;5;{number}m>
+
+task set-color-background-256
+  take number, like unsigned-integer-8
+  lace text, text <{escape}[48;5;{number}m>
+
+task set-color-foreground-rgb
+  take r, like unsigned-integer-8
+  take g, like unsigned-integer-8
+  take b, like unsigned-integer-8
+  lace text, text <{escape}[38;2;{r};{g};{b}m>
+
+task set-color-background-rgb
+  take r, like unsigned-integer-8
+  take g, like unsigned-integer-8
+  take b, like unsigned-integer-8
+  lace text, text <{escape}[48;2;{r};{g};{b}m>
+
+# ESC[={value}h	Changes the screen width or type to the mode specified by value.
+# ESC[=0h	40 x 25 monochrome (text)
+# ESC[=1h	40 x 25 color (text)
+# ESC[=2h	80 x 25 monochrome (text)
+# ESC[=3h	80 x 25 color (text)
+# ESC[=4h	320 x 200 4-color (graphics)
+# ESC[=5h	320 x 200 monochrome (graphics)
+# ESC[=6h	640 x 200 monochrome (graphics)
+# ESC[=7h	Enables line wrapping
+# ESC[=13h	320 x 200 color (graphics)
+# ESC[=14h	640 x 200 color (16-color graphics)
+# ESC[=15h	640 x 350 monochrome (2-color graphics)
+# ESC[=16h	640 x 350 color (16-color graphics)
+# ESC[=17h	640 x 480 monochrome (2-color graphics)
+# ESC[=18h	640 x 480 color (16-color graphics)
+# ESC[=19h	320 x 200 color (256-color graphics)
+# ESC[={value}l	Resets the mode by using the same values that Set Mode uses, except for 7, which disables line wrapping. The last character in this escape sequence is a lowercase L.
+
+task make-cursor-invisible
+  note <Make cursor invisible.>
+  lace text, text <{escape}[?25l>
+
+task make-cursor-visible
+  note <Make cursor visible.>
+  lace text, text <{escape}[?25h>
+
+task restore-screen
+  note <Restore screen.>
+  lace text, text <{escape}[?47l>
+
+task save-screen
+  note <Save screen.>
+  lace text, text <{escape}[?47h>
+
+task enable-alternative-buffer
+  note <Enables the alternative buffer.>
+  lace text, text <{escape}[?1049h>
+
+task disable-alternative-buffer
+  note <Disables the alternative buffer.>
+  lace text, text <{escape}[?1049l>
+

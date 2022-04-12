@@ -1,217 +1,215 @@
-state AL, #b000
-state AL, #b000
-state AX, #b000
-state EAX, #b000
-state RAX, #b000
-state MM0, #b000
-state XMM0, #b000
-state YMM0, #b000
-state ZMM0, #b000
-state ZMM16, #b000
-state ES, #b000
-state CR0, #b000
-state DR0, #b000
+host al, code #b000
+host al, code #b000
+host ax, code #b000
+host eax, code #b000
+host rax, code #b000
+host mm0, code #b000
+host xmm0, code #b000
+host ymm0, code #b000
+host zmm0, code #b000
+host zmm16, code #b000
+host es, code #b000
+host cr0, code #b000
+host dr0, code #b000
 
-state CL, #b001
-state CL, #b001
-state CX, #b001
-state ECX, #b001
-state RCX, #b001
-state MM1, #b001
-state XMM1, #b001
-state YMM1, #b001
-state ZMM1, #b001
-state ZMM17, #b001
-state CS, #b001
-state CR1, #b001
-state DR1, #b001
+host cl, code #b001
+host cl, code #b001
+host cx, code #b001
+host ecx, code #b001
+host rcx, code #b001
+host mm1, code #b001
+host xmm1, code #b001
+host ymm1, code #b001
+host zmm1, code #b001
+host zmm17, code #b001
+host cs, code #b001
+host cr1, code #b001
+host dr1, code #b001
 
-state DL, #b010
-state DL, #b010
-state DX, #b010
-state EDX, #b010
-state RDX, #b010
-state MM2, #b010
-state XMM2, #b010
-state YMM2, #b010
-state ZMM2, #b010
-state ZMM18, #b010
-state SS, #b010
-state CR2, #b010
-state DR2, #b010
+host dl, code #b010
+host dl, code #b010
+host dx, code #b010
+host edx, code #b010
+host rdx, code #b010
+host mm2, code #b010
+host xmm2, code #b010
+host ymm2, code #b010
+host zmm2, code #b010
+host zmm18, code #b010
+host ss, code #b010
+host cr2, code #b010
+host dr2, code #b010
 
-state BL, #b011
-state BL, #b011
-state BX, #b011
-state EBX, #b011
-state RBX, #b011
-state MM3, #b011
-state XMM3, #b011
-state YMM3, #b011
-state ZMM3, #b011
-state ZMM19, #b011
-state DS, #b011
-state CR3, #b011
-state DR3, #b011
+host bl, code #b011
+host bl, code #b011
+host bx, code #b011
+host ebx, code #b011
+host rbx, code #b011
+host mm3, code #b011
+host xmm3, code #b011
+host ymm3, code #b011
+host zmm3, code #b011
+host zmm19, code #b011
+host ds, code #b011
+host cr3, code #b011
+host dr3, code #b011
 
-state AH, #b100
-state SPL, #b100
-state SP, #b100
-state ESP, #b100
-state RSP, #b100
-state MM4, #b100
-state XMM4, #b100
-state YMM4, #b100
-state ZMM4, #b100
-state ZMM20, #b100
-state FS, #b100
-state CR4, #b100
-state DR4, #b100
+host ah, code #b100
+host spl, code #b100
+host sp, code #b100
+host esp, code #b100
+host rsp, code #b100
+host mm4, code #b100
+host xmm4, code #b100
+host ymm4, code #b100
+host zmm4, code #b100
+host zmm20, code #b100
+host fs, code #b100
+host cr4, code #b100
+host dr4, code #b100
 
-state CH, #b101
-state BPL, #b101
-state BP, #b101
-state EBP, #b101
-state RBP, #b101
-state MM5, #b101
-state XMM5, #b101
-state YMM5, #b101
-state ZMM5, #b101
-state ZMM21, #b101
-state GS, #b101
-state CR5, #b101
-state DR5, #b101
+host ch, code #b101
+host bpl, code #b101
+host bp, code #b101
+host ebp, code #b101
+host rbp, code #b101
+host mm5, code #b101
+host xmm5, code #b101
+host ymm5, code #b101
+host zmm5, code #b101
+host zmm21, code #b101
+host gs, code #b101
+host cr5, code #b101
+host dr5, code #b101
 
-state DH, #b110
-state SIL, #b110
-state SI, #b110
-state ESI, #b110
-state RSI, #b110
-state MM6, #b110
-state XMM6, #b110
-state YMM6, #b110
-state ZMM6, #b110
-state ZMM22, #b110
-state res., #b110
-state CR6, #b110
-state DR6, #b110
+host dh, code #b110
+host sil, code #b110
+host si, code #b110
+host esi, code #b110
+host rsi, code #b110
+host mm6, code #b110
+host xmm6, code #b110
+host ymm6, code #b110
+host zmm6, code #b110
+host zmm22, code #b110
+# host res., code #b110
+host cr6, code #b110
+host dr6, code #b110
 
-state BH, #b111
-state DIL, #b111
-state DI, #b111
-state EDI, #b111
-state RDI, #b111
-state MM7, #b111
-state XMM7, #b111
-state YMM7, #b111
-state ZMM7, #b111
-state ZMM23, #b111
-state res., #b111
-state CR7, #b111
-state DR7, #b111
+host bh, code #b111
+host dil, code #b111
+host di, code #b111
+host edi, code #b111
+host rdi, code #b111
+host mm7, code #b111
+host xmm7, code #b111
+host ymm7, code #b111
+host zmm7, code #b111
+host zmm23, code #b111
+# host res., code #b111
+host cr7, code #b111
+host dr7, code #b111
 
-Rex is 1 for these:
+host r8b, code #b000
+host r8w, code #b000
+host r8d, code #b000
+host r8, code #b000
+host mm0, code #b000
+host xmm8, code #b000
+host ymm8, code #b000
+host zmm8, code #b000
+host zmm24, code #b000
+host es, code #b000
+host cr8, code #b000
+host dr8, code #b000
 
-state R8B, #b000
-state R8W, #b000
-state R8D, #b000
-state R8, #b000
-state MM0, #b000
-state XMM8, #b000
-state YMM8, #b000
-state ZMM8, #b000
-state ZMM24, #b000
-state ES, #b000
-state CR8, #b000
-state DR8, #b000
+host r9b, code #b001
+host r9w, code #b001
+host r9d, code #b001
+host r9, code #b001
+host mm1, code #b001
+host xmm9, code #b001
+host ymm9, code #b001
+host zmm9, code #b001
+host zmm25, code #b001
+host cs, code #b001
+host cr9, code #b001
+host dr9, code #b001
 
-state R9B, #b001
-state R9W, #b001
-state R9D, #b001
-state R9, #b001
-state MM1, #b001
-state XMM9, #b001
-state YMM9, #b001
-state ZMM9, #b001
-state ZMM25, #b001
-state CS, #b001
-state CR9, #b001
-state DR9, #b001
+host r10b, code #b010
+host r10w, code #b010
+host r10d, code #b010
+host r10, code #b010
+host mm2, code #b010
+host xmm10, code #b010
+host ymm10, code #b010
+host zmm10, code #b010
+host zmm26, code #b010
+host ss, code #b010
+host cr10, code #b010
+host dr10, code #b010
 
-state R10B, #b010
-state R10W, #b010
-state R10D, #b010
-state R10, #b010
-state MM2, #b010
-state XMM10, #b010
-state YMM10, #b010
-state ZMM10, #b010
-state ZMM26, #b010
-state SS, #b010
-state CR10, #b010
-state DR10, #b010
+host r11b, code #b011
+host r11w, code #b011
+host r11d, code #b011
+host r11, code #b011
+host mm3, code #b011
+host xmm11, code #b011
+host ymm11, code #b011
+host zmm11, code #b011
+host zmm27, code #b011
+host ds, code #b011
+host cr11, code #b011
+host dr11, code #b011
 
-state R11B, #b011
-state R11W, #b011
-state R11D, #b011
-state R11, #b011
-state MM3, #b011
-state XMM11, #b011
-state YMM11, #b011
-state ZMM11, #b011
-state ZMM27, #b011
-state DS, #b011
-state CR11, #b011
-state DR11, #b011
+host r12b, code #b100
+host r12w, code #b100
+host r12d, code #b100
+host r12, code #b100
+host mm4, code #b100
+host xmm12, code #b100
+host ymm12, code #b100
+host zmm12, code #b100
+host zmm28, code #b100
+host fs, code #b100
+host cr12, code #b100
+host dr12, code #b100
 
-state R12B, #b100
-state R12W, #b100
-state R12D, #b100
-state R12, #b100
-state MM4, #b100
-state XMM12, #b100
-state YMM12, #b100
-state ZMM12, #b100
-state ZMM28, #b100
-state FS, #b100
-state CR12, #b100
-state DR12, #b100
+host r13b, code #b101
+host r13w, code #b101
+host r13d, code #b101
+host r13, code #b101
+host mm5, code #b101
+host xmm13, code #b101
+host ymm13, code #b101
+host zmm13, code #b101
+host zmm29, code #b101
+host gs, code #b101
+host cr13, code #b101
+host dr13, code #b101
 
-state R13B, #b101
-state R13W, #b101
-state R13D, #b101
-state R13, #b101
-state MM5, #b101
-state XMM13, #b101
-state YMM13, #b101
-state ZMM13, #b101
-state ZMM29, #b101
-state GS, #b101
-state CR13, #b101
-state DR13, #b101
+host r14b, code #b110
+host r14w, code #b110
+host r14d, code #b110
+host r14, code #b110
+host mm6, code #b110
+host xmm14, code #b110
+host ymm14, code #b110
+host zmm14, code #b110
+host zmm30, code #b110
+# host res., code #b110
+host cr14, code #b110
+host dr14, code #b110
 
-state R14B, #b110
-state R14W, #b110
-state R14D, #b110
-state R14, #b110
-state MM6, #b110
-state XMM14, #b110
-state YMM14, #b110
-state ZMM14, #b110
-state ZMM30, #b110
-state res., #b110
-state CR14, #b110
-state DR14, #b110
-
-state R15B, #b111
-state R15W, #b111
-state R15D, #b111
-state R15, #b111
-state MM7, #b111
-state XMM15, #b111
-state YMM15, #b111
-state ZMM15, #b111
-state ZMM31, #b111
-state res., #b111
-state CR15, #b111
-state DR15, #b111
+host r15b, code #b111
+host r15w, code #b111
+host r15d, code #b111
+host r15, code #b111
+host mm7, code #b111
+host xmm15, code #b111
+host ymm15, code #b111
+host zmm15, code #b111
+host zmm31, code #b111
+# host res., code #b111
+host cr15, code #b111
+host dr15, code #b111
