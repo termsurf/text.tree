@@ -12,284 +12,284 @@ host carriage-return, code #h0D
 host escape, code #h1B
 host delete, code #h7F
 
-task move-cursor-to-home-position
+lace move-cursor-to-home-position
   note <Moves cursor to home position (0, 0).>
   lace text, text <{escape}[H>
 
-task move-cursor-to-line-and-column
+lace move-cursor-to-line-and-column
   note <Moves cursor to line #, column #.>
   take line, like unsigned-integer-8
   take column, like unsigned-integer-8
   lace text, text <{escape}[{line};{column}H>
 
-task move-cursor-up
+lace move-cursor-up
   note <Moves cursor up # lines>
   take number, like unsigned-integer-8
   lace text, text <{escape}[{number}A>
 
-task move-cursor-down
+lace move-cursor-down
   note <Moves cursor down # lines.>
   take number, like unsigned-integer-8
   lace text, text <{escape}[{number}B>
 
-task move-cursor-right
+lace move-cursor-right
   note <Moves cursor right # columns.>
   take number, like unsigned-integer-8
   lace text, text <{escape}[{number}C>
 
-task move-cursor-left
+lace move-cursor-left
   note <Moves cursor left # columns.>
   take number, like unsigned-integer-8
   lace text, text <{escape}[{number}D>
 
-task move-cursor-to-beginning-of-next-line
+lace move-cursor-to-beginning-of-next-line
   note <Moves cursor to beginning of next line, # lines down.>
   take number, like unsigned-integer-8
   lace text, text <{escape}[{number}E>
 
-task move-cursor-to-beginning-of-previous-line
+lace move-cursor-to-beginning-of-previous-line
   note <Moves cursor to beginning of previous line, # lines up.>
   take number, like unsigned-integer-8
   lace text, text <{escape}[{number}F>
 
-task move-cursor-to-column
+lace move-cursor-to-column
   note <Moves cursor to column #.>
   take number, like unsigned-integer-8
   lace text, text <{escape}[{number}G>
 
-task request-cursor-position
+lace request-cursor-position
   note <Request cursor position.>
   lace text, text <{escape}[6n>
 
-task move-cursor-up-one-line-with-scrolling
+lace move-cursor-up-one-line-with-scrolling
   note <Moves cursor one line up, scrolling if needed.>
   lace text, text <{escape}[M>
 
-task save-cursor-position
+lace save-cursor-position
   note <Save cursor position.>
   lace text, text <{escape}[7>
 
-task restore-cursor-position
+lace restore-cursor-position
   note <Restores the cursor to the last saved position.>
   lace text, text <{escape}[8>
 
-task erase-in-display
+lace erase-in-display
   note <Erase in display (same as ESC[0J).>
   lace text, text <{escape}[J>
 
-task erase-from-cursor-until-end-of-scren
+lace erase-from-cursor-until-end-of-scren
   note <Erase from cursor until end of screen.>
   lace text, text <{escape}[0J>
 
-task erase-from-cursor-to-beginning-of-scren
+lace erase-from-cursor-to-beginning-of-scren
   note <Erase from cursor to beginning of screen.>
   lace text, text <{escape}[1J>
 
-task erase-screen
+lace erase-screen
   note <Erase entire screen.>
   lace text, text <{escape}[2J>
 
-task erase-saved-lines
+lace erase-saved-lines
   note <Erase saved lines.>
   lace text, text <{escape}[3J>
 
-task erase-in-line
+lace erase-in-line
   note <Erase in line (same as ESC[0K).>
   lace text, text <{escape}[K>
 
-task erase-from-cursor-to-end-of-line
+lace erase-from-cursor-to-end-of-line
   note <Erase from cursor to end of line.>
   lace text, text <{escape}[0K>
 
-task erase-from-start-of-line-to-cursor
+lace erase-from-start-of-line-to-cursor
   note <Erase start of line to the cursor.>
   lace text, text <{escape}[1K>
 
-task erase-line
+lace erase-line
   note <Erase the entire line.>
   lace text, text <{escape}[2K>
 
-task reset-all-modes
+lace reset-all-modes
   note <Reset all modes (styles and colors).>
   lace text, text <{escape}[0m>
 
-task set-bold-mode
+lace set-bold-mode
   lace text, text <{escape}[1m>
 
-task reset-bold-mode
+lace reset-bold-mode
   lace text, text <{escape}[22m>
 
-task set-dim-mode
+lace set-dim-mode
   lace text, text <{escape}[2m>
 
-task reset-dim-mode
+lace reset-dim-mode
   lace text, text <{escape}[22m>
 
-task set-faint-mode
+lace set-faint-mode
   lace text, text <{escape}[2m>
 
-task reset-faint-mode
+lace reset-faint-mode
   lace text, text <{escape}[22m>
 
-task set-italic-mode
+lace set-italic-mode
   lace text, text <{escape}[3m>
 
-task reset-italic-mode
+lace reset-italic-mode
   lace text, text <{escape}[23m>
 
-task set-underline-mode
+lace set-underline-mode
   lace text, text <{escape}[4m>
 
-task reset-underline-mode
+lace reset-underline-mode
   lace text, text <{escape}[24m>
 
-task set-blinking-mode
+lace set-blinking-mode
   lace text, text <{escape}[5m>
 
-task reset-blinking-mode
+lace reset-blinking-mode
   lace text, text <{escape}[25m>
 
-task set-inverse-mode
+lace set-inverse-mode
   lace text, text <{escape}[7m>
 
-task reset-inverse-mode
+lace reset-inverse-mode
   lace text, text <{escape}[27m>
 
-task set-hidden-mode
+lace set-hidden-mode
   lace text, text <{escape}[8m>
 
-task reset-hidden-mode
+lace reset-hidden-mode
   lace text, text <{escape}[28m>
 
-task set-strike-through-mode
+lace set-strike-through-mode
   lace text, text <{escape}[9m>
 
-task reset-strike-through-mode
+lace reset-strike-through-mode
   lace text, text <{escape}[29m>
 
-task set-black-foreground
+lace set-black-foreground
   lace text, text <{escape}[30m>
 
-task set-black-background
+lace set-black-background
   lace text, text <{escape}[40m>
 
-task set-red-foreground
+lace set-red-foreground
   lace text, text <{escape}[31m>
 
-task set-red-background
+lace set-red-background
   lace text, text <{escape}[41m>
 
-task set-green-foreground
+lace set-green-foreground
   lace text, text <{escape}[32m>
 
-task set-green-background
+lace set-green-background
   lace text, text <{escape}[42m>
 
-task set-yellow-foreground
+lace set-yellow-foreground
   lace text, text <{escape}[33m>
 
-task set-yellow-background
+lace set-yellow-background
   lace text, text <{escape}[43m>
 
-task set-blue-foreground
+lace set-blue-foreground
   lace text, text <{escape}[34m>
 
-task set-blue-background
+lace set-blue-background
   lace text, text <{escape}[44m>
 
-task set-magenta-foreground
+lace set-magenta-foreground
   lace text, text <{escape}[35m>
 
-task set-magenta-background
+lace set-magenta-background
   lace text, text <{escape}[45m>
 
-task set-cyan-foreground
+lace set-cyan-foreground
   lace text, text <{escape}[36m>
 
-task set-cyan-background
+lace set-cyan-background
   lace text, text <{escape}[46m>
 
-task set-white-foreground
+lace set-white-foreground
   lace text, text <{escape}[37m>
 
-task set-white-background
+lace set-white-background
   lace text, text <{escape}[47m>
 
-task set-default-foreground
+lace set-default-foreground
   lace text, text <{escape}[39m>
 
-task set-default-background
+lace set-default-background
   lace text, text <{escape}[49m>
 
-task reset-color-foreground
+lace reset-color-foreground
   lace text, text <{escape}[0m>
 
-task reset-color-background
+lace reset-color-background
   lace text, text <{escape}[0m>
 
-task set-bright-black-foreground
+lace set-bright-black-foreground
   lace text, text <{escape}[90m>
 
-task set-bright-black-background
+lace set-bright-black-background
   lace text, text <{escape}[100m>
 
-task set-bright-red-foreground
+lace set-bright-red-foreground
   lace text, text <{escape}[91m>
 
-task set-bright-red-background
+lace set-bright-red-background
   lace text, text <{escape}[101m>
 
-task set-bright-green-foreground
+lace set-bright-green-foreground
   lace text, text <{escape}[92m>
 
-task set-bright-green-background
+lace set-bright-green-background
   lace text, text <{escape}[102m>
 
-task set-bright-yellow-foreground
+lace set-bright-yellow-foreground
   lace text, text <{escape}[93m>
 
-task set-bright-yellow-background
+lace set-bright-yellow-background
   lace text, text <{escape}[103m>
 
-task set-bright-blue-foreground
+lace set-bright-blue-foreground
   lace text, text <{escape}[94m>
 
-task set-bright-blue-background
+lace set-bright-blue-background
   lace text, text <{escape}[104m>
 
-task set-bright-magenta-foreground
+lace set-bright-magenta-foreground
   lace text, text <{escape}[95m>
 
-task set-bright-magenta-background
+lace set-bright-magenta-background
   lace text, text <{escape}[105m>
 
-task set-bright-cyan-foreground
+lace set-bright-cyan-foreground
   lace text, text <{escape}[96m>
 
-task set-bright-cyan-background
+lace set-bright-cyan-background
   lace text, text <{escape}[106m>
 
-task set-bright-white-foreground
+lace set-bright-white-foreground
   lace text, text <{escape}[97m>
 
-task set-bright-white-background
+lace set-bright-white-background
   lace text, text <{escape}[107m>
 
-task set-color-foreground-256
+lace set-color-foreground-256
   take number, like unsigned-integer-8
   lace text, text <{escape}[38;5;{number}m>
 
-task set-color-background-256
+lace set-color-background-256
   take number, like unsigned-integer-8
   lace text, text <{escape}[48;5;{number}m>
 
-task set-color-foreground-rgb
+lace set-color-foreground-rgb
   take r, like unsigned-integer-8
   take g, like unsigned-integer-8
   take b, like unsigned-integer-8
   lace text, text <{escape}[38;2;{r};{g};{b}m>
 
-task set-color-background-rgb
+lace set-color-background-rgb
   take r, like unsigned-integer-8
   take g, like unsigned-integer-8
   take b, like unsigned-integer-8
@@ -313,27 +313,27 @@ task set-color-background-rgb
 # ESC[=19h	320 x 200 color (256-color graphics)
 # ESC[={value}l	Resets the mode by using the same values that Set Mode uses, except for 7, which disables line wrapping. The last character in this escape sequence is a lowercase L.
 
-task make-cursor-invisible
+lace make-cursor-invisible
   note <Make cursor invisible.>
   lace text, text <{escape}[?25l>
 
-task make-cursor-visible
+lace make-cursor-visible
   note <Make cursor visible.>
   lace text, text <{escape}[?25h>
 
-task restore-screen
+lace restore-screen
   note <Restore screen.>
   lace text, text <{escape}[?47l>
 
-task save-screen
+lace save-screen
   note <Save screen.>
   lace text, text <{escape}[?47h>
 
-task enable-alternative-buffer
+lace enable-alternative-buffer
   note <Enables the alternative buffer.>
   lace text, text <{escape}[?1049h>
 
-task disable-alternative-buffer
+lace disable-alternative-buffer
   note <Disables the alternative buffer.>
   lace text, text <{escape}[?1049l>
 
