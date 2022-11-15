@@ -1,14 +1,14 @@
 
-load @drumwork/seed/code/form/bind
+load @treesurf/seed/code/form/bind
   take form bind
 
-load @drumwork/seed/code/form/link
+load @treesurf/seed/code/form/link
   take form link
 
-load @drumwork/seed/code/form/test
+load @treesurf/seed/code/form/test
   take form test
 
-load @drumwork/seed/code/form/walk
+load @treesurf/seed/code/form/walk
   take form walk
 
 wear lace-flow
