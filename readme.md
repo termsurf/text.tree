@@ -25,7 +25,7 @@ The `fish.link` library is a collection of text and binary parsers and generator
 
 ### License
 
-Copyright 2021-2022 <a href='https://drum.work'>TreeSurf</a>
+Copyright 2021-2023 <a href='https://drum.work'>TreeSurf</a>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
