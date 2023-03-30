@@ -1,14 +1,14 @@
 
-load @treesurf/seed/code/form/bind
+load @tunebond/seed/code/form/bind
   take form bind
 
-load @treesurf/seed/code/form/link
+load @tunebond/seed/code/form/link
   take form link
 
-load @treesurf/seed/code/form/test
+load @tunebond/seed/code/form/test
   take form test
 
-load @treesurf/seed/code/form/walk
+load @tunebond/seed/code/form/walk
   take form walk
 
 wear lace-flow
