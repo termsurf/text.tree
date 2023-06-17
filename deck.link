@@ -1,6 +1,6 @@
 
 deck @tunebond/tree
-  head <Base Link Content Grammars>
+  head <The Base Link Content Grammar Library>
   term <information>
   term <computation>
   term <library>
