@@ -1,5 +1,0 @@
-
-match ascii
-  match bound
-    mount start, share 0
-    mount front, share 127

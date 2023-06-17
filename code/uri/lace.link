@@ -1,0 +1,39 @@
+
+lace uri
+  take uri
+
+  test has
+    bind seed, loan uri/scheme
+    lace text, loan uri/scheme
+    lace text, loan <:>
+  test has
+    bind seed, loan uri/login
+    lace text, loan uri/login
+    lace text, loan <@>
+  test has
+    bind seed, loan uri/host
+    lace text, loan uri/host
+  test has
+    bind seed, loan uri/port
+    lace text, loan <:>
+    lace text, loan uri/port
+  lace class, class absolute-uri
+    bind seed, loan uri
+
+lace absolute-uri
+  take uri
+
+  walk uri/path
+    lace text, loan </>
+    lace text, loan block
+  test has
+    bind seed, loan login/query
+    lace text, loan <?>
+    walk login/query
+      lace text, loan block/key
+      lace text, loan <=>
+      lace text, loan block/value
+  test has
+    bind seed, loan login/fragment
+    lace text, loan <#>
+    lace text, loan login/fragment

@@ -1,0 +1,36 @@
+
+mine digit
+  mine bind
+    bind base, text <0>
+    bind head, text <9>
+
+mine non-zero-digit
+  mine bind
+    bind base, text <1>
+    bind head, text <9>
+
+mine digit-list
+  mine list
+    mine form, form digit
+
+mine non-zero-digit-list
+  mine list
+    mine form, form non-zero-digit
+
+mine signed-integer
+  mine list
+    mine form, form non-zero-digit
+
+mine integer
+  mine room
+    mine form, form minus
+  mine list
+    mine form, form non-zero-digit
+
+mine minus
+  mine text, text <->
+
+mine number
+  mine head
+    mine form, form decimal
+    mine form, form integer

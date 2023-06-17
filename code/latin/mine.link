@@ -1,0 +1,15 @@
+
+mine uppercase-alphabet
+  mine band
+    bind base, text <A>
+    bind head, text <Z>
+
+mine lowercase-alphabet
+  mine band
+    bind base, text <a>
+    bind head, text <z>
+
+mine alphabet
+  mine head
+    mine form, form uppercase-alphabet
+    mine form, form lowercase-alphabet

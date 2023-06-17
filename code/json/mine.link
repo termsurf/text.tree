@@ -1,0 +1,175 @@
+
+mine json
+  mine form, form value
+
+mine value
+  mine head
+    mine form, form string
+    mine form, form number
+    mine form, form object
+    mine form, form array
+    mine form, form boolean
+    mine form, form null
+
+mine string
+  mine form, form quote
+  mine list
+    mine head
+      mine form, form esc
+      mine form, form safe-code-point
+  mine form, form quote
+
+mine quote
+  mine text, text #x0022
+
+mine safe-code-point
+  mine void
+    mine head
+      mine text, text <">
+      mine text, text <\\>
+      mine band
+        bind base, #x0000
+        bind head, #x001F
+
+mine number
+  mine miss, mine form, form minus-sign
+  mine head
+    mine form, form float
+    mine form, form integer
+  mine miss, mine form, form exponent
+
+mine float
+  mine form, form integer
+  mine form, form decimal-point
+  mine list
+    bind base, text 1
+    mine form, form zero-through-nine
+
+mine zero-through-nine
+  mine band
+    bind base, text #x0030
+    bind head, text #x0039
+
+mine one-through-nine
+  mine band
+    bind base, text #x0031
+    bind head, text #x0039
+
+mine minus-sign
+  mine text, text #x002D
+
+mine decimal-point
+  mine text, text #x002E
+
+mine integer
+  mine head
+    mine text, text #x0030
+    mine form, form nonzero-integer
+
+mine nonzero-integer
+  mine form, form one-through-nine
+  mine list
+    mine form, form zero-through-nine
+
+mine exponent
+  mine head
+    mine text, text <E>
+    mine text, text <e>
+  mine miss, mine form, form sign
+  mine form, form integer
+
+mine sign
+  mine head
+    mine text, text <+>
+    mine text, text <->
+
+mine object
+  mine form, form open-brace
+  mine list, mine form, form whitespace
+  mine miss
+    mine form, form pair
+    mine list, mine form, form whitespace
+    mine list
+      mine list, mine form, form whitespace
+      mine form, form comma
+      mine list, mine form, form whitespace
+      mine form, form pair
+      mine list, mine form, form whitespace
+  mine form, form close-brace
+
+mine comma
+  mine text, text #x002C
+
+mine open-brace
+  mine text, text #x007B
+
+mine close-brace
+  mine text, text #x007D
+
+mine pair
+  mine form, form string
+  mine list, mine form, form whitespace
+  mine form, form colon
+  mine list, mine form, form whitespace
+  mine form, form value
+
+mine colon
+  mine text, text <:>
+
+mine array
+  mine text, text #x005B
+  mine list, mine form, form whitespace
+  mine miss
+    mine form, form value
+    mine list
+      mine form, form comma
+      mine form, form value
+  mine list, mine form, form whitespace
+  mine text, text #x005D
+
+mine boolean
+  mine head
+    mine text, text <true>
+    mine text, text <false>
+
+mine null
+  mine text, text <null>
+
+mine whitespace
+  mine head
+    mine text, text #x0009
+    mine text, text #x000A
+    mine text, text #x000D
+    mine text, text #x0020
+
+mine esc
+  mine text, text <\\>
+  mine head
+    mine head
+      mine text, text <">
+      mine text, text <\\>
+      mine text, text </>
+      mine text, text <b>
+      mine text, text <f>
+      mine text, text <n>
+      mine text, text <r>
+      mine text, text <t>
+    mine form, form unicode
+
+mine unicode
+  mine text, text <u>
+  mine mark
+    bind mark, mark 4
+    mine form, form hex
+
+mine hex
+  mine head
+    mine band
+      bind base, text <0>
+      bind head, text <9>
+    mine band
+      bind base, text <a>
+      bind head, text <f>
+    mine band
+      bind base, text <A>
+      bind head, text <F>

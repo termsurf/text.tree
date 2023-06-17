@@ -1,0 +1,8 @@
+
+mine octet
+  mine count, 8, mine block
+
+mine char
+  mine bound
+    bind start, share 0
+    bind front, share 127

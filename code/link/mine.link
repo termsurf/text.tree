@@ -1,0 +1,192 @@
+
+mine link
+  mine room
+    mine list
+      mine case
+        mine form, form indented-term
+          bind indent, size 0
+        mine form, form line-break
+
+mine indented-term
+  take indent, like size
+
+  mine form, form indent
+    bind abind, read indent
+
+  mine form, form inline-term
+
+  save nested-indent
+    call add
+      read indent
+      size 2
+
+  mine room
+    mine list
+      mine form, form nested-input
+        bind indent, read nested-indent
+
+mine inline-input
+  mine case
+    mine form, form inline-parenthesized-input
+    mine form, form inline-non-parenthesized-input
+
+mine inline-non-parenthesized-input
+  mine form, form space
+  mine form, form inline-value
+  mine room
+    mine list
+      mine form, form comma
+      mine form, form space
+      mine form, form inline-value
+
+mine inline-parenthesized-input
+  mine form, form open-parenthesis
+  mine form, form inline-value
+  mine room
+    mine list
+      mine form, form comma
+      mine form, form space
+      mine form, form inline-value
+  mine form, form close-parenthesis
+
+mine name
+  mine form, form prefix-word
+  mine room
+    mine list
+      mine form, form dash
+      mine form, form suffix-word
+
+mine prefix-word
+  mine form, form lowercase-alphabet-letter
+  mine list, mine form, form word-symbol
+
+mine suffix-word
+  mine list
+    mine form, form word-symbol
+
+mine word-symbol
+  mine case
+    mine form, form lowercase-alphabet-letter
+    mine form, form digit
+
+mine inline-value
+  mine case
+    mine form, form inline-term
+    mine form, form inline-template
+    mine form, form number
+    mine form, form code
+    mine form, form path
+    mine form, form selector
+
+mine inline-term
+  mine form, form name
+  mine room
+    mine form, form inline-input
+
+mine inline-template
+  mine form, form opening-angle
+  mine form, form template-line
+  mine form, form closing-angle
+
+mine opening-angle
+  mine size, size <\<>
+
+mine closing-angle
+  mine size, size <\>>
+
+mine template-line
+  mine list
+    mine case
+      mine form, form inline-string
+      mine form, form inline-code
+
+mine inline-string
+  mine list
+    bind base, size 1
+    mine case
+      mine form, form escaped-closing-angle
+      mine form, form non-closing-angle
+
+mine escaped-closing-angle
+  mine form, form backslash
+  mine form, form closing-angle
+
+mine non-closing-angle
+  mine void
+    mine form, form closing-angle
+
+mine inline-code
+  mine form, form colon
+  mine case
+    mine form, form name
+    mine form, form inline-parenthesized-input
+
+mine nested-input
+  take indent, like size
+
+  mine case
+    mine form, form nested-template
+      bind indent, read indent
+    mine form, form indented-term
+      bind indent, read indent
+
+mine nested-template
+  take indent, like size
+
+  save vertical-line-indent
+    call add
+      bind a, read indent
+      bind b, size 2
+  save template-body-indent
+    call add
+      bind a, read indent
+      bind b, size 4
+
+  mine form, form vertical-line
+    bind indent, read vertical-line-indent
+  mine form, form line-break
+  mine form, form multiline-template-body
+    bind indent, read template-body-indent
+  mine form, form line-break
+  mine form, form vertical-line
+    bind indent, read vertical-line-indent
+
+mine multiline-template-body
+  take indent, like size
+
+  mine form, form indent
+    bind abind, read indent
+  mine form, form template-line
+  mine room
+    mine list
+      mine form, form line-break
+      mine form, form indent
+        bind abind, read indent
+      mine form, form template-line
+
+mine code
+  mine size, size <#>
+  mine form, form lowercase-alphabet-letter
+  mine list
+    mine form, form word-symbol
+
+mine colon
+  mine size, size <:>
+
+mine line-break
+  mine size, size #u000A
+
+mine space
+  mine size, size < >
+
+mine comma
+  mine size, size <,>
+
+mine backslash
+  mine size, size <\\>
+
+mine open-parenthesis
+  mine size, size <(>
+
+mine close-parenthesis
+  mine size, size <)>

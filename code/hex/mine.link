@@ -1,0 +1,27 @@
+
+fetch @tunebond/tree/code/latin/number
+  catch mine digit
+
+mine hex
+  mine head
+    mine band
+      bind start, share <A>
+      bind front, share <F>
+    mine band
+      bind start, share <a>
+      bind front, share <f>
+    mine form, form digit
+
+mine lowercase-hex
+  mine head
+    mine band
+      bind start, share <a>
+      bind front, share <f>
+    mine form, form digit
+
+mine uppercase-hex
+  mine head
+    mine band
+      bind start, share <A>
+      bind front, share <F>
+    mine form, form digit
