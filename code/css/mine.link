@@ -1,6 +1,10 @@
 
+mine css
+  mine list
+    mine form, form property-declaration
+
 mine property-declaration
-  mine crown
+  mine head
     mine form, form accent-color-declaration
     mine form, form align-content-declaration
     mine form, form align-items-declaration
@@ -540,7 +544,7 @@ mine property-declaration
     mine form, form z-index-declaration
 
 mine accent-color-declaration
-  mine crown
+  mine head
     mine form, form global-setter
     mine form, form keyword-setter
     mine form, form color

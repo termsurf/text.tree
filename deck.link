@@ -1,9 +1,11 @@
 
 deck @tunebond/tree
-  lead <Base Link Content Grammars>
-  make <information>
-  make <computation>
-  make <library>
-  cite <Lance Pollard>, home <lp@elk.fm>
-  read book
-  term <Apache 2.0>
+  head <Base Link Content Grammars>
+  term <information>
+  term <computation>
+  term <library>
+  face <Lance Pollard>, site <lp@elk.fm>
+  read ./book
+  lock <Apache 2.0>
+  mark <0.0.1>
+  bear ./code
