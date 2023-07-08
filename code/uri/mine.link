@@ -46,7 +46,7 @@ mine ip-literal
       mine form, form ipv-future
   mine text, text <]>
 
-mine    abs_path
+mine abs_path
   mine form, form "/"  path-segment-list
 
 mine path

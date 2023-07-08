@@ -1,6 +1,6 @@
 mine OWS
-  mine chain
-    mine sieve
+  mine list
+    mine room
       mine form, form obs-fold
     mine form, form WSP
 
@@ -9,30 +9,30 @@ mine obs-fold
 
 mine set-cookie-string
   mine form, form cookie-pair
-  mine chain
-    mine write, write <;>
+  mine list
+    mine text, write <;>
     mine form, form SP
     mine form, form cookie-av
 
 mine cookie-pair
   mine form, form cookie-name
-  mine write, write <=>
+  mine text, write <=>
   mine form, form cookie-value
 
 mine cookie-name
   mine form, form token
 
 mine cookie-value
-  mine crown
-    mine chain
+  mine head
+    mine list
       mine form, form cookie-octet
-    mine chunk
+    mine hunk
       mine form, form DQUOTE
-      mine chain, form cookie-octet
+      mine list, form cookie-octet
       mine form, form DQUOTE
 
 mine cookie-octet
-  mine crown
+  mine head
     mine chunk, share #u0021
     mine bound
       bind start, share #u0023
@@ -48,7 +48,7 @@ mine cookie-octet
       bind front, share #u007E
 
 mine controls
-  mine crown
+  mine head
     mine bound
       bind start, share #u0000
       bind front, share #u001F
@@ -56,7 +56,7 @@ mine controls
 
 mine token
   mine shift
-    mine crown
+    mine head
       mine form, form controls
       mine form, form non-token-separators
 
@@ -102,7 +102,7 @@ mine max-age-av
   mine chunk, share <Max-Age=>
     bind sense, write false
   mine form, form non-zero-digit
-  mine chain
+  mine list
     mine form, form DIGIT
 
 mine non-zero-digit
@@ -119,7 +119,7 @@ mine domain-value
   mine form, form subdomain
 
 mine subdomain
-  mine crown
+  mine head
     mine form, form label
     mine block
       mine form, form subdomain
@@ -128,30 +128,30 @@ mine subdomain
 
 mine label
   mine form, form letter
-  mine sieve
-    mine sieve
+  mine room
+    mine room
       mine form, form ldh-str
     mine form, form let-dig
 
 mine ldh-str
-  mine crown
+  mine head
     mine form, form let-dig-hyp
     mine block
       mine form, form let-dig-hyp
       mine form, form ldh-str
 
 mine let-dig-hyp
-  mine crown
+  mine head
     mine form, form let-dig
     mine chunk, share <->
 
 mine let-dig
-  mine crown
+  mine head
     mine form, form letter
     mine form, form digit
 
 mine letter
-  mine crown
+  mine head
     mine bound
       mine start, share a
       mine start, share z
@@ -172,7 +172,7 @@ mine path-av
 mine path-value
   mine form, form char
     mine shift
-      mine crown
+      mine head
         mine form, form controls
         mine chunk, share <;>
 
@@ -192,7 +192,7 @@ mine httponly-av
 mine extension-av
   mine form, form char
     mine shift
-      mine crown
+      mine head
         mine form, form controls
         mine chunk, share <;>
 
@@ -205,7 +205,7 @@ mine cookie-header
 
 mine cookie-string
   mine form, cookie-pair
-  mine chain
+  mine list
     mine chunk, share <;>
     mine form, form SP
     mine form, form cookie-pair

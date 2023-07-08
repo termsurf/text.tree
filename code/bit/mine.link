@@ -1,8 +1,10 @@
 
 mine octet
-  mine count, 8, mine block
+  mine size
+    bind size, 8
+    mine block
 
 mine char
-  mine bound
-    bind start, share 0
-    bind front, share 127
+  mine band
+    bind base, share 0
+    bind head, share 127
