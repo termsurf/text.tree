@@ -12,7 +12,7 @@
 
 <h3 align='center'>tree.link</h3>
 <p align='center'>
-  The Base Link Content Grammar Library
+  The BaseLink Content Grammar Library
 </p>
 
 <br/>
