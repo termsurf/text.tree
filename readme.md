@@ -7,10 +7,10 @@
 <br/>
 
 <p align='center'>
-  <img src='https://github.com/tunebond/tree.link/blob/make/view/base.svg?raw=true' height='256'>
+  <img src='https://github.com/tunebond/worm.link/blob/make/view/view.svg?raw=true' height='256'>
 </p>
 
-<h3 align='center'>tree.link</h3>
+<h3 align='center'>worm.link</h3>
 <p align='center'>
   The BaseLink Content Grammar Library
 </p>
@@ -21,22 +21,22 @@
 
 ## Welcome
 
-The `tree.link` library is a collection of text and binary parsers and generators. They are in the form of grammars, for parsing and generating the appropriate input and output across many content types.
+The `worm.link` library is a collection of text and binary parsers and generators. They are in the form of grammars, for parsing and generating the appropriate input and output across many content types.
 
 ## Usage
 
 ```
-base save deck @tunebond/tree
+base save @tunebond/worm
 ```
 
 Pick your favorite parser grammars:
 
 ```
 load @tunebond/tree
-  find mine alphabet
-  find mine number
-  find mine css
-  find mine xml
+  find alphabet
+  find number
+  find css
+  find xml
 ```
 
 ## License
