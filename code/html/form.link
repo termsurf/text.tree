@@ -1,5 +1,5 @@
 
-mount @tunebond/fish/field
+mount @wavebond/fish/field
 
 class document
   field header

@@ -1,14 +1,14 @@
 
-load @tunebond/seed/code/form/bind
+load @wavebond/seed/code/form/bind
   take form bind
 
-load @tunebond/seed/code/form/link
+load @wavebond/seed/code/form/link
   take form link
 
-load @tunebond/seed/code/form/test
+load @wavebond/seed/code/form/test
   take form test
 
-load @tunebond/seed/code/form/walk
+load @wavebond/seed/code/form/walk
   take form walk
 
 wear lace-flow

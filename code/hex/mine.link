@@ -1,5 +1,5 @@
 
-fetch @tunebond/tree/code/latin/number
+fetch @wavebond/tree/code/latin/number
   catch mine digit
 
 mine hex
