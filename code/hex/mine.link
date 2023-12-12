@@ -1,5 +1,5 @@
 
-fetch @textsurf/tree/code/latin/number
+fetch @termsurf/tree/code/latin/number
   catch mine digit
 
 mine hex

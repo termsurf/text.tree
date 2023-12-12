@@ -1,7 +1,7 @@
 
 # https://ghostscript.com/~robin/pdf_reference17.pdf
 
-load @textsurf/seed/code/content/pdf
+load @termsurf/seed/code/content/pdf
   take form document
   take form reference
 

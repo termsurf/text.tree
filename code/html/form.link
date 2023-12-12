@@ -1,5 +1,5 @@
 
-mount @textsurf/fish/field
+mount @termsurf/fish/field
 
 class document
   field header

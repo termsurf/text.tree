@@ -1,5 +1,5 @@
 
-deck @textsurf/tree
+deck @termsurf/tree
   head <The BaseLink Content Grammar Library>
   term <information>
   term <computation>
