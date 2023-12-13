@@ -1,6 +1,6 @@
 
 deck @termsurf/tree
-  head <The BaseLink Content Grammar Library>
+  head <The BaseNote Content Grammar Library>
   term <information>
   term <computation>
   term <library>
