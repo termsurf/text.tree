@@ -12,7 +12,7 @@
 
 <h3 align='center'>worm.note</h3>
 <p align='center'>
-  The BaseLink Content Grammar Library
+  The BaseNote Content Grammar Library
 </p>
 
 <br/>
