@@ -7,10 +7,10 @@
 <br/>
 
 <p align='center'>
-  <img src='https://github.com/termsurf/worm.link/blob/make/view/view.svg?raw=true' height='256'>
+  <img src='https://github.com/termsurf/worm.note/blob/make/view/view.svg?raw=true' height='256'>
 </p>
 
-<h3 align='center'>worm.link</h3>
+<h3 align='center'>worm.note</h3>
 <p align='center'>
   The BaseLink Content Grammar Library
 </p>
@@ -21,7 +21,7 @@
 
 ## Welcome
 
-The `worm.link` library is a collection of text and binary parsers and generators. They are in the form of grammars, for parsing and generating the appropriate input and output across many content types.
+The `worm.note` library is a collection of text and binary parsers and generators. They are in the form of grammars, for parsing and generating the appropriate input and output across many content types.
 
 ## Usage
 
