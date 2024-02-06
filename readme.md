@@ -7,12 +7,12 @@
 <br/>
 
 <p align='center'>
-  <img src='https://github.com/termsurf/worm.note/blob/make/view/view.svg?raw=true' height='256'>
+  <img src='https://github.com/termsurf/worm.leaf/blob/make/view/view.svg?raw=true' height='256'>
 </p>
 
-<h3 align='center'>worm.note</h3>
+<h3 align='center'>worm.leaf</h3>
 <p align='center'>
-  The BaseNote Content Grammar Library
+  The SeedLeaf Content Grammar Library
 </p>
 
 <br/>
@@ -21,7 +21,7 @@
 
 ## Welcome
 
-The `worm.note` library is a collection of text and binary parsers and generators. They are in the form of grammars, for parsing and generating the appropriate input and output across many content types.
+The `worm.leaf` library is a collection of text and binary parsers and generators. They are in the form of grammars, for parsing and generating the appropriate input and output across many content types.
 
 ## Usage
 
