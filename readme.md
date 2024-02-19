@@ -41,7 +41,7 @@ load @termsurf/tree
 
 ## License
 
-Copyright 2021-2023 <a href='https://term.surf'>TermSurf</a>
+Copyright 2021-2024 <a href='https://term.surf'>TermSurf</a>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
