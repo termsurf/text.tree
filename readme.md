@@ -6,13 +6,9 @@
 <br/>
 <br/>
 
+<h3 align='center'>text.tree</h3>
 <p align='center'>
-  <img src='https://github.com/termsurf/worm.tree/blob/make/view/view.svg?raw=true' height='256'>
-</p>
-
-<h3 align='center'>worm.tree</h3>
-<p align='center'>
-  The Star Content Grammar Library
+  The NoteTree Content Grammar Library
 </p>
 
 <br/>
@@ -21,18 +17,18 @@
 
 ## Welcome
 
-The `worm.tree` library is a collection of text and binary parsers and generators. They are in the form of grammars, for parsing and generating the appropriate input and output across many content types.
+The `text.tree` library is a collection of text and binary parsers and generators. They are in the form of grammars, for parsing and generating the appropriate input and output across many content types.
 
 ## Usage
 
 ```
-base save @termsurf/worm
+note save @termsurf/text
 ```
 
 Pick your favorite parser grammars:
 
 ```
-load @termsurf/tree
+load @termsurf/text
   find alphabet
   find number
   find css
