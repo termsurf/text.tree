@@ -6,9 +6,9 @@
 <br/>
 <br/>
 
-<h3 align='center'>text.tree</h3>
+<h3 align='center'>code.tree</h3>
 <p align='center'>
-  The NoteTree Content Grammar Library
+  The TextTree Content Grammar Library
 </p>
 
 <br/>
@@ -17,18 +17,18 @@
 
 ## Welcome
 
-The `text.tree` library is a collection of text and binary parsers and generators. They are in the form of grammars, for parsing and generating the appropriate input and output across many content types.
+The `code.tree` library is a collection of text and binary parsers and generators. They are in the form of grammars, for parsing and generating the appropriate input and output across many content types.
 
 ## Usage
 
 ```
-note save @termsurf/text
+note save @termsurf/code
 ```
 
 Pick your favorite parser grammars:
 
 ```
-load @termsurf/text
+load @termsurf/code
   find alphabet
   find number
   find css
